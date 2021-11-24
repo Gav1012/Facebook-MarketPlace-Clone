@@ -1,4 +1,5 @@
 -- categories
+INSERT INTO category(id, parent, names) VALUES ('480939b6-95ce-430f-b30a-7d7c5e5a9c88',NULL,'Vehicles');
 INSERT INTO category(id, parent, names) VALUES ('700e982d-15fb-4f2e-a9c0-6629d16730fd','480939b6-95ce-430f-b30a-7d7c5e5a9c88','Cars');
 INSERT INTO category(id, parent, names) VALUES ('c082f693-dc37-47f3-8f01-7bc11c957594','480939b6-95ce-430f-b30a-7d7c5e5a9c88','Motorcycles');
 INSERT INTO category(id, parent, names) VALUES ('882b7132-c340-4d77-bcf1-3522b86526a8',NULL,'Apparel');
