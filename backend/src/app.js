@@ -28,7 +28,6 @@ app.use(
 
 app.get('/v0/dummy', dummy.get);
 // Your routes go here
-// comment from gavin
 
 app.use((err, req, res, next) => {
   res.status(err.status).json({

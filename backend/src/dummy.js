@@ -8,20 +8,18 @@ const pool = new Pool({
   password: process.env.POSTGRES_PASSWORD,
 });
 
-//  const selectDummy = async () => {
-//  const select = 'SELECT * FROM dummy';
-//  const query = {
- //   text: select,
- //   values: [],
-//  };
-//  const {rows} = await pool.query(query);
- // return rows[0].created;
-// };
+const selectDummy = async () => {
+  const select = 'SELECT * FROM dummy';
+  const query = {
+    text: select,
+    values: [],
+  };
+  const {rows} = await pool.query(query);
+  return rows[0].created;
+};
 
-exports.getListings = async (req, res) => {
+exports.get = async (req, res) => {
   res.status(200).json({message:
     `Hello CSE183 @ ${new Date().toString()} ` +
     `[ Database created ${await selectDummy()} ]`});
 };
-
-
