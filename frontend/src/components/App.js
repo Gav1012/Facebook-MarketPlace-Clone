@@ -1,6 +1,8 @@
 import React from 'react';
-
-import Dummy from './Dummy';
+import TopBar from './TopBar';
+import Category from './Category';
+import ListGrid from './ListGrid';
+// import Dummy from './Dummy';
 
 /**
  * Simple component with no state.
@@ -9,7 +11,11 @@ import Dummy from './Dummy';
  */
 function App() {
   return (
-    <Dummy />
+    <div>
+      <TopBar />
+      <Category />
+      <ListGrid />
+    </div>
   );
 }
 
