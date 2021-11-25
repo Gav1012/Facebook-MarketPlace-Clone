@@ -1,4 +1,4 @@
-#
+
 # CSE183 Assignment 8 Backend
 #
 
@@ -13,39 +13,34 @@ servers:
   - url: http://localhost:3010/v0
 
 paths:
-  /dummy:
+  /listings:
     get:
-      description: Dummy Endpoint
+      description: Gets all listings
       responses:
         200:
-          description: Succesful
+          description: Got all listings
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/DummyResponse'
-        default:
-          description: unexpected error
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
+                $ref: '#/components/schemas/Listings'
 
 components:
   schemas:
-    Error:
+    Listings:
       properties:
-        code:
-          type: integer
-          format: int32
-        message:
+        id:
           type: string
-      required:
-        - code
-        - message
-
-    DummyResponse:
-      properties:
-        message:
+          format: uuid
+        categoryID:
           type: string
+          format: uuid
+        memberID:
+          type: string
+          format: uuid
+        listings:
+          type: object  
       required:
-        - message
+        - id
+        - categoryID
+        - memberID
+        - listings

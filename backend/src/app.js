@@ -6,7 +6,7 @@ const fs = require('fs');
 const path = require('path');
 const OpenApiValidator = require('express-openapi-validator');
 
-const dummy = require('./dummy');
+const listings = require('./listings');
 
 const app = express();
 app.use(cors());
@@ -26,8 +26,12 @@ app.use(
   }),
 );
 
-app.get('/v0/dummy', dummy.get);
+
 // Your routes go here
+// comment from gavin
+
+app.get('/v0/listings', listings.getListings);
+app.get('/v0/listings/:category', listings.getCat);
 
 app.use((err, req, res, next) => {
   res.status(err.status).json({
