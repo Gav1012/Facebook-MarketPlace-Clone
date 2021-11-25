@@ -11,7 +11,7 @@ const pool = new Pool({
 
 
 exports.searchListings = async () => {
-  const select = 'SELECT * FROM listings';
+  const select = 'SELECT * FROM listing';
   const query = {
     text: select,
     values: [],
