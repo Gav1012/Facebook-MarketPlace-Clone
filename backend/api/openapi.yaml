@@ -23,6 +23,26 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Listings'
+  /listings/{category}:
+    get:
+      description: Gets listings from category
+      parameters:
+      - name: category
+        in: path
+        description: Name of category
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: Listings Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listings'
+     
+        404:
+          description: Listings not found
 
 components:
   schemas:

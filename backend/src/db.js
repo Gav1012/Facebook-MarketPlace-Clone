@@ -23,12 +23,13 @@ exports.searchListings = async () => {
   return rows;
 };
 
-exports.pullCategories = async (category) => {
-
-  const select = 'SELECT * FROM listings';
+exports.catListings = async (category) => {
+  const select = 
+  'select * from listing where listing.categoryid in (select id from category where category.parent in (select id from category where category.parent is null and category.names = $1))'
+  ;
   const query = {
   text: select,
-  values: [],
+  values: [category],
    }; 
   const {rows} = await pool.query(query);
   return rows;
