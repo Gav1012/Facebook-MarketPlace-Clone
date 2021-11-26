@@ -1,13 +1,19 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import {CardActionArea} from '@mui/material';
+import CategoryContext from './CategoryContext';
 
-const fetchListings = (setListings) => {
-  fetch('/v0/listings', {
+const fetchListings = (setListings, currCat) => {
+  let toBeFetched = '/v0/listings';
+  if (currCat) {
+    toBeFetched = '/v0/listings/' + currCat;
+  }
+  console.log('tobefetched', toBeFetched);
+  fetch(toBeFetched, {
     method: 'get',
     headers: {
       'Content-Type': 'application/json',
@@ -29,10 +35,10 @@ const fetchListings = (setListings) => {
  */
 function ListGrid() {
   const [listings, setListings] = React.useState([]);
-
+  const {currCat} = useContext(CategoryContext);
   React.useEffect(() => {
-    fetchListings(setListings);
-  }, []);
+    fetchListings(setListings, currCat);
+  }, [currCat]);
 
   return (
     <Grid container spacing={3}>
