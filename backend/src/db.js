@@ -16,7 +16,7 @@ exports.searchListings = async (search) => {
   if (search) {
     console.log(search);
     select += ` WHERE LOWER(listings ->> 'title') LIKE $1`;
-    const searchQuery = search + '%';
+    const searchQuery = '%' + search + '%';
     val.push(searchQuery);
   }
   const query = {

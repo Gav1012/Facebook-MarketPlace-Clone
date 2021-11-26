@@ -5,7 +5,7 @@ exports.getListings = async (req, res) => {
     //  on in the program if we need it this req.query.search
     const listings = await db.searchListings(req.query.search);
     if (listings === undefined) {
-      res.status(404).send();
+      res.status(200).json([]);
     } else {
       res.status(200).json(listings);
     }
