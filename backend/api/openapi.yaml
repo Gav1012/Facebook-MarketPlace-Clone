@@ -16,6 +16,13 @@ paths:
   /listings:
     get:
       description: Gets all listings
+      parameters:
+      - name: search
+        in: query
+        description: Query search
+        required: false
+        schema:
+          type: string
       responses:
         200:
           description: Got all listings
