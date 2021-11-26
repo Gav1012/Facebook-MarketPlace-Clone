@@ -6,62 +6,62 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import {CardActionArea} from '@mui/material';
 
-/**
- * @return {object}
- */
-function FormRow() {
-  return (
-    <React.Fragment>
-      <Grid item xs={6}>
-        <CardActionArea>
-          <Card>
-            <CardMedia
-              component="img"
-              height="140"
-              image="https://engineering.ucsc.edu/people/dcharris/photo/1"
-              alt="green iguana"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                TEMP ITEM
-              </Typography>
-            </CardContent>
-          </Card>
-        </CardActionArea>
-      </Grid>
-      <Grid item xs={6}>
-        <CardActionArea>
-          <Card>
-            <CardMedia
-              component="img"
-              height="140"
-              image="https://engineering.ucsc.edu/people/dcharris/photo/1"
-              alt="green iguana"
-            />
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                TEMP ITEM
-              </Typography>
-            </CardContent>
-          </Card>
-        </CardActionArea>
-      </Grid>
-    </React.Fragment>
-  );
-}
+const fetchListings = (setListings) => {
+  fetch('/v0/listings', {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw response;
+      }
+      return response.json();
+    })
+    .then((json) => {
+      setListings(json);
+    });
+};
 
 /**
  * @return {object}
  */
 function ListGrid() {
+  const [listings, setListings] = React.useState([]);
+
+  React.useEffect(() => {
+    fetchListings(setListings);
+  }, []);
+
   return (
     <Grid container spacing={3}>
       <Grid container item spacing={2}>
-        <FormRow />
-        <FormRow />
-        <FormRow />
-        <FormRow />
-        <FormRow />
+        {listings.map((listing) => (
+          <Grid item xs={6} key={listing.id}>
+            <CardActionArea>
+              <Card sx={{width: 200}}>
+                <CardMedia
+                  component='img'
+                  height='140'
+                  image="https://upload.wikimedia.org/wikipedia/commons/b/b1/Beater_Nissan.jpg"
+                  alt={listing.listings.title}
+                />
+                <CardContent>
+                  <Typography variant='h5'>
+                    {listing.listings.price}
+                  </Typography>
+                  <Typography gutterBottom variant='h6'>
+                    {listing.listings.title}
+                  </Typography>
+                  <Typography variant='body2'>
+                    {listing.listings.content}
+                  </Typography>
+                </CardContent>
+              </Card>
+            </CardActionArea>
+          </Grid>
+        ))}
       </Grid>
     </Grid>
   );
