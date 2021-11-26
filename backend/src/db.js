@@ -10,11 +10,18 @@ const pool = new Pool({
 
 
 
-exports.searchListings = async () => {
-  const select = 'SELECT * FROM listing';
+exports.searchListings = async (search) => {
+  let select = 'SELECT * FROM listing';
+  val = [];
+  if (search) {
+    console.log(search);
+    select += ` WHERE LOWER(listings ->> 'title') LIKE $1`;
+    const searchQuery = search + '%';
+    val.push(searchQuery);
+  }
   const query = {
     text: select,
-    values: [],
+    values: val,
   };
   const {rows} = await pool.query(query);
   if (rows[0] === undefined) {
