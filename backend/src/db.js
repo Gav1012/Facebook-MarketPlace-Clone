@@ -35,9 +35,20 @@ exports.catListings = async (category) => {
   'select * from listing where listing.categoryid in (select id from category where category.parent in (select id from category where category.parent is null and category.names = $1))'
   ;
   const query = {
-  text: select,
-  values: [category],
-   }; 
+    text: select,
+    values: [category],
+  }; 
   const {rows} = await pool.query(query);
   return rows;
+};
+
+exports.getCategories = async () => {
+  const select = 'select * from category';
+  console.log('abc');
+  const query = {
+    text: select,
+    values : [],
   };
+  const {rows} = await pool.query(query);
+  return rows;
+}

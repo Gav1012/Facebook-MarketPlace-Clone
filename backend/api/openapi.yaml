@@ -30,6 +30,16 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Listings'
+  /listings/category:
+    get:
+      description: Gets all categories
+      responses:
+        200:
+          description: Got all categories
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Categories'
   /listings/{category}:
     get:
       description: Gets listings from category
@@ -53,6 +63,19 @@ paths:
 
 components:
   schemas:
+    Categories:
+      properties:
+        parent:
+          type: string
+        name:
+          type: string
+        id:
+          type: string
+          format: uuid
+      required:
+        - parent
+        - name
+        - id
     Listings:
       properties:
         id:
