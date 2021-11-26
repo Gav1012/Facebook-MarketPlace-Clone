@@ -1,8 +1,8 @@
 import React from 'react';
+import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import TopBar from './TopBar';
 import Category from './Category';
 import ListGrid from './ListGrid';
-// import Dummy from './Dummy';
 
 /**
  * Simple component with no state.
@@ -11,11 +11,18 @@ import ListGrid from './ListGrid';
  */
 function App() {
   return (
-    <div>
-      <TopBar />
-      <Category />
-      <ListGrid />
-    </div>
+    <BrowserRouter>
+      <Switch>
+        <Route>
+          <TopBar />
+          <Category />
+          <ListGrid />
+        </Route>
+        {/* <Route path='/login'>
+          <Login />
+        </Route> */}
+      </Switch>
+    </BrowserRouter>
   );
 }
 

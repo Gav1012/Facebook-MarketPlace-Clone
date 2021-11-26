@@ -4,6 +4,7 @@ import Container from '@mui/material/Container';
 import Chip from '@mui/material/Chip';
 import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
+import SearchIcon from '@mui/icons-material/Search';
 
 
 /**
@@ -17,18 +18,12 @@ function Category() {
           <Chip label='Sell' onClick={()=>console.log('sell button')} />
           <Chip label='Categories' variant='outlined'
             onClick={()=>console.log('category button')} />
-          <Chip label='Vehicles' variant='outlined'
-            onClick={()=>console.log('Vehicle button')} />
-          <Chip label='Apparel' variant='outlined'
-            onClick={()=>console.log('apparel button')} />
         </Stack>
-        <form noValidate autoComplete="off">
-          <TextField
-            label="search"
-            variant="standard"
-            fullWidth
-          ></TextField>
-        </form>
+        <div>
+          <SearchIcon />
+          <TextField size='small' id='outlined-disabled' label='search'>
+          </TextField>
+        </div>
       </Box>
     </Container>
   );
