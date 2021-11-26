@@ -7,12 +7,14 @@ import CardMedia from '@mui/material/CardMedia';
 import {CardActionArea} from '@mui/material';
 import CategoryContext from './CategoryContext';
 
-const fetchListings = (setListings, currCat) => {
+const fetchListings = (setListings, currCat, search) => {
   let toBeFetched = '/v0/listings';
   if (currCat) {
     toBeFetched = '/v0/listings/' + currCat;
   }
-  console.log('tobefetched', toBeFetched);
+  if (search.length > 0) {
+    toBeFetched += '?search=' + search;
+  }
   fetch(toBeFetched, {
     method: 'get',
     headers: {
@@ -36,9 +38,11 @@ const fetchListings = (setListings, currCat) => {
 function ListGrid() {
   const [listings, setListings] = React.useState([]);
   const {currCat} = useContext(CategoryContext);
+  const {search} = useContext(CategoryContext);
   React.useEffect(() => {
-    fetchListings(setListings, currCat);
-  }, [currCat]);
+    fetchListings(setListings, currCat, search);
+  }, [currCat, search]);
+  console.log(search);
 
   return (
     <Grid container spacing={3}>

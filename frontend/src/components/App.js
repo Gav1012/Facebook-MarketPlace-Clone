@@ -12,15 +12,17 @@ import ListGrid from './ListGrid';
  */
 function App() {
   const [currCat, setCategory] = useState(undefined);
+  const [search, setSearch] = useState('');
 
   return (
     <BrowserRouter>
       <Switch>
         <Route>
           <TopBar />
-          <CategoryContext.Provider value={{currCat, setCategory}}>
-            <Category />
-            <ListGrid />
+          <CategoryContext.Provider value={{currCat, setCategory,
+            search, setSearch}}>
+            <Category setSearch={setSearch}/>
+            <ListGrid/>
           </CategoryContext.Provider>
         </Route>
         {/* <Route path='/login'>
