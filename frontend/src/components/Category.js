@@ -56,7 +56,10 @@ function Category({setSearch}) {
   };
   // used for when the search iconis clicked
   const onSearchClick = (e) => {
+    setSub(undefined);
+    setCategory(undefined);
     setSearch(e);
+    handleClose();
   };
   const handleClickOpen = () => {
     setOpen(true);
@@ -94,7 +97,10 @@ function Category({setSearch}) {
                 <Chip
                   label={sub.names}
                   key={sub.names}
-                  onClick={()=>setSub(sub.names)}
+                  onClick={()=>{
+                    setSub(sub.names);
+                    setSearch('');
+                  }}
                 />
               ))}
             </Box>:
@@ -114,14 +120,20 @@ function Category({setSearch}) {
                   <ListItem
                     button
                     key={'Vehicles'}
-                    onClick={()=>setCategory('Vehicles')}
+                    onClick={()=>{
+                      setCategory('Vehicles');
+                      setSearch('');
+                    }}
                   >
                     <ListItemText primary={'Vehicles'} />
                   </ListItem>
                   <ListItem
                     button
                     key={'Apparel'}
-                    onClick={()=>setCategory('Apparel')}
+                    onClick={()=>{
+                      setCategory('Apparel');
+                      setSearch('');
+                    }}
                   >
                     <ListItemText primary={'Apparel'} />
                   </ListItem>
