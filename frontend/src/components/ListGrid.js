@@ -1,13 +1,26 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import {CardActionArea} from '@mui/material';
+import CategoryContext from './CategoryContext';
 
-const fetchListings = (setListings) => {
-  fetch('/v0/listings', {
+// grabs all the listings and specific ones depending on other inputs
+const fetchListings = (setListings, currCat, search) => {
+  // original string to grab all listings
+  let toBeFetched = '/v0/listings';
+  // if a category has been clicked, only that category is viewed
+  if (currCat) {
+    toBeFetched = '/v0/listings/' + currCat;
+  }
+  // if search bar is used, includes it in search process
+  if (search.length > 0) {
+    toBeFetched += '?search=' + search;
+  }
+  // fetches the listings based on above modifications
+  fetch(toBeFetched, {
     method: 'get',
     headers: {
       'Content-Type': 'application/json',
@@ -29,10 +42,11 @@ const fetchListings = (setListings) => {
  */
 function ListGrid() {
   const [listings, setListings] = React.useState([]);
-
+  const {currCat} = useContext(CategoryContext);
+  const {search} = useContext(CategoryContext);
   React.useEffect(() => {
-    fetchListings(setListings);
-  }, []);
+    fetchListings(setListings, currCat, search);
+  }, [currCat, search]);
 
   return (
     <Grid container spacing={3}>
@@ -44,7 +58,7 @@ function ListGrid() {
                 <CardMedia
                   component='img'
                   height='140'
-                  image="https://upload.wikimedia.org/wikipedia/commons/b/b1/Beater_Nissan.jpg"
+                  image={listing.listings.images[0].link}
                   alt={listing.listings.title}
                 />
                 <CardContent>

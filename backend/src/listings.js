@@ -1,3 +1,4 @@
+
 const db = require('./db');
 
 exports.getListings = async (req, res) => {
@@ -21,3 +22,9 @@ exports.getListings = async (req, res) => {
       res.status(200).json(listings);
     }
   };
+
+  exports.getCategories = async (req, res) => {
+  // this function gets all categories
+  const categories = await db.getCategories();
+  res.status(200).json(categories);
+}

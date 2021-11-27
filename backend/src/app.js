@@ -31,6 +31,7 @@ app.use(
 // comment from gavin
 
 app.get('/v0/listings', listings.getListings);
+app.get('/v0/listings/category', listings.getCategories);
 app.get('/v0/listings/:category', listings.getCatListings);
 
 app.use((err, req, res, next) => {
