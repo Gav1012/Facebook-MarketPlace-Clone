@@ -6,9 +6,36 @@ import Stack from '@mui/material/Stack';
 import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 import CategoryContext from './CategoryContext';
-import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Dialog from '@mui/material/Dialog';
 import {useState} from 'react';
-import Link from '@mui/material/Link';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
+import Typography from '@mui/material/Typography';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+
+// grabs all the listings and specific ones depending on other inputs
+const fetchCategory = (setSubCat) => {
+  // fetches the listings based on above modifications
+  fetch('/v0/listings/category', {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw response;
+      }
+      return response.json();
+    })
+    .then((json) => {
+      setSubCat(json);
+    });
+};
 
 /**
  * @return {object}
@@ -18,6 +45,8 @@ function Category({setSearch}) {
   const {currCat, setCategory} = useContext(CategoryContext);
   // sets state for when search box is used
   const [value, setValue] = useState('');
+  const [subCat, setSubCat] = React.useState();
+  const [open, setOpen] = React.useState(false);
   // const [searchSend, setSearchSend] = useState('');
   // handles when listing changes
   const handleChange = (e) => {
@@ -27,25 +56,77 @@ function Category({setSearch}) {
   const onSearchClick = (e) => {
     setSearch(e);
   };
-
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  React.useEffect(() => {
+    fetchCategory(setSubCat);
+  }, []);
+  console.log('subCat: ', subCat);
+  let found = undefined;
+  const temp = [];
+  // checks that a category was selected
+  if (currCat) {
+    // finds the main category
+    found = subCat.find((element) => element.names === currCat);
+    // iterates through all the listings
+    subCat.forEach((element) => {
+      console.log(element);
+      // checks for the subcategories of current main category
+      if (element.parent === found.id) {
+        console.log('found subcat: ', element.names);
+        temp.push(element);
+      }
+    });
+  }
   return (
     <Container>
       <Box sx={{my: 2}}>
-        {currCat ? <Breadcrumbs>
-          <Link onClick={()=>setCategory(undefined)} color='inherit'
-            underline='hover'>
-            Main Menu
-          </Link>
-        </Breadcrumbs>: <div>NO CATEGORY SELECTED</div>}
-
         <Stack direction="row" spacing={1}>
-          <Chip label='Sell' onClick={()=>setCategory('bruh')} />
-          <Chip label='Categories' variant='outlined'
-            onClick={()=>setCategory(undefined)} />
-          <Chip label='Vehicles' variant='outlined'
-            onClick={()=>setCategory('Vehicles')} />
-          <Chip label='Apparel' variant='outlined'
-            onClick={()=>setCategory('Apparel')} />
+          {currCat ?
+            <Box>
+              {temp.map((sub) => (
+                <Chip
+                  label={sub.names}
+                  key={sub.names}
+                  onClick={()=>setCategory(sub.names)}
+                />
+              ))}
+            </Box>:
+            <Box>
+              <Chip label='Sell' onClick={()=>setCategory(undefined)} />
+              <Chip label='Categories' onClick={handleClickOpen} />
+              <Dialog fullScreen open={open} onClose={handleClose}>
+                <AppBar sx={{position: 'relative'}}>
+                  <Toolbar>
+                    <Typography>Categories</Typography>
+                    <IconButton sx={{marginLeft: 'auto'}} onClick={handleClose}>
+                      <CloseIcon />
+                    </IconButton>
+                  </Toolbar>
+                </AppBar>
+                <List>
+                  <ListItem
+                    button
+                    key={'Vehicles'}
+                    onClick={()=>setCategory('Vehicles')}
+                  >
+                    <ListItemText primary={'Vehicles'} />
+                  </ListItem>
+                  <ListItem
+                    button
+                    key={'Apparel'}
+                    onClick={()=>setCategory('Apparel')}
+                  >
+                    <ListItemText primary={'Apparel'} />
+                  </ListItem>
+                </List>
+              </Dialog>
+            </Box>
+          }
         </Stack>
         <div>
           <SearchIcon onClick={()=>onSearchClick(value)} />
