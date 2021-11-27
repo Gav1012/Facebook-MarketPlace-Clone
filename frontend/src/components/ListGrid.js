@@ -7,14 +7,19 @@ import CardMedia from '@mui/material/CardMedia';
 import {CardActionArea} from '@mui/material';
 import CategoryContext from './CategoryContext';
 
+// grabs all the listings and specific ones depending on other inputs
 const fetchListings = (setListings, currCat, search) => {
+  // original string to grab all listings
   let toBeFetched = '/v0/listings';
+  // if a category has been clicked, only that category is viewed
   if (currCat) {
     toBeFetched = '/v0/listings/' + currCat;
   }
+  // if search bar is used, includes it in search process
   if (search.length > 0) {
     toBeFetched += '?search=' + search;
   }
+  // fetches the listings based on above modifications
   fetch(toBeFetched, {
     method: 'get',
     headers: {
@@ -42,7 +47,6 @@ function ListGrid() {
   React.useEffect(() => {
     fetchListings(setListings, currCat, search);
   }, [currCat, search]);
-  console.log(search);
 
   return (
     <Grid container spacing={3}>
@@ -54,7 +58,7 @@ function ListGrid() {
                 <CardMedia
                   component='img'
                   height='140'
-                  image="https://upload.wikimedia.org/wikipedia/commons/b/b1/Beater_Nissan.jpg"
+                  image={listing.listings.images[0].link}
                   alt={listing.listings.title}
                 />
                 <CardContent>

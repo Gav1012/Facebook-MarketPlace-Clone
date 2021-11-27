@@ -11,7 +11,9 @@ import ListGrid from './ListGrid';
  * @return {object} JSX
  */
 function App() {
+  // sets state for category being viewed
   const [currCat, setCategory] = useState(undefined);
+  // sets state for when search bar is used
   const [search, setSearch] = useState('');
 
   return (
