@@ -43,6 +43,8 @@ const fetchCategory = (setSubCat) => {
 function Category({setSearch}) {
   // uses context to set the category to be viewed when clicked
   const {currCat, setCategory} = useContext(CategoryContext);
+  const {currSub, setSub} = useContext(CategoryContext);
+  console.log(currSub);
   // sets state for when search box is used
   const [value, setValue] = useState('');
   const [subCat, setSubCat] = React.useState();
@@ -92,7 +94,7 @@ function Category({setSearch}) {
                 <Chip
                   label={sub.names}
                   key={sub.names}
-                  onClick={()=>setCategory(sub.names)}
+                  onClick={()=>setSub(sub.names)}
                 />
               ))}
             </Box>:

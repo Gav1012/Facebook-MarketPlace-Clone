@@ -13,6 +13,7 @@ import ListGrid from './ListGrid';
 function App() {
   // sets state for category being viewed
   const [currCat, setCategory] = useState(undefined);
+  const [currSub, setSub] = useState(undefined);
   // sets state for when search bar is used
   const [search, setSearch] = useState('');
 
@@ -21,8 +22,8 @@ function App() {
       <Switch>
         <Route>
           <TopBar />
-          <CategoryContext.Provider value={{currCat, setCategory,
-            search, setSearch}}>
+          <CategoryContext.Provider value={
+            {currCat, setCategory, currSub, setSub, search, setSearch}}>
             <Category setSearch={setSearch}/>
             <ListGrid/>
           </CategoryContext.Provider>

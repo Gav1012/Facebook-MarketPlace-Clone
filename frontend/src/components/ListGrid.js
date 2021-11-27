@@ -8,12 +8,19 @@ import {CardActionArea} from '@mui/material';
 import CategoryContext from './CategoryContext';
 
 // grabs all the listings and specific ones depending on other inputs
-const fetchListings = (setListings, currCat, search) => {
+const fetchListings = (setListings, currCat, currSub, search) => {
+  console.log('inside Fetch Listings');
+  console.log(currCat);
   // original string to grab all listings
   let toBeFetched = '/v0/listings';
   // if a category has been clicked, only that category is viewed
-  if (currCat) {
+
+  if (currCat && currSub === undefined) {
     toBeFetched = '/v0/listings/' + currCat;
+  }
+
+  if (currCat && currSub) {
+    toBeFetched = '/v0/listings/' + currCat + '?sub=' + currSub;
   }
   // if search bar is used, includes it in search process
   if (search.length > 0) {
@@ -44,9 +51,10 @@ function ListGrid() {
   const [listings, setListings] = React.useState([]);
   const {currCat} = useContext(CategoryContext);
   const {search} = useContext(CategoryContext);
+  const {currSub} = useContext(CategoryContext);
   React.useEffect(() => {
-    fetchListings(setListings, currCat, search);
-  }, [currCat, search]);
+    fetchListings(setListings, currCat, currSub, search);
+  }, [currCat, currSub, search]);
 
   return (
     <Grid container spacing={3}>
