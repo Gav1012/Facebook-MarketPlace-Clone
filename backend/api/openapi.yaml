@@ -40,6 +40,12 @@ paths:
         required: true
         schema:
           type: string
+      - name: sub
+        in: query
+        description: Name of a subcategory
+        required: false
+        schema:
+          type: string
       responses:
         200:
           description: Listings Found

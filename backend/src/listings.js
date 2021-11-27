@@ -14,7 +14,7 @@ exports.getListings = async (req, res) => {
   exports.getCatListings = async (req, res) => {
     //  this function can take a filter query later 
     //  on in the program if we need it this req.query.filter
-    const listings = await db.catListings(req.params.category);
+    const listings = await db.catListings(req.params.category, req.query.sub);
     if (listings === undefined) {
       res.status(404).send();
     } else {
