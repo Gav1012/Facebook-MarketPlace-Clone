@@ -60,8 +60,11 @@ function TopBar() {
           label='password'
           sx={{my: '3%', width: '300px'}}
         >PASSWORD</TextField>
-        <Button variant='contained' sx={{width: '300px'}}>
+        <Button variant='contained' sx={{my: '3%', width: '300px'}}>
           Login
+        </Button>
+        <Button variant='contained' sx={{width: '300px'}}>
+          New User
         </Button>
       </Box>
     </Dialog>
