@@ -1,8 +1,9 @@
-import React, {useState, useEffect} from 'react';
+import React, {useContext} from 'react';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import CssBaseline from '@mui/material/CssBaseline';
+import CategoryContext from './CategoryContext';
 // import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
@@ -69,20 +70,8 @@ function TopBar() {
       </Box>
     </Dialog>
   );
-  const winDims = () => ({
-    width: window.innerWidth,
-  });
   // deals with conditional render
-  const [dimensions, setDimensions] = useState(winDims);
-  useEffect(() => {
-    const handleResize = () => {
-      setDimensions(winDims);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  const {dimensions} = useContext(CategoryContext);
   return (
     <React.Fragment>
       <CssBaseline />
