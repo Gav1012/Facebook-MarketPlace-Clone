@@ -145,29 +145,7 @@ function Category({setSearch}) {
                     handleClose();
                   }}
                 > <ListItemText primary={cat.names} />
-              </ListItem>))}
-                  <ListItem
-                    button
-                    key={'Vehicles'}
-                    onClick={()=>{
-                      setCategory('Vehicles');
-                      handleClose();
-                      setSearch('');
-                    }}
-                  >
-                    <ListItemText primary={'Vehicles'} />
-                  </ListItem>
-                  <ListItem
-                    button
-                    key={'Apparel'}
-                    onClick={()=>{
-                      setCategory('Apparel');
-                      handleClose();
-                      setSearch('');
-                    }}
-                  >
-                    <ListItemText primary={'Apparel'} />
-                  </ListItem>
+                </ListItem>))}
                 </List>
               </Dialog>
             </Box>
