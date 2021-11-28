@@ -72,13 +72,19 @@ exports.getCategories = async () => {
   return rows;
 }
 // gets all the members from db
-exports.selectMembers = async () => {
-  const select = 'select * from member';
-  console.log(select);
+exports.selectMembers = async (email) => {
+  console.log('email: ', email);
+  let select = ` select id, member from member`;
+  if (email) {
+    select += ` where member->>'email' = $1`;
+  }
   const query = {
     text: select,
-    values: [],
+    values: email ? [`${email}`] : []
   };
   const {rows} = await pool.query(query);
+  if (rows.length === 0) {
+    return undefined;
+  }
   return rows;
 }

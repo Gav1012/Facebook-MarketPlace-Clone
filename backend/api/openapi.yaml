@@ -68,6 +68,12 @@ paths:
   /member:
     get:
       description: Gets users
+      parameters:
+      - name: user
+        in: query
+        description: specific user
+        schema:
+          type: string
       responses:
         200:
           description: got users

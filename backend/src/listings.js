@@ -30,7 +30,11 @@ exports.getListings = async (req, res) => {
 }
 
 exports.getMembers = async (req, res) => {
-  const members = await db.selectMembers();
-  console.log('hello');
-  res.status(200).json(members);
+  console.log(req.query);
+  const members = await db.selectMembers(req.query.user);
+  if (members) {
+    res.status(200).json(members);
+  } else {
+    res.status(404).send();
+  }
 }
