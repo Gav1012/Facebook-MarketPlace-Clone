@@ -7,9 +7,10 @@ import Button from '@mui/material/Button';
 /**
  * @return {object}
  */
-export default function CustomSeparator({setSearch}) {
+export default function CustomSeparator() {
   const {currCat, setCategory} = useContext(CategoryContext);
   const {currSub, setSub} = useContext(CategoryContext);
+  const {setSearch} = useContext(CategoryContext);
   return (
     <div>
       <Stack spacing={1}>
