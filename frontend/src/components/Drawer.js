@@ -10,12 +10,22 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
-
+import CategoryContext from './CategoryContext';
+import BreadCrumbs from './BreadCrumbs';
+import {useContext} from 'react';
 const drawerWidth = 400;
 /**
  * @return {object}
  */
 export default function PermanentDrawerLeft() {
+  const {currCat, setCategory} = useContext(CategoryContext);
+  const {dimensions} = useContext(CategoryContext);
+  const {setSub} = useContext(CategoryContext);
+  const {catList} = useContext(CategoryContext);
+  const {subList} = useContext(CategoryContext);
+  const {setSearch} = useContext(CategoryContext);
+  console.log(subList);
+  console.log(currCat);
   return (
     <Box sx={{display: 'flex'}}>
       <CssBaseline />
@@ -32,17 +42,20 @@ export default function PermanentDrawerLeft() {
         anchor="left"
       >
         <Toolbar />
+        {dimensions.width > 599? <BreadCrumbs /> : ''}
         <Divider />
         <List>
-          {['Vehicles', 'Apparel',
-            'Electronics', 'Drafts'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
+        {catList.map((cat) => (
+                <ListItem
+                  label={cat.names}
+                  key={cat.names}
+                  onClick={()=>{
+                    setCategory(cat.names);
+                    setSub(undefined);
+                    setSearch('');
+                  }}
+                > <ListItemText primary={cat.names} />
+                </ListItem>))}
         </List>
         <Divider />
         <List>
