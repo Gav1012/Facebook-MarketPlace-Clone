@@ -11,17 +11,18 @@ export default function CustomSeparator({setSearch}) {
 const {currCat, setCategory} = useContext(CategoryContext);
 const {currSub, setSub} = useContext(CategoryContext);
   return (
-    <Stack spacing={2}>
+    <Stack spacing={1}>
       <Breadcrumbs separator="›">
-        <Button color="inherit"
-            onClick={()=>{
-              setCategory(undefined);
-              setSub(undefined);
-              setSearch('');
-            }}
-          >
-      HOME
-    </Button>
+      {currCat !== undefined ?
+        <Button color="inherit" display='none'
+          onClick={()=>{
+            setCategory(undefined);
+            setSub(undefined);
+            setSearch('');
+          }}
+        >
+      MARKETPLACE
+    </Button> : <Button style={{visibility: 'hidden'}}>MARKETPLACe</Button>}
     {currCat !== undefined? <Button
       underline="hover"
       key="2"
