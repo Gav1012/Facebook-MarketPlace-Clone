@@ -4,6 +4,7 @@ import CategoryContext from './CategoryContext';
 import TopBar from './TopBar';
 import Category from './Category';
 import ListGrid from './ListGrid';
+import BreadCrumbs from './BreadCrumbs';
 
 /**
  * Simple component with no state.
@@ -24,6 +25,7 @@ function App() {
           <TopBar />
           <CategoryContext.Provider value={
             {currCat, setCategory, currSub, setSub, search, setSearch}}>
+              <BreadCrumbs setSearch={setSearch}/>
             <Category setSearch={setSearch}/>
             <ListGrid/>
           </CategoryContext.Provider>

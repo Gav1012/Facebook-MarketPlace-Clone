@@ -59,9 +59,9 @@ function Category({setSearch}) {
     setSub(undefined);
     setCategory(undefined);
     setSearch(e);
-    handleClose();
   };
   const handleClickOpen = () => {
+    console.log('we got to handleclick open');
     setOpen(true);
   };
   const handleClose = () => {
@@ -87,6 +87,7 @@ function Category({setSearch}) {
       }
     });
   }
+  console.log(open);
   return (
     <Container>
       <Box sx={{my: 2}}>
@@ -122,6 +123,7 @@ function Category({setSearch}) {
                     key={'Vehicles'}
                     onClick={()=>{
                       setCategory('Vehicles');
+                      handleClose();
                       setSearch('');
                     }}
                   >
@@ -132,6 +134,7 @@ function Category({setSearch}) {
                     key={'Apparel'}
                     onClick={()=>{
                       setCategory('Apparel');
+                      handleClose();
                       setSearch('');
                     }}
                   >
