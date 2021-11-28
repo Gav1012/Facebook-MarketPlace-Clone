@@ -22,6 +22,13 @@ paths:
         required: false
         schema:
           type: string
+      - name: id
+        in: query
+        description: Listing ID
+        required: false
+        schema:
+          type: string
+          format: uuid
       responses:
         200:
           description: Got all listings

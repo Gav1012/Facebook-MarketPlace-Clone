@@ -8,7 +8,7 @@ const pool = new Pool({
   password: process.env.POSTGRES_PASSWORD,
 });
 
-exports.searchListings = async (search) => {
+exports.searchListings = async (search, id) => {
   let select = 'SELECT * FROM listing';
   val = [];
   if (search) {
@@ -16,6 +16,10 @@ exports.searchListings = async (search) => {
     select += ` WHERE LOWER(listings ->> 'title') LIKE $1`;
     const searchQuery = '%' + search + '%';
     val.push(searchQuery);
+  } else if (id) {
+    select += ` WHERE listing.id = $1`;
+    console.log(id);
+    val.push(id);
   }
   const query = {
     text: select,
