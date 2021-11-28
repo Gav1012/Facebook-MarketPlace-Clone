@@ -8,18 +8,15 @@ const pool = new Pool({
   password: process.env.POSTGRES_PASSWORD,
 });
 
-exports.searchListings = async (search, id) => {
+// gets all the listings
+exports.searchListings = async (search) => {
   let select = 'SELECT * FROM listing';
   val = [];
   if (search) {
-    console.log(search);
+    // console.log(search);
     select += ` WHERE LOWER(listings ->> 'title') LIKE $1`;
     const searchQuery = '%' + search + '%';
     val.push(searchQuery);
-  } else if (id) {
-    select += ` WHERE listing.id = $1`;
-    console.log(id);
-    val.push(id);
   }
   const query = {
     text: select,
@@ -32,6 +29,7 @@ exports.searchListings = async (search, id) => {
   return rows;
 };
 
+// gets listings based on category selected
 exports.catListings = async (category, sub) => {
   if (sub !== undefined) {
     const select =
@@ -63,9 +61,9 @@ exports.catListings = async (category, sub) => {
   }
 };
 
+// gets all the categories from db
 exports.getCategories = async () => {
   const select = 'select * from category';
-  console.log('abc');
   const query = {
     text: select,
     values : [],
@@ -73,4 +71,20 @@ exports.getCategories = async () => {
   const {rows} = await pool.query(query);
   return rows;
 }
-
+// gets all the members from db
+exports.selectMembers = async (email) => {
+  console.log('email: ', email);
+  let select = ` select id, member from member`;
+  if (email) {
+    select += ` where member->>'email' = $1`;
+  }
+  const query = {
+    text: select,
+    values: email ? [`${email}`] : []
+  };
+  const {rows} = await pool.query(query);
+  if (rows.length === 0) {
+    return undefined;
+  }
+  return rows;
+}

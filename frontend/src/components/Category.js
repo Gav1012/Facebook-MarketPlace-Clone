@@ -59,9 +59,9 @@ function Category({setSearch}) {
     setSub(undefined);
     setCategory(undefined);
     setSearch(e);
-    handleClose();
   };
   const handleClickOpen = () => {
+    console.log('we got to handleclick open');
     setOpen(true);
   };
   const handleClose = () => {
@@ -70,7 +70,8 @@ function Category({setSearch}) {
   React.useEffect(() => {
     fetchCategory(setSubCat);
   }, []);
-  console.log('subCat: ', subCat);
+  // console.log('subCat: ', subCat);
+  // NEED TO CHANGE THIS??
   let found = undefined;
   const temp = [];
   // checks that a category was selected
@@ -87,14 +88,16 @@ function Category({setSearch}) {
       }
     });
   }
+  console.log(open);
   return (
     <Container>
-      <Box sx={{my: 2}}>
+      <Box>
         <Stack direction="row" spacing={1}>
           {currCat ?
-            <Box>
+            <Box sx={{my: 1}}>
               {temp.map((sub) => (
                 <Chip
+                  sx={{mb: .25, mr: 1}}
                   label={sub.names}
                   key={sub.names}
                   onClick={()=>{
@@ -104,9 +107,11 @@ function Category({setSearch}) {
                 />
               ))}
             </Box>:
-            <Box>
-              <Chip label='Sell' onClick={()=>setCategory(undefined)} />
-              <Chip label='Categories' onClick={handleClickOpen} />
+            <Box sx={{my: 1}}>
+              <Chip sx={{mb: .25, mr: 1}} label='Sell'
+                onClick={()=>setCategory(undefined)} />
+              <Chip sx={{mb: .25}} label='Categories'
+                onClick={handleClickOpen} />
               <Dialog fullScreen open={open} onClose={handleClose}>
                 <AppBar sx={{position: 'relative'}}>
                   <Toolbar>
@@ -122,6 +127,7 @@ function Category({setSearch}) {
                     key={'Vehicles'}
                     onClick={()=>{
                       setCategory('Vehicles');
+                      handleClose();
                       setSearch('');
                     }}
                   >
@@ -132,6 +138,7 @@ function Category({setSearch}) {
                     key={'Apparel'}
                     onClick={()=>{
                       setCategory('Apparel');
+                      handleClose();
                       setSearch('');
                     }}
                   >
@@ -142,12 +149,12 @@ function Category({setSearch}) {
             </Box>
           }
         </Stack>
-        <div>
+        <Box sx={{my: .5}}>
           <SearchIcon onClick={()=>onSearchClick(value)} />
           <TextField size='small' id='outlined-disabled' label='search'
             value={value} onChange={handleChange}>
           </TextField>
-        </div>
+        </Box>
       </Box>
     </Container>
   );
