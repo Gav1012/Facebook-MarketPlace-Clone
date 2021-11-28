@@ -39,6 +39,13 @@ paths:
   /listings/category:
     get:
       description: Gets all categories
+      parameters:
+      - name: sub
+        in: query
+        description: Finds sub of category
+        required: false
+        schema:
+          type: string
       responses:
         200:
           description: Got all categories

@@ -18,7 +18,9 @@ import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 
 // grabs all the listings and specific ones depending on other inputs
-const fetchCategory = (setSubCat) => {
+
+
+const fetchCategory = (setCatList) => {
   // fetches the listings based on above modifications
   fetch('/v0/listings/category', {
     method: 'get',
@@ -33,8 +35,31 @@ const fetchCategory = (setSubCat) => {
       return response.json();
     })
     .then((json) => {
-      setSubCat(json);
+      setCatList(json);
     });
+};
+const fetchSub = (setSubList, currCat) => {
+  console.log('we get here');
+  console.log(currCat);
+  if (currCat) {
+  console.log('we never get here');
+  // fetches the listings based on above modifications
+  fetch('/v0/listings/category?sub=' + currCat, {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw response;
+      }
+      return response.json();
+    })
+    .then((json) => {
+      setSubList(json);
+    });
+  }
 };
 
 /**
@@ -43,11 +68,14 @@ const fetchCategory = (setSubCat) => {
 function Category({setSearch}) {
   // uses context to set the category to be viewed when clicked
   const {currCat, setCategory} = useContext(CategoryContext);
-  const {currSub, setSub} = useContext(CategoryContext);
-  console.log(currSub);
+  const {setSub} = useContext(CategoryContext);
+  const {catList, setCatList} = useContext(CategoryContext);
+  const {subList, setSubList} = useContext(CategoryContext);
+  console.log(catList);
+  console.log(subList);
+  console.log('inside category');
   // sets state for when search box is used
   const [value, setValue] = useState('');
-  const [subCat, setSubCat] = React.useState();
   const [open, setOpen] = React.useState(false);
   // const [searchSend, setSearchSend] = useState('');
   // handles when listing changes
@@ -68,34 +96,18 @@ function Category({setSearch}) {
     setOpen(false);
   };
   React.useEffect(() => {
-    fetchCategory(setSubCat);
+    fetchCategory(setCatList);
   }, []);
-  // console.log('subCat: ', subCat);
-  // NEED TO CHANGE THIS??
-  let found = undefined;
-  const temp = [];
-  // checks that a category was selected
-  if (currCat) {
-    // finds the main category
-    found = subCat.find((element) => element.names === currCat);
-    // iterates through all the listings
-    subCat.forEach((element) => {
-      console.log(element);
-      // checks for the subcategories of current main category
-      if (element.parent === found.id) {
-        console.log('found subcat: ', element.names);
-        temp.push(element);
-      }
-    });
-  }
-  console.log(open);
+  React.useEffect(() => {
+    fetchSub(setSubList, currCat);
+  }, [currCat]);
   return (
     <Container>
       <Box>
         <Stack direction="row" spacing={1}>
           {currCat ?
             <Box sx={{my: 1}}>
-              {temp.map((sub) => (
+              {subList.map((sub) => (
                 <Chip
                   sx={{mb: .25, mr: 1}}
                   label={sub.names}
@@ -122,6 +134,18 @@ function Category({setSearch}) {
                   </Toolbar>
                 </AppBar>
                 <List>
+                {catList.map((cat) => (
+                <ListItem
+                  label={cat.names}
+                  key={cat.names}
+                  onClick={()=>{
+                    setCategory(cat.names);
+                    setSub(undefined);
+                    setSearch('');
+                    handleClose();
+                  }}
+                > <ListItemText primary={cat.names} />
+              </ListItem>))}
                   <ListItem
                     button
                     key={'Vehicles'}

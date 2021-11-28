@@ -66,14 +66,24 @@ exports.catListings = async (category, sub) => {
 };
 
 // gets all the categories from db
-exports.getCategories = async () => {
-  const select = 'select * from category';
+exports.getCategories = async (sub, fil) => {
+  if (sub) {
+    const select = 'select names from category where category.parent in (select id from category where category.names = $1)';
+    const query = {
+      text: select,
+      values : [sub],
+    };
+    const {rows} = await pool.query(query);
+    return rows;
+  } else {
+  const select = 'select names from category where category.parent is null';
   const query = {
     text: select,
     values : [],
   };
   const {rows} = await pool.query(query);
   return rows;
+  }
 }
 // gets all the members from db
 exports.selectMembers = async (email) => {

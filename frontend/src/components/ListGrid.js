@@ -86,6 +86,8 @@ function ListGrid() {
       console.log('end');
   };
 
+  console.log(fetchItem);
+
   React.useEffect(() => {
     fetchListings(setListings, currCat, currSub, search);
   }, [currCat, currSub, search]);
