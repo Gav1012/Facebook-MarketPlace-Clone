@@ -42,23 +42,23 @@ const fetchSub = (setSubList, currCat) => {
   console.log('we get here');
   console.log(currCat);
   if (currCat) {
-  console.log('we never get here');
-  // fetches the listings based on above modifications
-  fetch('/v0/listings/category?sub=' + currCat, {
-    method: 'get',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw response;
-      }
-      return response.json();
+    console.log('we never get here');
+    // fetches the listings based on above modifications
+    fetch('/v0/listings/category?sub=' + currCat, {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
-    .then((json) => {
-      setSubList(json);
-    });
+      .then((response) => {
+        if (!response.ok) {
+          throw response;
+        }
+        return response.json();
+      })
+      .then((json) => {
+        setSubList(json);
+      });
   }
 };
 
@@ -134,40 +134,18 @@ function Category({setSearch}) {
                   </Toolbar>
                 </AppBar>
                 <List>
-                {catList.map((cat) => (
-                <ListItem
-                  label={cat.names}
-                  key={cat.names}
-                  onClick={()=>{
-                    setCategory(cat.names);
-                    setSub(undefined);
-                    setSearch('');
-                    handleClose();
-                  }}
-                > <ListItemText primary={cat.names} />
-              </ListItem>))}
-                  <ListItem
-                    button
-                    key={'Vehicles'}
-                    onClick={()=>{
-                      setCategory('Vehicles');
-                      handleClose();
-                      setSearch('');
-                    }}
-                  >
-                    <ListItemText primary={'Vehicles'} />
-                  </ListItem>
-                  <ListItem
-                    button
-                    key={'Apparel'}
-                    onClick={()=>{
-                      setCategory('Apparel');
-                      handleClose();
-                      setSearch('');
-                    }}
-                  >
-                    <ListItemText primary={'Apparel'} />
-                  </ListItem>
+                  {catList.map((cat) => (
+                    <ListItem
+                      label={cat.names}
+                      key={cat.names}
+                      onClick={()=>{
+                        setCategory(cat.names);
+                        setSub(undefined);
+                        setSearch('');
+                        handleClose();
+                      }}
+                    > <ListItemText primary={cat.names} />
+                    </ListItem>))}
                 </List>
               </Dialog>
             </Box>
