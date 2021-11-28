@@ -13,7 +13,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import CategoryContext from './CategoryContext';
 import BreadCrumbs from './BreadCrumbs';
 import {useContext} from 'react';
-const drawerWidth = 400;
+const drawerWidth = 500;
 /**
  * @return {object}
  */

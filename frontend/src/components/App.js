@@ -45,8 +45,8 @@ function App() {
               search, setSearch, dimensions, catList, setCatList,
                 subList, setSubList}}>
             <TopBar />
-            <div style={dimensions.width > 599 ? {margin: 400} : {margin: 0}}>
-            {dimensions.width < 600? <BreadCrumbs setSearch={setSearch}/> : ''}
+            <div style={dimensions.width > 599 ? {margin: 500} : {margin: 0}}>
+            {dimensions.width < 600? <BreadCrumbs/> : ''}
             <Category setSearch={setSearch}/>
             {dimensions.width > 599 ? <Drawer /> :
              ''}
