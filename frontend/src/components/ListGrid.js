@@ -119,7 +119,12 @@ function ListGrid() {
       <Grid container item spacing={2}>
         {listings.map((listing) => (
           <Grid item sx={{ml: 1}} key={listing.id}>
-            <CardActionArea>
+            <CardActionArea key={listing.id} onClick={
+              () => {
+                setDialog(true);
+                fetchItem(listing.id);
+                }
+              }>
               <Card sx={{width: 180}}>
                 <CardMedia
                   component='img'
