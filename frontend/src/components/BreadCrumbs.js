@@ -23,7 +23,7 @@ const {currSub, setSub} = useContext(CategoryContext);
           }}
         >
       MARKETPLACE
-    </Button> : <Button style={{visibility: 'hidden'}}>MARKETPLACe</Button>}
+    </Button> : ''}
     {currCat !== undefined? <Button
       underline="hover"
       key="2"
