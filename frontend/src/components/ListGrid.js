@@ -121,8 +121,8 @@ function ListGrid() {
           <Grid item sx={{ml: 1}} key={listing.id}>
             <CardActionArea key={listing.id} onClick={
               () => {
-                setDialog(true);
                 fetchItem(listing.id);
+                setDialog(true);
                 }
               }>
               <Card sx={{width: 180}}>
