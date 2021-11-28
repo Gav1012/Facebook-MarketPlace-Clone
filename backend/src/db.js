@@ -8,11 +8,12 @@ const pool = new Pool({
   password: process.env.POSTGRES_PASSWORD,
 });
 
+// gets all the listings
 exports.searchListings = async (search) => {
   let select = 'SELECT * FROM listing';
   val = [];
   if (search) {
-    console.log(search);
+    // console.log(search);
     select += ` WHERE LOWER(listings ->> 'title') LIKE $1`;
     const searchQuery = '%' + search + '%';
     val.push(searchQuery);
@@ -28,6 +29,7 @@ exports.searchListings = async (search) => {
   return rows;
 };
 
+// gets listings based on category selected
 exports.catListings = async (category, sub) => {
   if (sub !== undefined) {
     const select =
@@ -59,9 +61,9 @@ exports.catListings = async (category, sub) => {
   }
 };
 
+// gets all the categories from db
 exports.getCategories = async () => {
   const select = 'select * from category';
-  console.log('abc');
   const query = {
     text: select,
     values : [],
@@ -69,4 +71,14 @@ exports.getCategories = async () => {
   const {rows} = await pool.query(query);
   return rows;
 }
-
+// gets all the members from db
+exports.selectMembers = async () => {
+  const select = 'select * from member';
+  console.log(select);
+  const query = {
+    text: select,
+    values: [],
+  };
+  const {rows} = await pool.query(query);
+  return rows;
+}

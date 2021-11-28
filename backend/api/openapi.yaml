@@ -65,6 +65,18 @@ paths:
      
         404:
           description: Listings not found
+  /member:
+    get:
+      description: Gets users
+      responses:
+        200:
+          description: got users
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Members'
+        404:
+          description: Users not found
 
 components:
   schemas:
@@ -99,3 +111,13 @@ components:
         - categoryID
         - memberID
         - listings
+    Members:
+      properties:
+        id:
+          type: string
+          format: uuid
+        member:
+          type: object
+      required:
+        - id
+        - member
