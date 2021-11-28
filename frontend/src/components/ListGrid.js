@@ -60,9 +60,9 @@ function ListGrid() {
     <Grid container spacing={3}>
       <Grid container item spacing={2}>
         {listings.map((listing) => (
-          <Grid item xs={6} key={listing.id}>
+          <Grid item sx={{ml: 1}} key={listing.id}>
             <CardActionArea>
-              <Card sx={{width: 200}}>
+              <Card sx={{width: 180}}>
                 <CardMedia
                   component='img'
                   height='140'

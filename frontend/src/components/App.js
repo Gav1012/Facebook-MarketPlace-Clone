@@ -25,7 +25,7 @@ function App() {
           <TopBar />
           <CategoryContext.Provider value={
             {currCat, setCategory, currSub, setSub, search, setSearch}}>
-              <BreadCrumbs setSearch={setSearch}/>
+            <BreadCrumbs setSearch={setSearch}/>
             <Category setSearch={setSearch}/>
             <ListGrid/>
           </CategoryContext.Provider>
