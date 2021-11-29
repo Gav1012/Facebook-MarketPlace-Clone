@@ -9,13 +9,14 @@ import Button from '@mui/material/Button';
  */
 export default function CustomSeparator() {
   const {currCat, setCategory} = useContext(CategoryContext);
+  const {dimensions} = useContext(CategoryContext);
   const {currSub, setSub} = useContext(CategoryContext);
   const {setSearch} = useContext(CategoryContext);
   return (
     <div>
       <Stack spacing={1}>
         <Breadcrumbs separator="›">
-          {currCat !== undefined ?
+          {currCat !== undefined || dimensions.width > 599 ?
             <Button color="inherit" display='none'
               onClick={()=>{
                 setCategory(undefined);
