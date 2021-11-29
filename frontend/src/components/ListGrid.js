@@ -42,6 +42,7 @@ const fetchListings = (setListings, currCat, currSub, search) => {
     .then((response) => {
       if (!response.ok) {
         throw response;
+        console.log('here we go');
       }
       return response.json();
     })

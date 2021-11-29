@@ -111,15 +111,17 @@ function Category({setSearch}) {
                 onClick={()=>setCategory(undefined)} />
               <Chip sx={{mb: .25}} label='Categories'
                 onClick={handleClickOpen} />
-              <Dialog fullScreen open={open} onClose={handleClose}>
-                <AppBar sx={{position: 'relative'}}>
-                  <Toolbar>
-                    <Typography>Categories</Typography>
-                    <IconButton sx={{marginLeft: 'auto'}} onClick={handleClose}>
-                      <CloseIcon />
-                    </IconButton>
-                  </Toolbar>
-                </AppBar>
+              {dimensions.width < 600?
+                <Dialog fullScreen open={open} onClose={handleClose}>
+                  <AppBar sx={{position: 'relative'}}>
+                    <Toolbar>
+                      <Typography>Categories</Typography>
+                      <IconButton
+                        sx={{marginLeft: 'auto'}} onClick={handleClose}>
+                        <CloseIcon />
+                      </IconButton>
+                    </Toolbar>
+                  </AppBar>
                 <List>
                   {catList.map((cat) => (
                     <ListItem
@@ -134,7 +136,7 @@ function Category({setSearch}) {
                     > <ListItemText primary={cat.names} />
                     </ListItem>))}
                 </List>
-              </Dialog>
+              </Dialog> : ''}
             </Box>
           }
         </Stack>

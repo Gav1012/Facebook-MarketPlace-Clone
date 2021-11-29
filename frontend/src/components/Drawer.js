@@ -62,9 +62,9 @@ export default function PermanentDrawerLeft() {
             Marketplace
           </Typography> : ''}
       </div>
-        <Divider />
         <div style={{margin: 10}}>
         <Search />
+        <Divider />
         <Typography variant="h5" gutterBottom component="div">
         Categories
       </Typography>
