@@ -3,6 +3,7 @@ import {BrowserRouter, Route, Switch} from 'react-router-dom';
 import CategoryContext from './CategoryContext';
 import TopBar from './TopBar';
 import Category from './Category';
+import Search from './Search';
 import ListGrid from './ListGrid';
 import Drawer from './Drawer';
 import BreadCrumbs from './BreadCrumbs';
@@ -50,6 +51,7 @@ function App() {
             <Category setSearch={setSearch}/>
             {dimensions.width > 599 ? <Drawer /> :
              ''}
+             {dimensions.width < 600? <Search /> : ''}
             <ListGrid/>
             </div>
           </CategoryContext.Provider>
