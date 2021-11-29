@@ -26,8 +26,9 @@ exports.getListings = async (req, res) => {
   };
 
   exports.getCategories = async (req, res) => {
+    console.log(req.query);
   // this function gets all categories
-  const categories = await db.getCategories();
+  const categories = await db.getCategories(req.query.sub, req.query.fil);
   res.status(200).json(categories);
 }
 
