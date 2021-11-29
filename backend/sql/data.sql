@@ -11,9 +11,9 @@ INSERT INTO category(id, parent, names) VALUES ('e2af758a-0c87-4710-a611-14a9ecb
 INSERT INTO category(id, parent, names) VALUES ('006915ba-51c1-4bb5-bcfe-5f45e59a5c3a','882b7132-c340-4d77-bcf1-3522b86526a8','Accessories');
 
 -- users
-INSERT INTO member(id, member) VALUES ('fd4e8e32-bef3-41c0-b111-61f695ea3912','{"name":"Jason Bourne", "password":"secretman123", "email":"jasonbourne@gmail.com"}');
-INSERT INTO member(id, member) VALUES ('59599566-32d7-4cff-a293-48178ff58876','{"name":"Superman", "password":"kryptonite", "email":"supermane@gmail.com"}');
-INSERT INTO member(id, member) VALUES ('ff761662-3505-4fcf-b44d-e7307bb586c6','{"name":"David Harrison", "password":"cse183", "email":"davidharrison@gmail.com"}');
+INSERT INTO member(id, member) VALUES ('fd4e8e32-bef3-41c0-b111-61f695ea3912','{"name":"Jason Bourne", "password":"$2b$04$yYw78cmFe/VQhKDFWG4HG.LZLIPOVR5w0z/7/7MSM9ngWpaflFygO", "email":"jasonbourne@gmail.com"}');
+INSERT INTO member(id, member) VALUES ('59599566-32d7-4cff-a293-48178ff58876','{"name":"Superman", "password":"$2b$04$9Rk7QXhcI6h0uYkLeTahp.s0VCV8jQmV7Nj0Dc2VEKtv5pCEfip0u", "email":"supermane@gmail.com"}');
+INSERT INTO member(id, member) VALUES ('ff761662-3505-4fcf-b44d-e7307bb586c6','{"name":"David Harrison", "password":"$2b$04$e17gHnkUDwGrE1A.PdCyG.jh8pMW26jWkKEkqz2IDylWp2HFRRqae", "email":"davidharrison@gmail.com"}');
 
 
 -- listings
