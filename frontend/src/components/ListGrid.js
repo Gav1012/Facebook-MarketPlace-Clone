@@ -59,8 +59,8 @@ function ListGrid() {
   const [popupData, setPopupData] = React.useState(false);
 
   const fetchItem = (popupId) => {
-    console.log('fetching specific item');
-    console.log(popupId);
+    // console.log('fetching specific item');
+    // console.log(popupId);
     // const toBeFetched = '/v0/listings';
     const toBeFetched = '/v0/listings?id=' + popupId;
     console.log(toBeFetched);
@@ -72,19 +72,21 @@ function ListGrid() {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log('error');
+          // console.log('error');
           throw response;
         }
         return response.json();
       })
       .then((json) => {
         setPopupData(json);
-        console.log('setting...');
+        // console.log('setting...');
         // console.log(json);
         console.log(json[0].listings);
       });
-      console.log('end');
+    // console.log('end');
   };
+
+  console.log(fetchItem);
 
   React.useEffect(() => {
     fetchListings(setListings, currCat, currSub, search);
@@ -92,28 +94,27 @@ function ListGrid() {
 
   return (
     <Grid container spacing={3}>
-              <Dialog fullscreen='true' open={dialogPopup}
+      <Dialog fullscreen='true' open={dialogPopup}
         style={{zIndex: 9999, height: '100vh', left: '0',
-        width: '100%', backgroundColor: 'black', position: 'fixed',
-        margin: 0}}>
-          {popupData &&
+          width: '100%', backgroundColor: 'black', position: 'fixed',
+          margin: 0}}>
+        {popupData &&
           <Box sx={{display: 'grid'}}>
             <img src={popupData[0].listings.images[0].link}
-            style={{width: '100%', height: '100%'}}></img>
+              style={{width: '100%', height: '100%'}}></img>
             <div style={{height: '50px', fontSize: '25pt'}}
             >{popupData[0].listings.title}</div>
             <div style={{height: '30px', fontSize: '15pt'}}
             >{popupData[0].listings.price}</div>
             <div style={{height: '50px', fontSize: '15pt'}}
             >{popupData[0].listings.content}</div>
-          </Box>
-          }
-          <Button onClick={() => setDialog(false)}
+          </Box>}
+        <Button onClick={() => setDialog(false)}
           style={{right: '0', top: '0', width: '10px',
-          position: 'fixed', zIndex: '99999'}}>
+            position: 'fixed', zIndex: '99999'}}>
             x
-          </Button>
-        </Dialog>
+        </Button>
+      </Dialog>
       <Grid container item spacing={2}>
         {listings.map((listing) => (
           <Grid item sx={{ml: 1}} key={listing.id}>
@@ -121,8 +122,8 @@ function ListGrid() {
               () => {
                 fetchItem(listing.id);
                 setDialog(true);
-                }
-              }>
+              }
+            }>
               <Card sx={{width: 180}}>
                 <CardMedia
                   component='img'
