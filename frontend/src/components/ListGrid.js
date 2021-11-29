@@ -9,6 +9,9 @@ import CategoryContext from './CategoryContext';
 import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import {alpha} from '@material-ui/core/styles/colorManipulator';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
 
 // grabs all the listings and specific ones depending on other inputs
 const fetchListings = (setListings, currCat, currSub, search) => {
@@ -135,14 +138,14 @@ function ListGrid() {
 
   return (
     <Grid container spacing={3}>
-              <Dialog fullscreen='true' open={dialogPopup}
+              <Dialog fullScreen open={dialogPopup}
         style={{zIndex: 9999, height: '100vh', left: '0',
         width: '100%', backgroundColor: 'black', position: 'fixed',
         margin: 0}}>
           {popupData &&
           <Box sx={{display: 'grid'}}>
             <img src={popupData[0].listings.images[imageNo].link}
-            style={{width: '400px', height: '100%'}}></img>
+            style={{width: '100%', height: '100%'}}></img>
             {popupData[0].listings.images.length > 1 &&
             <div style={{textAlign: 'center'}} sx={{m: 0.5}}>
               <Button onClick={() => shiftImageLeft(
@@ -182,13 +185,25 @@ function ListGrid() {
           position: 'absolute', backgroundColor: 'black',
           borderRadius: '50%', opacity: '0.5', color: 'white'}}>
           →</Button> */}
-          <Button onClick={() => {
+          {/* <Button onClick={() => {
             setDialog(false); setImage(0);
           }}
-          style={{right: '0', top: '0', width: '10px',
-          position: 'fixed', zIndex: '99999'}}>
-            x
-          </Button>
+          style={{right: '0', top: '0',
+          minWidth: '7px', width: '35px',
+          position: 'fixed', zIndex: '99999', color: 'white',
+          borderRadius: '50%', backgroundColor: alpha('#000', 0.5),
+          }}>
+          x
+          </Button> */}
+          <IconButton sx={{marginLeft: 'auto'}} onClick={
+            ()=> {
+              setDialog(false); setImage(0);
+            }}
+            style={{right: '0', top: '0', position: 'fixed', color: 'black',
+            backgroundColor: alpha('#000', 0.5)}}
+          >
+            <CloseIcon />
+          </IconButton>
         </Dialog>
       <Grid container item spacing={2}>
         {listings.map((listing) => (
