@@ -1,9 +1,13 @@
 import React, {useContext} from 'react';
 import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
 import SearchIcon from '@mui/icons-material/Search';
 import CategoryContext from './CategoryContext';
 import {useState} from 'react';
+import FormControl from '@mui/material/FormControl';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import OutlinedInput from '@mui/material/OutlinedInput';
+
 /**
  * @return {object}
  */
@@ -22,9 +26,16 @@ export default function Search() {
   };
   return (
     <Box sx={{my: .5}}>
-      <SearchIcon onClick={()=>onSearchClick(value)} />
-      <TextField size='small' id='outlined-disabled' label='search'
-        value={value} onChange={handleChange}>
-      </TextField>
+       <FormControl style ={{width: '98%'}}>
+          <InputLabel htmlFor="outlined-adornment-amount">Search</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-amount"
+            value={value}
+            onChange={handleChange}
+            startAdornment={<InputAdornment position="start"><SearchIcon
+              onClick={()=>onSearchClick(value)} /></InputAdornment>}
+            label="Search"
+          />
+        </FormControl>
     </Box>);
 }

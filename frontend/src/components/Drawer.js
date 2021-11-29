@@ -11,6 +11,7 @@ import Typography from '@mui/material/Typography';
 import ListItemText from '@mui/material/ListItemText';
 import CategoryContext from './CategoryContext';
 import BreadCrumbs from './BreadCrumbs';
+import Search from './Search';
 import CheckroomIcon from '@mui/icons-material/Checkroom';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import {useContext} from 'react';
@@ -55,6 +56,7 @@ export default function PermanentDrawerLeft() {
       </div>
         <Divider />
         <div style={{margin: 10}}>
+        <Search />
         <Typography variant="h5" gutterBottom component="div">
         Categories
       </Typography>
@@ -77,13 +79,6 @@ export default function PermanentDrawerLeft() {
                 </ListItem>))}
         </List>
         <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
       </Drawer>
     </Box>
   );

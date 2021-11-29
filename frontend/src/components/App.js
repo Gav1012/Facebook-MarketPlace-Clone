@@ -51,7 +51,9 @@ function App() {
             <Category setSearch={setSearch}/>
             {dimensions.width > 599 ? <Drawer /> :
              ''}
+            <div style={{margin: 10}}>
              {dimensions.width < 600? <Search /> : ''}
+            </div>
             <ListGrid/>
             </div>
           </CategoryContext.Provider>
