@@ -86,7 +86,7 @@ function ListGrid() {
         // console.log(json);
         console.log(json[0].listings);
       });
-      console.log('end');
+    console.log('end');
   };
 
   const shiftImageLeft = (length) => {
@@ -112,10 +112,10 @@ function ListGrid() {
     rows = [];
     for (let i = 0; i < length; i++) {
       rows.push(<Button key={i}
-      onClick={() => setImage(i)}
-      style={{minWidth: '10px', width: '35px',
-      backgroundColor: 'black', marginRight: '5px',
-      borderRadius: '50%', opacity: '0.5', color: 'white'}}>
+        onClick={() => setImage(i)}
+        style={{minWidth: '10px', width: '35px',
+        backgroundColor: 'black', marginRight: '5px',
+        borderRadius: '50%', opacity: '0.5', color: 'white'}}>
         {i+1}
       </Button>);
     }
@@ -143,6 +143,7 @@ function ListGrid() {
           <Box sx={{display: 'grid'}}>
             <img src={popupData[0].listings.images[imageNo].link}
             style={{width: '400px', height: '100%'}}></img>
+            {popupData[0].listings.images.length > 1 &&
             <div style={{textAlign: 'center'}} sx={{m: 0.5}}>
               <Button onClick={() => shiftImageLeft(
               popupData[0].listings.images.length)}
@@ -158,6 +159,7 @@ function ListGrid() {
               borderRadius: '50%', opacity: '0.5', color: 'white'}}>
               →</Button>
             </div>
+            }
             <div style={{height: '50px', fontSize: '25pt'}}
             >{popupData[0].listings.title}</div>
             <div style={{height: '30px', fontSize: '15pt'}}
