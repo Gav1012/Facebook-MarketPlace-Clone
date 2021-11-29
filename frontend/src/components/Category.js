@@ -105,8 +105,8 @@ function Category({setSearch}) {
                 />
               ))}
             </Box>:
-           <Box sx={{my: 1}}
-            style={dimensions.width > 599? {display: 'none'} : {}}>
+            <Box sx={{my: 1}}
+              style={dimensions.width > 599? {display: 'none'} : {}}>
               <Chip sx={{mb: .25, mr: 1}} label='Sell'
                 onClick={()=>setCategory(undefined)} />
               <Chip sx={{mb: .25}} label='Categories'

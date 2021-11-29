@@ -12,6 +12,25 @@ servers:
   - url: http://localhost:3010/v0
 
 paths:
+  /authenticate:
+    post:
+      description: check login values
+      requestBody:
+        description: login values
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/InputLogin'
+      responses:
+        200:
+          description: Sucessfully Logged in
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginSuccess'
+        401:
+          description: Email or password incorrect
   /listings:
     get:
       description: Gets all listings
@@ -145,6 +164,21 @@ components:
       required:
         - id
         - member
+    InputLogin:
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - email
+        - password
+    LoginSuccess:
+      properties:
+        email:
+          type: string
+        accessToken:
+          type: string
   securitySchemes:
     bearerAuth:
       type: http

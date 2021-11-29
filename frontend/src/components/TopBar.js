@@ -39,7 +39,7 @@ function TopBar() {
   );
   const loginScreen = (
     <Dialog fullScreen open={open} onClose={handleClose}>
-      <AppBar sx={{position: 'relative'}}>
+      <AppBar sx={{position: 'relative', zIndex: 1300}}>
         <Toolbar>
           <Typography variant='h6'>Login Screen</Typography>
           <IconButton sx={{marginLeft: 'auto'}} onClick={handleClose}>
@@ -75,8 +75,7 @@ function TopBar() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <AppBar position="fixed"
-        sx={{zIndex: (theme) => theme.zIndex.drawer + 1}}>
+      <AppBar position='fixed' style={{zIndex: 1250}}>
         <Toolbar>
           <Typography variant='h6' component='div'>
             facebook

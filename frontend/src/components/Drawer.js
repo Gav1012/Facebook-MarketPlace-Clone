@@ -27,7 +27,6 @@ export default function PermanentDrawerLeft() {
   const {subList} = useContext(CategoryContext);
   const {search, setSearch} = useContext(CategoryContext);
   console.log(subList);
-  console.log(currCat);
   return (
     <Box sx={{display: 'flex'}}>
       <CssBaseline />
@@ -45,46 +44,46 @@ export default function PermanentDrawerLeft() {
       >
         <Toolbar />
         <div style={{margin: 15}} >
-        {dimensions.width > 599? <BreadCrumbs /> : ''}
-        {currSub ? <Typography variant="h4" gutterBottom component="div">
-          {currSub}
-        </Typography> : ''}
-        {currCat && !currSub ?
-        <Typography variant="h4" gutterBottom component="div">
-          {currCat}
-        </Typography> : ''}
-        {search.length > 0 ?
-          <Typography variant="h4" gutterBottom component="div">
-            Search results
+          {dimensions.width > 599? <BreadCrumbs /> : ''}
+          {currSub ? <Typography variant="h4" gutterBottom component="div">
+            {currSub}
           </Typography> : ''}
+          {currCat && !currSub ?
+            <Typography variant="h4" gutterBottom component="div">
+              {currCat}
+            </Typography> : ''}
+          {search.length > 0 ?
+            <Typography variant="h4" gutterBottom component="div">
+              Search results
+            </Typography> : ''}
           {search.length === 0 && !currSub && !currCat ?
-          <Typography variant="h4" gutterBottom component="div">
-            Marketplace
-          </Typography> : ''}
-      </div>
-        <div style={{margin: 10}}>
-        <Search />
+            <Typography variant="h4" gutterBottom component="div">
+              Marketplace
+            </Typography> : ''}
+        </div>
         <Divider />
-        <Typography variant="h5" gutterBottom component="div">
-        Categories
-      </Typography>
-      </div>
+        <div style={{margin: 10}}>
+          <Search />
+          <Typography variant="h5" gutterBottom component="div">
+            Categories
+          </Typography>
+        </div>
         <List>
-        {catList.map((cat, index) => (
-                <ListItem
-                  label={cat.names}
-                  key={cat.names}
-                  onClick={()=>{
-                    setCategory(cat.names);
-                    setSub(undefined);
-                    setSearch('');
-                  }}
-                >
-                    <ListItemIcon>
+          {catList.map((cat, index) => (
+            <ListItem
+              label={cat.names}
+              key={cat.names}
+              onClick={()=>{
+                setCategory(cat.names);
+                setSub(undefined);
+                setSearch('');
+              }}
+            >
+              <ListItemIcon>
                 {index % 2 === 0 ? <DirectionsCarIcon /> : < CheckroomIcon />}
               </ListItemIcon>
-                <ListItemText primary={cat.names} />
-                </ListItem>))}
+              <ListItemText primary={cat.names} />
+            </ListItem>))}
         </List>
         <Divider />
       </Drawer>

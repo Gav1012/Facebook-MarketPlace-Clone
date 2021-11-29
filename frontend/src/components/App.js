@@ -44,17 +44,16 @@ function App() {
           <CategoryContext.Provider value={
             {currCat, setCategory, currSub, setSub,
               search, setSearch, dimensions, catList, setCatList,
-                subList, setSubList}}>
+              subList, setSubList}}>
             <TopBar />
             <div style={dimensions.width > 599 ? {margin: 500} : {margin: 0}}>
-            {dimensions.width < 600? <BreadCrumbs/> : ''}
-            <Category setSearch={setSearch}/>
-            {dimensions.width > 599 ? <Drawer /> :
-             ''}
-            <div style={{margin: 10}}>
-             {dimensions.width < 600? <Search /> : ''}
-            </div>
-            <ListGrid/>
+              {dimensions.width < 600? <BreadCrumbs/> : ''}
+              <Category setSearch={setSearch}/>
+              {dimensions.width > 599 ? <Drawer /> : ''}
+              <div style={{margin: 10}}>
+                {dimensions.width < 600? <Search /> : ''}
+              </div>
+              <ListGrid/>
             </div>
           </CategoryContext.Provider>
         </Route>
