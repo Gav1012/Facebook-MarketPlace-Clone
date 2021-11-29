@@ -17,8 +17,10 @@ function App() {
   // sets state for category being viewed
   const [currCat, setCategory] = useState(undefined);
   const [currSub, setSub] = useState(undefined);
+  const [currFilter, setFilter] = useState(undefined);
   const [catList, setCatList] = useState([]);
   const [subList, setSubList] = useState([]);
+  const [filList, setFilList] = useState([]);
   // sets state for when search bar is used
   const [search, setSearch] = useState('');
 
@@ -44,7 +46,8 @@ function App() {
           <CategoryContext.Provider value={
             {currCat, setCategory, currSub, setSub,
               search, setSearch, dimensions, catList, setCatList,
-              subList, setSubList}}>
+              subList, setSubList, currFilter, setFilter,
+                filList, setFilList}}>
             <TopBar />
             <div style={dimensions.width > 599 ? {margin: 500} : {margin: 0}}>
               {dimensions.width < 600? <BreadCrumbs/> : ''}
