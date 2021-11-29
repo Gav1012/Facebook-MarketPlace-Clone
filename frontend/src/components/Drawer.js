@@ -7,11 +7,12 @@ import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import Typography from '@mui/material/Typography';
 import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import CategoryContext from './CategoryContext';
 import BreadCrumbs from './BreadCrumbs';
+import CheckroomIcon from '@mui/icons-material/Checkroom';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import {useContext} from 'react';
 const drawerWidth = 500;
 /**
@@ -20,7 +21,7 @@ const drawerWidth = 500;
 export default function PermanentDrawerLeft() {
   const {currCat, setCategory} = useContext(CategoryContext);
   const {dimensions} = useContext(CategoryContext);
-  const {setSub} = useContext(CategoryContext);
+  const {currSub, setSub} = useContext(CategoryContext);
   const {catList} = useContext(CategoryContext);
   const {subList} = useContext(CategoryContext);
   const {setSearch} = useContext(CategoryContext);
@@ -42,10 +43,24 @@ export default function PermanentDrawerLeft() {
         anchor="left"
       >
         <Toolbar />
+        <div style={{margin: 15}} >
         {dimensions.width > 599? <BreadCrumbs /> : ''}
+        {currSub ? <Typography variant="h4" gutterBottom component="div">
+        {currSub}
+      </Typography> : ''}
+      {currCat && !currSub ?
+        <Typography variant="h4" gutterBottom component="div">
+        {currCat}
+      </Typography> : ''}
+      </div>
         <Divider />
+        <div style={{margin: 10}}>
+        <Typography variant="h5" gutterBottom component="div">
+        Categories
+      </Typography>
+      </div>
         <List>
-        {catList.map((cat) => (
+        {catList.map((cat, index) => (
                 <ListItem
                   label={cat.names}
                   key={cat.names}
@@ -54,16 +69,17 @@ export default function PermanentDrawerLeft() {
                     setSub(undefined);
                     setSearch('');
                   }}
-                > <ListItemText primary={cat.names} />
+                >
+                    <ListItemIcon>
+                {index % 2 === 0 ? <DirectionsCarIcon /> : < CheckroomIcon />}
+              </ListItemIcon>
+                <ListItemText primary={cat.names} />
                 </ListItem>))}
         </List>
         <Divider />
         <List>
           {['All mail', 'Trash', 'Spam'].map((text, index) => (
             <ListItem button key={text}>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>
           ))}
