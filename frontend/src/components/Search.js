@@ -26,16 +26,16 @@ export default function Search() {
   };
   return (
     <Box sx={{my: .5}}>
-       <FormControl style ={{width: '98%'}}>
-          <InputLabel htmlFor="outlined-adornment-amount">Search</InputLabel>
-          <OutlinedInput
-            id="outlined-adornment-amount"
-            value={value}
-            onChange={handleChange}
-            startAdornment={<InputAdornment position="start"><SearchIcon
-              onClick={()=>onSearchClick(value)} /></InputAdornment>}
-            label="Search"
-          />
-        </FormControl>
+      <FormControl style ={{width: '98%'}}>
+        <InputLabel htmlFor="outlined-adornment-amount">Search</InputLabel>
+        <OutlinedInput
+          id="outlined-adornment-amount"
+          value={value}
+          onChange={handleChange}
+          startAdornment={<InputAdornment position="start"><SearchIcon
+            onClick={()=>onSearchClick(value)} /></InputAdornment>}
+          label="Search"
+        />
+      </FormControl>
     </Box>);
 }

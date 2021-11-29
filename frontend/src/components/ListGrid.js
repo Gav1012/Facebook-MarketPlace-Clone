@@ -64,12 +64,10 @@ function ListGrid() {
   const [testState, setTestState] = React.useState(0);
   const [rowState, setRowState] = React.useState([]);
 
+  // fetches specific listing when clicking on a listing
   const fetchItem = (popupId) => {
-    console.log('fetching specific item');
-    console.log(popupId);
     // const toBeFetched = '/v0/listings';
     const toBeFetched = '/v0/listings?id=' + popupId;
-    console.log(toBeFetched);
     fetch(toBeFetched, {
       method: 'get',
       headers: {
@@ -78,18 +76,13 @@ function ListGrid() {
     })
       .then((response) => {
         if (!response.ok) {
-          console.log('error');
           throw response;
         }
         return response.json();
       })
       .then((json) => {
         setPopupData(json);
-        console.log('setting...');
-        // console.log(json);
-        console.log(json[0].listings);
       });
-    console.log('end');
   };
 
   const shiftImageLeft = (length) => {
@@ -109,57 +102,47 @@ function ListGrid() {
   };
 
   let rows = [];
-  console.log('rowprint:');
-  console.log(rows);
   const imageBar = (length) => {
     rows = [];
     for (let i = 0; i < length; i++) {
       rows.push(<Button key={i}
         onClick={() => setImage(i)}
         style={{minWidth: '10px', width: '35px',
-        backgroundColor: 'black', marginRight: '5px',
-        borderRadius: '50%', opacity: '0.5', color: 'white'}}>
+          backgroundColor: 'black', marginRight: '5px',
+          borderRadius: '50%', opacity: '0.5', color: 'white'}}>
         {i+1}
       </Button>);
     }
-    for (let i = 0; i < length; i++) {
-      console.log(rows[i].props.children);
-    }
-    // setTestState(testState + 1);
-    console.log('inside function, updating rows');
-    console.log(rows);
     setRowState(rows);
     return rows;
   };
-
+  // grabs all the listings from the database
+  // and changes depending on categories and search bar
   React.useEffect(() => {
     fetchListings(setListings, currCat, currSub, search);
   }, [currCat, currSub, search]);
 
   return (
     <Grid container spacing={3}>
-              <Dialog fullScreen open={dialogPopup}
-        style={{zIndex: 9999, height: '100vh', left: '0',
-        width: '100%', backgroundColor: 'black', position: 'fixed',
-        margin: 0}}>
-          {popupData &&
+      <Dialog fullScreen open={dialogPopup}>
+        {popupData &&
           <Box sx={{display: 'grid'}}>
             <img src={popupData[0].listings.images[imageNo].link}
-            style={{width: '100%', height: '100%'}}></img>
+              style={{width: '100%'}}></img>
             {popupData[0].listings.images.length > 1 &&
             <div style={{textAlign: 'center'}} sx={{m: 0.5}}>
               <Button onClick={() => shiftImageLeft(
-              popupData[0].listings.images.length)}
+                popupData[0].listings.images.length)}
               style={{minWidth: '7px', width: '35px',
-              backgroundColor: 'black', marginRight: '5px',
-              borderRadius: '50%', opacity: '0.5', color: 'white'}}>
+                backgroundColor: 'black', marginRight: '5px',
+                borderRadius: '50%', opacity: '0.5', color: 'white'}}>
               ←</Button>
               {rowState}
               <Button onClick={() => shiftImageRight(
-              popupData[0].listings.images.length)}
+                popupData[0].listings.images.length)}
               style={{minWidth: '7px', width: '35px',
-              backgroundColor: 'black',
-              borderRadius: '50%', opacity: '0.5', color: 'white'}}>
+                backgroundColor: 'black',
+                borderRadius: '50%', opacity: '0.5', color: 'white'}}>
               →</Button>
             </div>
             }
@@ -169,42 +152,18 @@ function ListGrid() {
             >{popupData[0].listings.price}</div>
             <div style={{height: '50px', fontSize: '15pt'}}
             >{popupData[0].listings.content}</div>
-            {/* {[<div>xyz</div>, <div>abc</div>]} */}
-            {/* {rowState} */}
           </Box>
-          }
-          {/* <Button onClick={() => shiftImageLeft(
-            popupData[0].listings.images.length)}
-          style={{left: '20px', top: '150px', minWidth: '7px',
-          position: 'absolute', backgroundColor: 'black',
-          borderRadius: '50%', opacity: '0.5', color: 'white'}}>
-          ←</Button>
-          <Button onClick={() => shiftImageRight(
-            popupData[0].listings.images.length)}
-          style={{right: '20px', top: '150px', minWidth: '7px',
-          position: 'absolute', backgroundColor: 'black',
-          borderRadius: '50%', opacity: '0.5', color: 'white'}}>
-          →</Button> */}
-          {/* <Button onClick={() => {
+        }
+        <IconButton sx={{marginLeft: 'auto'}} onClick={
+          ()=> {
             setDialog(false); setImage(0);
           }}
-          style={{right: '0', top: '0',
-          minWidth: '7px', width: '35px',
-          position: 'fixed', zIndex: '99999', color: 'white',
-          borderRadius: '50%', backgroundColor: alpha('#000', 0.5),
-          }}>
-          x
-          </Button> */}
-          <IconButton sx={{marginLeft: 'auto'}} onClick={
-            ()=> {
-              setDialog(false); setImage(0);
-            }}
-            style={{right: '0', top: '0', position: 'fixed', color: 'black',
-            backgroundColor: alpha('#000', 0.5)}}
-          >
-            <CloseIcon />
-          </IconButton>
-        </Dialog>
+        style={{right: '0', top: '0', position: 'fixed', color: 'black',
+          backgroundColor: alpha('#000', 0.5)}}
+        >
+          <CloseIcon />
+        </IconButton>
+      </Dialog>
       <Grid container item spacing={2}>
         {listings.map((listing) => (
           <Grid item sx={{ml: 1}} key={listing.id}>
@@ -214,8 +173,8 @@ function ListGrid() {
                 setDialog(true);
                 setTestState(testState + 1);
                 imageBar(listing.listings.images.length);
-                }
-              }>
+              }
+            }>
               <Card sx={{width: 180}}>
                 <CardMedia
                   component='img'
