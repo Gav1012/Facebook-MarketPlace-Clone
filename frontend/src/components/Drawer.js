@@ -25,7 +25,7 @@ export default function PermanentDrawerLeft() {
   const {currSub, setSub} = useContext(CategoryContext);
   const {catList} = useContext(CategoryContext);
   const {subList} = useContext(CategoryContext);
-  const {setSearch} = useContext(CategoryContext);
+  const {search, setSearch} = useContext(CategoryContext);
   console.log(subList);
   console.log(currCat);
   return (
@@ -47,12 +47,20 @@ export default function PermanentDrawerLeft() {
         <div style={{margin: 15}} >
         {dimensions.width > 599? <BreadCrumbs /> : ''}
         {currSub ? <Typography variant="h4" gutterBottom component="div">
-        {currSub}
-      </Typography> : ''}
-      {currCat && !currSub ?
+          {currSub}
+        </Typography> : ''}
+        {currCat && !currSub ?
         <Typography variant="h4" gutterBottom component="div">
-        {currCat}
-      </Typography> : ''}
+          {currCat}
+        </Typography> : ''}
+        {search.length > 0 ?
+          <Typography variant="h4" gutterBottom component="div">
+            Search results
+          </Typography> : ''}
+          {search.length === 0 && !currSub && !currCat ?
+          <Typography variant="h4" gutterBottom component="div">
+            Marketplace
+          </Typography> : ''}
       </div>
         <Divider />
         <div style={{margin: 10}}>
