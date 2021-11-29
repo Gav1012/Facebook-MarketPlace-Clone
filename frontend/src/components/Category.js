@@ -83,10 +83,10 @@ function Category({setSearch}) {
   };
   React.useEffect(() => {
     fetchCategory(setCatList);
-  }, []);
+  }, [setCatList]);
   React.useEffect(() => {
     fetchSub(setSubList, currCat);
-  }, [currCat]);
+  }, [setSubList, currCat]);
   return (
     <Container>
       <Box>
