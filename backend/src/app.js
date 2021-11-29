@@ -7,6 +7,7 @@ const path = require('path');
 const OpenApiValidator = require('express-openapi-validator');
 
 const listings = require('./listings');
+const auth = require('./auth');
 
 const app = express();
 app.use(cors());
@@ -28,6 +29,7 @@ app.use(
 
 
 // Your routes go here
+app.post('/authenticate', auth.authenticate);
 
 app.get('/v0/listings', listings.getListings);
 app.get('/v0/listings/category', listings.getCategories);
