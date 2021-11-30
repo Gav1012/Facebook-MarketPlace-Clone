@@ -47,7 +47,7 @@ function App() {
             {currCat, setCategory, currSub, setSub,
               search, setSearch, dimensions, catList, setCatList,
               subList, setSubList, currFilter, setFilter,
-                filList, setFilList}}>
+              filList, setFilList}}>
             <TopBar />
             <div style={dimensions.width > 599 ? {margin: 500} : {margin: 0}}>
               {dimensions.width < 600? <BreadCrumbs/> : ''}

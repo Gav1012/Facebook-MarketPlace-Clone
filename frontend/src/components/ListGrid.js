@@ -42,7 +42,6 @@ const fetchListings = (setListings, currCat, currSub, search) => {
     .then((response) => {
       if (!response.ok) {
         throw response;
-        console.log('here we go');
       }
       return response.json();
     })
@@ -128,8 +127,11 @@ function ListGrid() {
       <Dialog fullScreen open={dialogPopup}>
         {popupData &&
           <Box sx={{display: 'grid'}}>
-            <img src={popupData[0].listings.images[imageNo].link}
-              style={{width: '100%'}}></img>
+            <img
+              src={popupData[0].listings.images[imageNo].link}
+              style={{width: '100%'}}
+              alt={popupData[0].listings.title}
+            ></img>
             {popupData[0].listings.images.length > 1 &&
             <div style={{textAlign: 'center'}} sx={{m: 0.5}}>
               <Button onClick={() => shiftImageLeft(
