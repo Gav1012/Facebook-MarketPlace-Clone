@@ -10,6 +10,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import Typography from '@mui/material/Typography';
 import ListItemText from '@mui/material/ListItemText';
 import CategoryContext from './CategoryContext';
+import Filter from './Filter';
 import BreadCrumbs from './BreadCrumbs';
 import Search from './Search';
 import CheckroomIcon from '@mui/icons-material/Checkroom';
@@ -64,6 +65,14 @@ export default function PermanentDrawerLeft() {
         <Divider />
         <div style={{margin: 10}}>
           <Search />
+         {currCat?
+          <Typography variant="h5" gutterBottom component="div">
+            Filters
+          </Typography> : ''}
+          <Filter />
+        </div>
+        <Divider />
+        <div style={{margin: 10}}>
           <Typography variant="h5" gutterBottom component="div">
             Categories
           </Typography>

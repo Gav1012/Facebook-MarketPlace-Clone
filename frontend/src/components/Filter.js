@@ -9,6 +9,13 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import CategoryContext from './CategoryContext';
+import TuneIcon from '@mui/icons-material/Tune';
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import CloseIcon from '@mui/icons-material/Close';
+import IconButton from '@mui/material/IconButton';
 
 const fetchFilter = (setFilList, currCat) => {
     if (currCat) {
@@ -51,7 +58,6 @@ const fetchFilter = (setFilList, currCat) => {
     console.log(currFilter);
     console.log(open);
     console.log(setFilter);
-    console.log(setSearch);
     console.log(handleChange);
 
     const handleClickOpen = () => {
@@ -72,7 +78,50 @@ const fetchFilter = (setFilList, currCat) => {
 
     return (
         <div>
-          {currCat? <Accordion>
+{currCat && dimensions.width < 600?
+  <Button variant="outlined" startIcon={<TuneIcon />}
+    label='Filters' onClick={handleClickOpen}>
+  Filter
+</Button> : ''};
+                <Dialog fullScreen open={open} onClose={handleClose}>
+                  <AppBar sx={{position: 'relative'}}>
+                    <Toolbar>
+                      <Typography>Filters</Typography>
+                      <IconButton
+                        sx={{marginLeft: 'auto'}} onClick={handleClose}>
+                        <CloseIcon />
+                      </IconButton>
+                    </Toolbar>
+                  </AppBar>
+                  {currCat && dimensions.width < 600? <Accordion>
+            <AccordionSummary
+              expandIcon={<ExpandMoreIcon />}
+              aria-controls="panel1a-content"
+              id="panel1a-header"
+            >
+              <Typography>Subcategories for {currCat}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+            <FormControl component="fieldset">
+          <RadioGroup
+            aria-label="gender"
+            defaultValue="female"
+            name="radio-buttons-group"
+          >
+            {subList.map((sub) => (
+                <FormControlLabel value={sub.names}
+                control={<Radio />} label={sub.names} onClick={()=>{
+                    setSub(sub.names);
+                    handleClose();
+                    setSearch('');
+                  }} />
+              ))}
+          </RadioGroup>
+        </FormControl>
+            </AccordionDetails>
+          </Accordion> : ''}
+                </Dialog>
+         {currCat && dimensions.width > 599? <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
@@ -94,10 +143,6 @@ const fetchFilter = (setFilList, currCat) => {
                     setSearch('');
                   }} />
               ))}
-            <FormControlLabel value="male"
-                control={<Radio />} label="Male" />
-            <FormControlLabel value="other"
-                control={<Radio />} label="Other" />
           </RadioGroup>
         </FormControl>
             </AccordionDetails>

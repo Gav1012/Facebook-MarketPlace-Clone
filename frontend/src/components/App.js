@@ -7,6 +7,7 @@ import Search from './Search';
 import ListGrid from './ListGrid';
 import Drawer from './Drawer';
 import BreadCrumbs from './BreadCrumbs';
+import Filter from './Filter';
 
 /**
  * Simple component with no state.
@@ -55,6 +56,7 @@ function App() {
               {dimensions.width > 599 ? <Drawer /> : ''}
               <div style={{margin: 10}}>
                 {dimensions.width < 600? <Search /> : ''}
+                {dimensions.width < 600? <Filter /> : ''}
               </div>
               <ListGrid/>
             </div>
