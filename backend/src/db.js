@@ -87,7 +87,7 @@ exports.getCategories = async (sub, fil) => {
         const select = 'select names, attributes from filter where filter.parent in (select id from filter where filter.names = $1)';
         const query = {
           text: select,
-          values : [req],
+          values : [fil],
         };
         const {rows} = await pool.query(query);
         return rows;  
