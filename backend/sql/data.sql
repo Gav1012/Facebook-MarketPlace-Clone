@@ -35,5 +35,5 @@ INSERT INTO filter(id, parent, names, attributes) VALUES ('882b7132-c340-4d77-bc
 INSERT INTO filter(id, parent, names, attributes) VALUES ('0fab243a-744c-4cd7-b0f2-7a1a3afd5197','882b7132-c340-4d77-bcf1-3522b86526a8','Apparel Type', '{"type1":"Mens","type2":"Womens"}');
 INSERT INTO filter(id, parent, names, attributes) VALUES ('51a044c1-02bd-4ffa-9cc2-a44607c0c16e',NULL,'Electronics', NULL);
 INSERT INTO Filter(id, parent, names, attributes) VALUES ('6ee3737d-e0fa-4308-ba35-f1c65f5c2f2e','51a044c1-02bd-4ffa-9cc2-a44607c0c16e','Electronics Brand', '{"brand1":"Sony","brand2":"Samsung","brand3":"Apple"}');
-INSERT INTO filter(id, parent, names, attributes) VALUES ('dfdd0784-ed34-4eb8-9259-728cec089642',NULL,'Sporting Goods');
+INSERT INTO filter(id, parent, names, attributes) VALUES ('dfdd0784-ed34-4eb8-9259-728cec089642',NULL,'Sporting Goods', NULL);
 INSERT INTO filter(id, parent, names, attributes) VALUES ('610e2636-0cbf-4c8e-ac8c-588650756572','dfdd0784-ed34-4eb8-9259-728cec089642','Condition', '{"conition1":"New","condition2":"Used"}');
