@@ -9,6 +9,7 @@ import Drawer from './Drawer';
 import BreadCrumbs from './BreadCrumbs';
 import Filter from './Filter';
 import Login from './Login';
+import NewAccount from './NewAccount';
 
 /**
  * Simple component with no state.
@@ -66,9 +67,9 @@ function App() {
         <Route path='/login'>
           <Login />
         </Route>
-        {/* <Route path='/createacc'>
+        <Route path='/newaccount'>
           <NewAccount />
-        </Route> */}
+        </Route>
       </Switch>
     </BrowserRouter>
   );
