@@ -63,7 +63,13 @@ paths:
       parameters:
       - name: sub
         in: query
-        description: Finds sub of category
+        description: Finds subs of category
+        required: false
+        schema:
+          type: string
+      - name: fil
+        in: query
+        description: Finds filters of category
         required: false
         schema:
           type: string
@@ -88,6 +94,12 @@ paths:
       - name: sub
         in: query
         description: Name of a subcategory
+        required: false
+        schema:
+          type: string
+      - name: fil
+        in: query
+        description: Name of filter
         required: false
         schema:
           type: string

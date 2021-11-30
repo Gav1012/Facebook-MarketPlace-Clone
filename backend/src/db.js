@@ -34,8 +34,11 @@ exports.searchListings = async (search, id) => {
 };
 
 // gets listings based on category selected
-exports.catListings = async (category, sub) => {
-  if (sub !== undefined) {
+exports.catListings = async (category, sub, fil) => {
+  if (sub && fil) {
+
+  }
+  if (sub && !fil) {
     const select =
       'select * from listing where listing.categoryid in (select id from category where category.names = $1 and category.parent in (select id from category where category.names = $2))'
     const query = {
@@ -49,18 +52,22 @@ exports.catListings = async (category, sub) => {
       return rows;
     }
   } else {
-    const select = 
-      'select * from listing where listing.categoryid in (select id from category where category.parent in (select id from category where category.parent is null and category.names = $1))'
-      ;
-    const query = {
-      text: select,
-      values: [category],
-    }; 
-    const {rows} = await pool.query(query);
-    if (rows[0] === undefined) {
-      return undefined;
+    if (fil && !sub) {
+
     } else {
-      return rows;
+      const select = 
+        'select * from listing where listing.categoryid in (select id from category where category.parent in (select id from category where category.parent is null and category.names = $1))'
+        ;
+      const query = {
+        text: select,
+        values: [category],
+      }; 
+      const {rows} = await pool.query(query);
+      if (rows[0] === undefined) {
+        return undefined;
+      } else {
+        return rows;
+      }
     }
   }
 };
@@ -75,14 +82,19 @@ exports.getCategories = async (sub, fil) => {
     };
     const {rows} = await pool.query(query);
     return rows;
-  } else {
-  const select = 'select names from category where category.parent is null';
-  const query = {
-    text: select,
-    values : [],
-  };
-  const {rows} = await pool.query(query);
-  return rows;
+  } else { 
+      if (fil) {
+
+    } else {
+      const select = 'select names from category where category.parent is null';
+      const query = {
+        text: select,
+        values : [],
+      };
+      const {rows} = await pool.query(query);
+      return rows;
+    }
+  
   }
 }
 // gets all the members from db

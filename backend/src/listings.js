@@ -12,9 +12,12 @@ exports.getListings = async (req, res) => {
   };
 
 exports.getCatListings = async (req, res) => {
+  console.log('Were in getCatListings (inside listings)')
+  console.log(req.query);
   //  this function can take a filter query later 
   //  on in the program if we need it this req.query.filter
-  const listings = await db.catListings(req.params.category, req.query.sub);
+  const listings = await db.catListings(req.params.category, req.query.sub, req.query.fil);
+   
   // if it can't be found return error
   if (listings === undefined) {
     res.status(404).send();
@@ -24,6 +27,7 @@ exports.getCatListings = async (req, res) => {
 };
 
 exports.getCategories = async (req, res) => {
+  console.log('Were in getCategories (inside listings)')
   console.log(req.query);
   // this function gets all categories
   const categories = await db.getCategories(req.query.sub, req.query.fil);
@@ -32,6 +36,7 @@ exports.getCategories = async (req, res) => {
 
 exports.getMembers = async (req, res) => {
   // checks email from input and search for user with email
+
   const members = await db.selectMembers(req.query.user);
   // if the member is found
   if (members) {
