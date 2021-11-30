@@ -14,10 +14,12 @@ import Login from './Login';
  * @return {object}
  */
 function TopBar() {
+  // grabs current user from local storage
+  const curr = localStorage.getItem('member');
   // sets the state of login screen being opened
   const [open, setOpen] = React.useState(false);
   // used to swap between login and logout button
-  const [visible, setVisible] = React.useState(false);
+  const [visible, setVisible] = React.useState(curr ? true: false);
   // opens the login screen
   const handleClickOpen = () => {
     setOpen(true);
