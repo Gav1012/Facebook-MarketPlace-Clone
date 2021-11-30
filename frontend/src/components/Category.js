@@ -36,10 +36,7 @@ const fetchCategory = (setCatList) => {
     });
 };
 const fetchSub = (setSubList, currCat) => {
-  console.log('we get here');
-  console.log(currCat);
   if (currCat) {
-    console.log('we never get here');
     // fetches the listings based on above modifications
     fetch('/v0/listings/category?sub=' + currCat, {
       method: 'get',
@@ -65,13 +62,16 @@ const fetchSub = (setSubList, currCat) => {
 function Category({setSearch}) {
   // uses context to set the category to be viewed when clicked
   const {currCat, setCategory} = useContext(CategoryContext);
+  // grabs context for setting the subcategories
   const {setSub} = useContext(CategoryContext);
+  // grabs context for category list
   const {catList, setCatList} = useContext(CategoryContext);
+  // grabs context for subcat list
   const {subList, setSubList} = useContext(CategoryContext);
+  // grabs the current dimensions of the window
   const {dimensions} = useContext(CategoryContext);
   // sets state for when search box is used
   const [open, setOpen] = React.useState(false);
-  // const [searchSend, setSearchSend] = useState('');
   // handles when listing changes
   const handleClickOpen = () => {
     if (dimensions.width < 600) {
@@ -122,21 +122,21 @@ function Category({setSearch}) {
                       </IconButton>
                     </Toolbar>
                   </AppBar>
-                <List>
-                  {catList.map((cat) => (
-                    <ListItem
-                      label={cat.names}
-                      key={cat.names}
-                      onClick={()=>{
-                        setCategory(cat.names);
-                        setSub(undefined);
-                        setSearch('');
-                        handleClose();
-                      }}
-                    > <ListItemText primary={cat.names} />
-                    </ListItem>))}
-                </List>
-              </Dialog> : ''}
+                  <List>
+                    {catList.map((cat) => (
+                      <ListItem
+                        label={cat.names}
+                        key={cat.names}
+                        onClick={()=>{
+                          setCategory(cat.names);
+                          setSub(undefined);
+                          setSearch('');
+                          handleClose();
+                        }}
+                      > <ListItemText primary={cat.names} />
+                      </ListItem>))}
+                  </List>
+                </Dialog> : ''}
             </Box>
           }
         </Stack>

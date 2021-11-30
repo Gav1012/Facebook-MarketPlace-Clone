@@ -4,28 +4,25 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import CssBaseline from '@mui/material/CssBaseline';
 import CategoryContext from './CategoryContext';
-// import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
-import CloseIcon from '@mui/icons-material/Close';
-import IconButton from '@mui/material/IconButton';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
+import Login from './Login';
 
 /**
  *
  * @return {object}
  */
 function TopBar() {
+  // sets the state of login screen being opened
   const [open, setOpen] = React.useState(false);
+  // used to swap between login and logout button
+  const [visible, setVisible] = React.useState(false);
+  // opens the login screen
   const handleClickOpen = () => {
     setOpen(true);
   };
-  const handleClose = () => {
-    setOpen(false);
-  };
-  const temp = (
+  const inputBoxes = (
     <form noValidate autoComplete="off">
       <TextField
         id='outlined-search'
@@ -37,39 +34,11 @@ function TopBar() {
       >search</TextField>
     </form>
   );
-  const loginScreen = (
-    <Dialog fullScreen open={open} onClose={handleClose}>
-      <AppBar sx={{position: 'relative', zIndex: 1300}}>
-        <Toolbar>
-          <Typography variant='h6'>Login Screen</Typography>
-          <IconButton sx={{marginLeft: 'auto'}} onClick={handleClose}>
-            <CloseIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Box sx={{pl: '12%', my: '50%'}}>
-        <Box sx={{pl: '38%'}}>
-          <AccountCircleIcon />
-        </Box>
-        <TextField
-          id='outlined-search'
-          label='username'
-          sx={{my: '2%', width: '300px'}}
-        >USERNAME</TextField>
-        <TextField
-          id='outlined-search'
-          label='password'
-          sx={{my: '3%', width: '300px'}}
-        >PASSWORD</TextField>
-        <Button variant='contained' sx={{my: '3%', width: '300px'}}>
-          Login
-        </Button>
-        <Button variant='contained' sx={{width: '300px'}}>
-          New User
-        </Button>
-      </Box>
-    </Dialog>
-  );
+  // removes from local storage and displays Login
+  const logout = () => {
+    localStorage.removeItem('member');
+    setVisible(false);
+  };
   // deals with conditional render
   const {dimensions} = useContext(CategoryContext);
   return (
@@ -81,15 +50,21 @@ function TopBar() {
             facebook
           </Typography>
           <div>
-            {dimensions.width > 600 ? temp: null}
+            {dimensions.width > 600 ? inputBoxes: null}
           </div>
-          <Button
-            style={{color: 'white', marginLeft: 'auto'}}
-            onClick={handleClickOpen}
-          >Login
-          </Button>
+          {visible ?
+            <Button
+              onClick={logout}
+              style={{color: 'white', marginLeft: 'auto'}}>
+            Log out
+            </Button>:
+            <Button
+              style={{color: 'white', marginLeft: 'auto'}}
+              onClick={handleClickOpen}
+            >Login
+            </Button>}
           <Box>
-            {loginScreen}
+            <Login open={open} setOpen={setOpen} setVisible={setVisible}/>
           </Box>
         </Toolbar>
       </AppBar>
