@@ -1,10 +1,10 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Dialog from '@mui/material/Dialog';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
@@ -13,12 +13,9 @@ import Box from '@mui/material/Box';
 /**
  * @return {object}
  */
-function Login({open, setOpen, setVisible}) {
+function Login() {
   const [user, setUser] = React.useState({email: '', password: ''});
-  // closes the login screen
-  const handleClose = () => {
-    setOpen(false);
-  };
+  const history = useHistory();
   // from example code provided by Professor Harrison
   const handleInputChange = (event) => {
     const {value, name} = event.target;
@@ -48,8 +45,7 @@ function Login({open, setOpen, setVisible}) {
       })
       .then((json) => {
         localStorage.setItem('member', JSON.stringify(json));
-        setOpen(false);
-        setVisible(true);
+        history.push('/');
       })
       .catch((err) => {
         console.log(err);
@@ -57,48 +53,46 @@ function Login({open, setOpen, setVisible}) {
       });
   };
   return (
-    <Dialog fullScreen open={open} onClose={handleClose}>
-      <AppBar sx={{position: 'relative', zIndex: 1300}}>
+    <form onSubmit={onSubmit}>
+      <AppBar sx={{position: 'fixed'}}>
         <Toolbar>
           <Typography variant='h6'>Login Screen</Typography>
-          <IconButton sx={{marginLeft: 'auto'}} onClick={handleClose}>
+          <IconButton sx={{marginLeft: 'auto'}} onClick={()=>history.push('/')}>
             <CloseIcon />
           </IconButton>
         </Toolbar>
       </AppBar>
-      <form onSubmit={onSubmit}>
-        <Box sx={{pl: '12%', my: '50%'}}>
-          <Box sx={{pl: '38%'}}>
-            <AccountCircleIcon />
-          </Box>
-          <TextField
-            id='outlined-search'
-            label='email'
-            name='email'
-            onChange={handleInputChange}
-            required
-            sx={{my: '2%', width: '300px'}}
-          />
-          <TextField
-            id='outlined-search'
-            label='password'
-            name='password'
-            onChange={handleInputChange}
-            required
-            sx={{my: '3%', width: '300px'}}
-          />
-          <Button
-            variant='contained'
-            type='submit'
-            sx={{my: '3%', width: '300px'}}>
-            Login
-          </Button>
-          <Button variant='contained' sx={{width: '300px'}}>
-            New User
-          </Button>
+      <Box sx={{pl: '12%', my: '50%'}}>
+        <Box sx={{pl: '38%'}}>
+          <AccountCircleIcon />
         </Box>
-      </form>
-    </Dialog>
+        <TextField
+          id='outlined-search'
+          label='email'
+          name='email'
+          onChange={handleInputChange}
+          required
+          sx={{my: '2%', width: '300px'}}
+        />
+        <TextField
+          id='outlined-search'
+          label='password'
+          name='password'
+          onChange={handleInputChange}
+          required
+          sx={{my: '3%', width: '300px'}}
+        />
+        <Button
+          variant='contained'
+          type='submit'
+          sx={{my: '3%', width: '300px'}}>
+          Login
+        </Button>
+        <Button variant='contained' sx={{width: '300px'}}>
+          New User
+        </Button>
+      </Box>
+    </form>
   );
 }
 
