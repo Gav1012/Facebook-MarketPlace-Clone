@@ -15,6 +15,7 @@ export default function Search() {
   const {setCategory} = useContext(CategoryContext);
   const {setSearch} = useContext(CategoryContext);
   const {setSub} = useContext(CategoryContext);
+  const {setFilter} = useContext(CategoryContext);
   const [value, setValue] = useState('');
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -22,6 +23,7 @@ export default function Search() {
   const onSearchClick = (e) => {
     setSub(undefined);
     setCategory(undefined);
+    setFilter(undefined);
     setSearch(e);
   };
   return (

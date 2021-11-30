@@ -114,7 +114,7 @@ export default function Filter() {
                 {temp.map((fil) => (
                   <FormControlLabel value={fil}
                     control={<Radio />} label={fil} onClick={()=>{
-                      setFilter(fil.names);
+                      setFilter(fil);
                       handleClose();
                       setSearch('');
                     }}

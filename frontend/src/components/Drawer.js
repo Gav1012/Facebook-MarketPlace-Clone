@@ -28,6 +28,7 @@ export default function PermanentDrawerLeft() {
   const {currSub, setSub} = useContext(CategoryContext);
   const {catList} = useContext(CategoryContext);
   const {subList} = useContext(CategoryContext);
+  const {setFilter} = useContext(CategoryContext);
   const {search, setSearch} = useContext(CategoryContext);
   console.log(subList);
   return (
@@ -88,6 +89,7 @@ export default function PermanentDrawerLeft() {
               onClick={()=>{
                 setCategory(cat.names);
                 setSub(undefined);
+                setFilter(undefined);
                 setSearch('');
               }}
             >
