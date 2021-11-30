@@ -13,50 +13,38 @@ import Box from '@mui/material/Box';
 /**
  * @return {object}
  */
-function Login() {
-  const [user, setUser] = React.useState({email: '', password: ''});
+function NewAccount() {
   const history = useHistory();
-  // from example code provided by Professor Harrison
-  const handleInputChange = (event) => {
-    const {value, name} = event.target;
-    // grabs from the user state
-    const u = user;
-    // u[name] is the actual input
-    u[name] = value;
-    setUser(u);
-  };
-  // handles when user presses login button
-  // from example code provided by Professor Harrison
-  const onSubmit = (event) => {
-    event.preventDefault();
-    // checks with db that user exists
-    fetch('/v0/authenticate', {
-      method: 'POST',
-      body: JSON.stringify(user),
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then((res) => {
-        if (!res.ok) {
-          throw res;
-        }
-        return res.json();
-      })
-      .then((json) => {
-        localStorage.setItem('member', JSON.stringify(json));
-        history.push('/');
-      })
-      .catch((err) => {
-        console.log(err);
-        alert('Error logging in, please try again');
-      });
-  };
+  // const onSubmit = (event) => {
+  //   event.preventDefault();
+  //   // checks with db that user exists
+  //   fetch('/v0/member', {
+  //     method: 'POST',
+  //     body: JSON.stringify(user),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   })
+  //     .then((res) => {
+  //       if (!res.ok) {
+  //         throw res;
+  //       }
+  //       return res.json();
+  //     })
+  //     .then((json) => {
+  //       localStorage.setItem('member', JSON.stringify(json));
+  //       history.push('/');
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       alert('Error logging in, please try again');
+  //     });
+  // };
   return (
-    <form onSubmit={onSubmit}>
+    <form>
       <AppBar sx={{position: 'fixed'}}>
         <Toolbar>
-          <Typography variant='h6'>Login Screen</Typography>
+          <Typography variant='h6'>Create Account</Typography>
           <IconButton sx={{marginLeft: 'auto'}} onClick={()=>history.push('/')}>
             <CloseIcon />
           </IconButton>
@@ -70,7 +58,7 @@ function Login() {
           id='outlined-search'
           label='email'
           name='email'
-          onChange={handleInputChange}
+          // onChange={handleInputChange}
           required
           sx={{my: '2%', width: '300px'}}
         />
@@ -78,7 +66,7 @@ function Login() {
           id='outlined-search'
           label='password'
           name='password'
-          onChange={handleInputChange}
+          // onChange={handleInputChange}
           required
           sx={{my: '3%', width: '300px'}}
         />
@@ -86,17 +74,17 @@ function Login() {
           variant='contained'
           type='submit'
           sx={{my: '3%', width: '300px'}}>
-          Login
+          Create Account
         </Button>
         <Button
           variant='contained'
-          href='/NewAccount'
-          sx={{width: '300px'}}>
-          New User
+          href='/Login'
+        >
+          Already have an account?
         </Button>
       </Box>
     </form>
   );
 }
 
-export default Login;
+export default NewAccount;
