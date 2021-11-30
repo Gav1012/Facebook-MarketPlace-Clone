@@ -37,7 +37,7 @@ exports.getCategories = async (req, res) => {
 exports.getMembers = async (req, res) => {
   // checks email from input and search for user with email
 
-  const members = await db.selectMembers(req.query.user);
+  const members = await db.selectMembers(req.query.user, req.query.id);
   // if the member is found
   if (members) {
     res.status(200).json(members);
