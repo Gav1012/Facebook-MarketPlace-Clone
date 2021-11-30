@@ -15,6 +15,8 @@ import BreadCrumbs from './BreadCrumbs';
 import Search from './Search';
 import CheckroomIcon from '@mui/icons-material/Checkroom';
 import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import SportsCricketIcon from '@mui/icons-material/SportsCricket';
+import DevicesOtherIcon from '@mui/icons-material/DevicesOther';
 import {useContext} from 'react';
 const drawerWidth = 500;
 /**
@@ -90,7 +92,10 @@ export default function PermanentDrawerLeft() {
               }}
             >
               <ListItemIcon>
-                {index % 2 === 0 ? <DirectionsCarIcon /> : < CheckroomIcon />}
+                {index === 0 ? <DirectionsCarIcon/> : ''}
+                {index === 1 ? <CheckroomIcon/>: ''}
+                {index === 2 ? <DevicesOtherIcon/>: ''}
+                {index === 3 ? <SportsCricketIcon/>: ''}
               </ListItemIcon>
               <ListItemText primary={cat.names} />
             </ListItem>))}

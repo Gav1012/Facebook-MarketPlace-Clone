@@ -13,6 +13,11 @@ import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import CheckroomIcon from '@mui/icons-material/Checkroom';
+import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
+import SportsCricketIcon from '@mui/icons-material/SportsCricket';
+import DevicesOtherIcon from '@mui/icons-material/DevicesOther';
+import ListItemIcon from '@mui/material/ListItemIcon';
 
 // grabs all the listings and specific ones depending on other inputs
 
@@ -123,7 +128,7 @@ function Category({setSearch}) {
                     </Toolbar>
                   </AppBar>
                   <List>
-                    {catList.map((cat) => (
+                    {catList.map((cat, index) => (
                       <ListItem
                         label={cat.names}
                         key={cat.names}
@@ -133,7 +138,14 @@ function Category({setSearch}) {
                           setSearch('');
                           handleClose();
                         }}
-                      > <ListItemText primary={cat.names} />
+                      >
+                        <ListItemIcon>
+                          {index === 0 ? <DirectionsCarIcon/> : ''}
+                          {index === 1 ? <CheckroomIcon/>: ''}
+                          {index === 2 ? <DevicesOtherIcon/>: ''}
+                          {index === 3 ? <SportsCricketIcon/>: ''}
+                        </ListItemIcon>
+                        <ListItemText primary={cat.names} />
                       </ListItem>))}
                   </List>
                 </Dialog> : ''}
