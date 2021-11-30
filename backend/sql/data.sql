@@ -1,14 +1,21 @@
--- Dummy Data --
-INSERT INTO dummy (created) VALUES (current_timestamp);
-
 -- Populate Your Tables Here --
 -- categories
 INSERT INTO category(id, parent, names) VALUES ('480939b6-95ce-430f-b30a-7d7c5e5a9c88',NULL,'Vehicles');
 INSERT INTO category(id, parent, names) VALUES ('700e982d-15fb-4f2e-a9c0-6629d16730fd','480939b6-95ce-430f-b30a-7d7c5e5a9c88','Cars');
 INSERT INTO category(id, parent, names) VALUES ('c082f693-dc37-47f3-8f01-7bc11c957594','480939b6-95ce-430f-b30a-7d7c5e5a9c88','Motorcycles');
+INSERT INTO category(id, parent, names) VALUES ('add85f35-0199-4856-9dd6-324768eebdf3','480939b6-95ce-430f-b30a-7d7c5e5a9c88','RVs');
+INSERT INTO category(id, parent, names) VALUES ('9d71dcc0-92bd-4105-ae08-45bac3da819a','480939b6-95ce-430f-b30a-7d7c5e5a9c88','Boats');
 INSERT INTO category(id, parent, names) VALUES ('882b7132-c340-4d77-bcf1-3522b86526a8',NULL,'Apparel');
 INSERT INTO category(id, parent, names) VALUES ('e2af758a-0c87-4710-a611-14a9ecbccc9a','882b7132-c340-4d77-bcf1-3522b86526a8','Clothing');
 INSERT INTO category(id, parent, names) VALUES ('006915ba-51c1-4bb5-bcfe-5f45e59a5c3a','882b7132-c340-4d77-bcf1-3522b86526a8','Accessories');
+INSERT INTO category(id, parent, names) VALUES ('3ad197ef-07ff-4ef3-8d57-4d8d1771fe01','882b7132-c340-4d77-bcf1-3522b86526a8','Shoes');
+INSERT INTO category(id, parent, names) VALUES ('51a044c1-02bd-4ffa-9cc2-a44607c0c16e',NULL,'Electronics');
+INSERT INTO category(id, parent, names) VALUES ('9c33bf00-e7b9-45a3-b910-9a53e1517c6d','51a044c1-02bd-4ffa-9cc2-a44607c0c16e','Computers');
+INSERT INTO category(id, parent, names) VALUES ('7f6795b4-92a6-4030-b35d-f3d093f39fee','51a044c1-02bd-4ffa-9cc2-a44607c0c16e','Cellphones');
+INSERT INTO category(id, parent, names) VALUES ('4554e2ab-c238-4b99-a4fc-f132c4a6b4f6','51a044c1-02bd-4ffa-9cc2-a44607c0c16e','Cameras');
+INSERT INTO category(id, parent, names) VALUES ('dfdd0784-ed34-4eb8-9259-728cec089642',NULL,'Sporting Goods');
+INSERT INTO category(id, parent, names) VALUES ('2adb69f4-9529-4991-b502-af060ceb6295','dfdd0784-ed34-4eb8-9259-728cec089642','Sports Equipment');
+INSERT INTO category(id, parent, names) VALUES ('ac13a949-5aac-4960-b192-d0afddd21783','dfdd0784-ed34-4eb8-9259-728cec089642','Camping');
 
 -- users
 INSERT INTO member(id, member) VALUES ('fd4e8e32-bef3-41c0-b111-61f695ea3912','{"name":"Jason Bourne", "password":"$2b$04$yYw78cmFe/VQhKDFWG4HG.LZLIPOVR5w0z/7/7MSM9ngWpaflFygO", "email":"jasonbourne@gmail.com"}');
