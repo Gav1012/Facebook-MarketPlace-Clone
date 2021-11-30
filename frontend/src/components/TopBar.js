@@ -6,8 +6,6 @@ import CssBaseline from '@mui/material/CssBaseline';
 import CategoryContext from './CategoryContext';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import Box from '@mui/material/Box';
-import Login from './Login';
 
 /**
  *
@@ -16,14 +14,9 @@ import Login from './Login';
 function TopBar() {
   // grabs current user from local storage
   const curr = localStorage.getItem('member');
-  // sets the state of login screen being opened
-  const [open, setOpen] = React.useState(false);
   // used to swap between login and logout button
   const [visible, setVisible] = React.useState(curr ? true: false);
-  // opens the login screen
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  // used for logging in on the desktop version
   const inputBoxes = (
     <form noValidate autoComplete="off">
       <TextField
@@ -62,12 +55,9 @@ function TopBar() {
             </Button>:
             <Button
               style={{color: 'white', marginLeft: 'auto'}}
-              onClick={handleClickOpen}
+              href='/Login'
             >Login
             </Button>}
-          <Box>
-            <Login open={open} setOpen={setOpen} setVisible={setVisible}/>
-          </Box>
         </Toolbar>
       </AppBar>
       <Toolbar />

@@ -8,6 +8,7 @@ import ListGrid from './ListGrid';
 import Drawer from './Drawer';
 import BreadCrumbs from './BreadCrumbs';
 import Filter from './Filter';
+import Login from './Login';
 
 /**
  * Simple component with no state.
@@ -43,7 +44,7 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route>
+        <Route path='/' exact>
           <CategoryContext.Provider value={
             {currCat, setCategory, currSub, setSub,
               search, setSearch, dimensions, catList, setCatList,
@@ -62,8 +63,11 @@ function App() {
             </div>
           </CategoryContext.Provider>
         </Route>
-        {/* <Route path='/login'>
+        <Route path='/login'>
           <Login />
+        </Route>
+        {/* <Route path='/createacc'>
+          <NewAccount />
         </Route> */}
       </Switch>
     </BrowserRouter>
