@@ -20,7 +20,7 @@ import IconButton from '@mui/material/IconButton';
 const fetchFilter = (setFilList, currCat) => {
   if (currCat) {
     // fetches the listings based on above modifications
-    fetch('/v0/listings/category?sub=' + currCat, {
+    fetch('/v0/listings/category?fil=' + currCat, {
       method: 'get',
       headers: {
         'Content-Type': 'application/json',
@@ -44,19 +44,29 @@ export default function Filter() {
   const {currCat} = useContext(CategoryContext);
   const {dimensions} = useContext(CategoryContext);
   const {setSearch} = useContext(CategoryContext);
-  const {setSub} = useContext(CategoryContext);
+ //  const {setSub} = useContext(CategoryContext);
   const {currFilter, setFilter} = useContext(CategoryContext);
-  const {subList} = useContext(CategoryContext);
+ //  const {subList} = useContext(CategoryContext);
   const {filList, setFilList} = useContext(CategoryContext);
   const [open, setOpen] = useState(false);
   const handleChange = (event) => {
     setFilter(event.target.value);
   };
-  console.log(filList);
+  console.log('were inside filter');
   console.log(currFilter);
-  console.log(open);
-  console.log(setFilter);
   console.log(handleChange);
+
+  const temp = [];
+  let filterName = '';
+  if (currCat && filList[0]) {
+    for (const property in filList[0].attributes) {
+      if (filList[0].attributes[property] !== undefined) {
+        temp.push(filList[0].attributes[property]);
+      }
+    }
+    filterName = filList[0].names;
+  }
+  console.log(temp);
   const handleClickOpen = () => {
     if (dimensions.width < 600) {
       setOpen(true);
@@ -70,7 +80,7 @@ export default function Filter() {
   }, [setFilList, currCat]);
   return (
     <div>
-      {currCat && dimensions.width < 600?
+      {currCat && temp && dimensions.width < 600?
         <Button variant="outlined" startIcon={<TuneIcon />}
           label='Filters' onClick={handleClickOpen}>
           Filter
@@ -85,14 +95,14 @@ export default function Filter() {
             </IconButton>
           </Toolbar>
         </AppBar>
-        {currCat && dimensions.width < 600? <Accordion>
+        {currCat && temp && dimensions.width < 600? <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1a-content"
             id="panel1a-header"
             style= {{width: '90%'}}
           >
-            <Typography>Subcategories for {currCat}</Typography>
+            <Typography>{filterName}</Typography>
           </AccordionSummary>
           <AccordionDetails>
             <FormControl component="fieldset">
@@ -101,10 +111,10 @@ export default function Filter() {
                 defaultValue="female"
                 name="radio-buttons-group"
               >
-                {subList.map((sub) => (
-                  <FormControlLabel value={sub.names}
-                    control={<Radio />} label={sub.names} onClick={()=>{
-                      setSub(sub.names);
+                {temp.map((fil) => (
+                  <FormControlLabel value={fil}
+                    control={<Radio />} label={fil} onClick={()=>{
+                      setFilter(fil.names);
                       handleClose();
                       setSearch('');
                     }}
@@ -115,14 +125,14 @@ export default function Filter() {
           </AccordionDetails>
         </Accordion> : ''}
       </Dialog>
-      {currCat && dimensions.width > 599? <Accordion>
+      {currCat && temp && dimensions.width > 599? <Accordion>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
           style= {{width: '90%'}}
         >
-          <Typography>Subcategories for {currCat}</Typography>
+          <Typography>{filterName}</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <FormControl component="fieldset">
@@ -131,10 +141,10 @@ export default function Filter() {
               defaultValue="female"
               name="radio-buttons-group"
             >
-              {subList.map((sub) => (
-                <FormControlLabel value={sub.names}
-                  control={<Radio />} label={sub.names} onClick={()=>{
-                    setSub(sub.names);
+              {temp.map((fil) => (
+                <FormControlLabel value={fil}
+                  control={<Radio />} label={fil} onClick={()=>{
+                    setFilter(fil);
                     setSearch('');
                   }}
                 />
