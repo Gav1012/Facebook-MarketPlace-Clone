@@ -65,10 +65,11 @@ export default function PermanentDrawerLeft() {
         <Divider />
         <div style={{margin: 10}}>
           <Search />
-         {currCat?
-          <Typography variant="h5" gutterBottom component="div">
-            Filters
-          </Typography> : ''}
+          {currCat? <Divider /> : ''}
+          {currCat?
+            <Typography variant="h5" gutterBottom component="div">
+              Filters
+            </Typography> : ''}
           <Filter />
         </div>
         <Divider />
