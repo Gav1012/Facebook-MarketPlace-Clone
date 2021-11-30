@@ -84,7 +84,13 @@ exports.getCategories = async (sub, fil) => {
     return rows;
   } else { 
       if (fil) {
-
+        const select = 'select names, attributes from filter where filter.parent in (select id from filter where filter.names = $1)';
+        const query = {
+          text: select,
+          values : [req],
+        };
+        const {rows} = await pool.query(query);
+        return rows;  
     } else {
       const select = 'select names from category where category.parent is null';
       const query = {
