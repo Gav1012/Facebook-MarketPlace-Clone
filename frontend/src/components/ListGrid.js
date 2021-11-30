@@ -12,6 +12,8 @@ import Box from '@mui/material/Box';
 import {alpha} from '@material-ui/core/styles/colorManipulator';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 
 // grabs all the listings and specific ones depending on other inputs
 const fetchListings = (setListings, currCat, currSub, search) => {
@@ -134,19 +136,21 @@ function ListGrid() {
             ></img>
             {popupData[0].listings.images.length > 1 &&
             <div style={{textAlign: 'center'}} sx={{m: 0.5}}>
-              <Button onClick={() => shiftImageLeft(
+              <IconButton onClick={() => shiftImageLeft(
                 popupData[0].listings.images.length)}
               style={{minWidth: '7px', width: '35px',
                 backgroundColor: 'black', marginRight: '5px',
                 borderRadius: '50%', opacity: '0.5', color: 'white'}}>
-              ←</Button>
+                <ArrowBackIcon />
+              </IconButton>
               {rowState}
-              <Button onClick={() => shiftImageRight(
+              <IconButton onClick={() => shiftImageRight(
                 popupData[0].listings.images.length)}
               style={{minWidth: '7px', width: '35px',
                 backgroundColor: 'black',
                 borderRadius: '50%', opacity: '0.5', color: 'white'}}>
-              →</Button>
+                <ArrowForwardIcon />
+              </IconButton>
             </div>
             }
             <div style={{height: '50px', fontSize: '25pt'}}
@@ -161,8 +165,8 @@ function ListGrid() {
           ()=> {
             setDialog(false); setImage(0);
           }}
-        style={{right: '0', top: '0', position: 'fixed', color: 'black',
-          backgroundColor: alpha('#000', 0.5)}}
+        style={{right: '10px', top: '10px', position: 'fixed',
+          color: 'white', backgroundColor: alpha('#000', 0.5)}}
         >
           <CloseIcon />
         </IconButton>
