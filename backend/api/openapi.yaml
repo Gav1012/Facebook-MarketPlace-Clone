@@ -123,6 +123,12 @@ paths:
         description: specific user
         schema:
           type: string
+      - name: id
+        in: query
+        description: user id
+        schema:
+          type: string
+          format: uuid
       responses:
         200:
           description: got users
