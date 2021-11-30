@@ -13,7 +13,7 @@ import CategoryContext from './CategoryContext';
 const fetchFilter = (setFilList, currCat) => {
     if (currCat) {
       // fetches the listings based on above modifications
-      fetch('/v0/listings/category?fil=' + currCat, {
+      fetch('/v0/listings/category?sub=' + currCat, {
         method: 'get',
         headers: {
           'Content-Type': 'application/json',
@@ -38,13 +38,15 @@ const fetchFilter = (setFilList, currCat) => {
     const {currCat} = useContext(CategoryContext);
     const {dimensions} = useContext(CategoryContext);
     const {setSearch} = useContext(CategoryContext);
+    const {setSub} = useContext(CategoryContext);
     const {currFilter, setFilter} = useContext(CategoryContext);
+    const {subList} = useContext(CategoryContext);
     const {filList, setFilList} = useContext(CategoryContext);
     const [open, setOpen] = useState(false);
     const handleChange = (event) => {
       setFilter(event.target.value);
     };
-
+    console.log(subList);
     console.log(filList);
     console.log(currFilter);
     console.log(open);
@@ -70,13 +72,13 @@ const fetchFilter = (setFilList, currCat) => {
 
     return (
         <div>
-          <Accordion>
+          {currCat? <Accordion>
             <AccordionSummary
               expandIcon={<ExpandMoreIcon />}
               aria-controls="panel1a-content"
               id="panel1a-header"
             >
-              <Typography>Accordion 1</Typography>
+              <Typography>Subcategories for {currCat}</Typography>
             </AccordionSummary>
             <AccordionDetails>
             <FormControl component="fieldset">
@@ -85,8 +87,13 @@ const fetchFilter = (setFilList, currCat) => {
             defaultValue="female"
             name="radio-buttons-group"
           >
-            <FormControlLabel value="female"
-                control={<Radio />} label="Female" />
+            {subList.map((sub) => (
+                <FormControlLabel value={sub.names}
+                control={<Radio />} label={sub.names} onClick={()=>{
+                    setSub(sub.names);
+                    setSearch('');
+                  }} />
+              ))}
             <FormControlLabel value="male"
                 control={<Radio />} label="Male" />
             <FormControlLabel value="other"
@@ -94,7 +101,7 @@ const fetchFilter = (setFilList, currCat) => {
           </RadioGroup>
         </FormControl>
             </AccordionDetails>
-          </Accordion>
+          </Accordion> : ''}
         </div>
       );
     }
