@@ -267,6 +267,28 @@ test('GET BAD Members by ID', async () => {
     .expect(404)
 });
 
+const testMember = {
+  name: 'Maurice Foreman',
+  email: 'hooktrader@hotmail.com',
+  password: 'hamsandwich',
+};
+
+test('POST New Member', async () => {
+  await request.post('/v0/member')
+      .send(testMember)
+      .expect(201)
+      .then((res) => {
+        expect(res).toBeDefined();
+        expect(res.body).toBeDefined();
+        expect(res.body.id).toBeDefined();
+        expect(res.body.member).toBeDefined();
+        expect(res.body.member.name).toBeDefined();
+        expect(res.body.member.name).toBe('Maurice Foreman');
+        expect(res.body.member.email).toBeDefined();
+        expect(res.body.member.email).toBe('hooktrader@hotmail.com');
+      });
+});
+
 
 
 
