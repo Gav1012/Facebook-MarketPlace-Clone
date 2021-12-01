@@ -1,4 +1,4 @@
-import {TextField} from '@mui/material';
+// import {TextField} from '@mui/material';
 // import CategoryContext from './CategoryContext';
 import Dialog from '@mui/material/Dialog';
 // import Button from '@mui/material/Button';
@@ -10,6 +10,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import {useContext} from 'react';
 import ListingContext from './ListingContext';
+import Divider from '@mui/material/Divider';
 
 /**
  *
@@ -41,7 +42,9 @@ function ListViewer() {
   };
 
   return (
-    <Dialog fullScreen open={popupData !== undefined}>
+    <Dialog fullScreen style={{borderStyle: 'solid', borderColor: 'lightgrey',
+      borderWidth: '8px'}}
+      open={popupData !== undefined}>
           <Box sx={{display: 'grid'}}>
             <img
               src={popupData[0].listings.images[imageNo].link}
@@ -49,7 +52,7 @@ function ListViewer() {
               alt={popupData[0].listings.title}
             ></img>
             {popupData[0].listings.images.length > 1 &&
-            <div style={{textAlign: 'center'}} sx={{m: 0.5}}>
+            <div style={{textAlign: 'center', marginTop: '10px'}} sx={{m: 0.5}}>
               <IconButton onClick={() => shiftImageLeft(
                 popupData[0].listings.images.length)}
               style={{minWidth: '7px', width: '35px',
@@ -67,15 +70,20 @@ function ListViewer() {
               </IconButton>
             </div>
             }
-            <div style={{height: '50px', fontSize: '25pt'}}
+            <div style={{height: 'auto', fontSize: '20pt',
+              marginLeft: '15px', marginTop: '5px'}}
             >{popupData[0].listings.title}</div>
-            <div style={{height: '30px', fontSize: '15pt'}}
-            >{popupData[0].listings.price}</div>
-            <div style={{height: '50px', fontSize: '15pt'}}
+            <div style={{height: 'auto', fontSize: '20pt',
+              marginLeft: '15px'}}
             >{popupData[0].listings.content}</div>
-            <TextField id="outlined-basic" label="Leave a comment..."
-              variant="outlined" style={{width: '75%', marginLeft: '15px'}}>
-            </TextField>
+            <div style={{height: 'auto', fontSize: '13pt',
+              marginLeft: '15px'}}
+            >{popupData[0].listings.price}</div>
+            <Divider style={{marginTop: '10px', marginBottom: '10px'}}
+              variant='middle'/>
+            <div style={{height: 'auto', fontSize: '15pt',
+              marginLeft: '15px', paddingBottom: '15px'}}
+            >{popupData[0].listings.summary}</div>
           </Box>
         <IconButton sx={{marginLeft: 'auto'}} onClick={
           ()=> {
