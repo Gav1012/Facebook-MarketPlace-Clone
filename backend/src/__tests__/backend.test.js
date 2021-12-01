@@ -242,6 +242,26 @@ test('GET Members by ID', async () => {
     });
 });
 
+test('GET Members by Email', async () => {
+  await request.get('/v0/member?user=jasonbourne%40gmail.com')
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then((res) => {
+      expect(res).toBeDefined();
+      expect(res.body).toBeDefined();
+      console.log(res.body);
+      expect(res.body[0].id).toBeDefined();
+      expect(res.body[0].id).toBe('fd4e8e32-bef3-41c0-b111-61f695ea3912');
+      expect(res.body[0].member).toBeDefined();
+      expect(res.body[0].member.name).toBeDefined();
+      expect(res.body[0].member.name).toBe('Jason Bourne');
+      expect(res.body[0].member.email).toBeDefined();
+      expect(res.body[0].member.email).toBe('jasonbourne@gmail.com');
+      expect(res.body[0].member.picture).toBeDefined();
+      expect(res.body[0].member.password).toBeDefined();
+    });
+});
+
 test('GET BAD Members by ID', async () => {
   await request.get('/v0/member?id=ff761662-3505-ffff-4444-e7307bb58666')
     .expect(404)
