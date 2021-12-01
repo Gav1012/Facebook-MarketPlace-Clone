@@ -15,23 +15,19 @@ exports.authenticate = async (req, res) => {
   // grabs the user from the database
   const user = await db.selectMembers(email);
   // if the user is found give token
-  if (user) {
-    // checks that the user email and password match
-    if (user[0].member.email === email &&
-        bcrypt.compareSync(password, user[0].member.password)) {
-          console.log('found! email and pw match');
-          // grants access token to user logging in
-          const accessToken = jwt.sign(
-            {email: user[0].member.email},
-            secrets.accessToken, {
-              expiresIn: '30m',
-              algorithm: 'HS256'
-            });
-          // sends succesfully code
-          res.status(200).json({email: email, accessToken: accessToken});
-    } else {
-      res.status(401).send('Username or password incorrect');
-    }
+  // checks that the user email and password match
+  if (user && user[0].member.email === email &&
+      bcrypt.compareSync(password, user[0].member.password)) {
+        console.log('found! email and pw match');
+        // grants access token to user logging in
+        const accessToken = jwt.sign(
+          {email: user[0].member.email},
+          secrets.accessToken, {
+            expiresIn: '30m',
+            algorithm: 'HS256'
+          });
+        // sends succesfully code
+        res.status(200).json({email: email, accessToken: accessToken});
   } else {
     res.status(401).send('Username or password incorrect');
   }

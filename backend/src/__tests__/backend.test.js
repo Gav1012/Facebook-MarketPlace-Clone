@@ -319,10 +319,29 @@ test('POST New Member', async () => {
       });
 });
 
+const harrisonMember = {
+  email: 'davidharrison@gmail.com',
+  password: 'cse183',
+};
 
+const fakeMemeber = {
+  email: 'dummy@gmail.com',
+  password: 'strong password',
+}
 
+test('POST Authenticate Member', async () => {
+  await request.post('/v0/authenticate')
+    .send(harrisonMember)
+    .expect(200)
+    .then((res) => {
+      expect(res).toBeDefined();
+      expect(res.body).toBeDefined();
+      console.log(res.body);
+    })
+})
 
-
-
-
-
+test('POST Authenticate Bad Member', async () => {
+  await request.post('/v0/authenticate')
+    .send(fakeMemeber)
+    .expect(401)
+})
