@@ -13,13 +13,11 @@ exports.searchListings = async (search, id) => {
   let select = 'SELECT * FROM listing';
   val = [];
   if (search) {
-    // console.log(search);
     select += ` WHERE LOWER(listings ->> 'title') LIKE $1`;
     const searchQuery = '%' + search + '%';
     val.push(searchQuery);
   } else if (id) {
     select += ` WHERE listing.id = $1`;
-    console.log(id);
     val.push(id);
   }
   const query = {
@@ -106,7 +104,6 @@ exports.getCategories = async (sub, fil) => {
 
 // gets all the members from db
 exports.selectMembers = async (email, id) => {
-  console.log('email: ', email);
   let select = ` select id, member from member`;
   val = [];
   if (email) {
@@ -128,8 +125,6 @@ exports.selectMembers = async (email, id) => {
 }
 
 exports.insertMember = async (member) => {
-  console.log('hello from insert');
-  console.log(member);
   const insert = ` insert into member(member) values ($1) returning id`;
   const query = {
     text: insert,

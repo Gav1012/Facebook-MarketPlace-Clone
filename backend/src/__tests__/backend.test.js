@@ -10,7 +10,7 @@ beforeAll(() => {
   server = http.createServer(app);
   server.listen();
   request = supertest(server);
-  //  return db.reset();
+  return db.reset();
 });
 
 afterAll((done) => {
@@ -120,7 +120,6 @@ test('GET Listings by ID', async () => {
     .expect('Content-Type', /json/)
     .then((res) => {
       expect(res).toBeDefined();
-      console.log(res.body);
       expect(res.body).toBeDefined();
       expect(res.body[0].id).toBeDefined();
       expect(res.body[0].id).toBe('61d21627-0c63-4b85-9ae1-c7b668009348');
@@ -229,7 +228,6 @@ test('GET Members by ID', async () => {
     .then((res) => {
       expect(res).toBeDefined();
       expect(res.body).toBeDefined();
-      console.log(res.body);
       expect(res.body[0].id).toBeDefined();
       expect(res.body[0].id).toBe('ff761662-3505-4fcf-b44d-e7307bb586c6');
       expect(res.body[0].member).toBeDefined();
@@ -249,7 +247,6 @@ test('GET Members by Email', async () => {
     .then((res) => {
       expect(res).toBeDefined();
       expect(res.body).toBeDefined();
-      console.log(res.body);
       expect(res.body[0].id).toBeDefined();
       expect(res.body[0].id).toBe('fd4e8e32-bef3-41c0-b111-61f695ea3912');
       expect(res.body[0].member).toBeDefined();
