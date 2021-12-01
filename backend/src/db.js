@@ -34,7 +34,18 @@ exports.searchListings = async (search, id) => {
 // gets listings based on category selected
 exports.catListings = async (category, sub, fil) => {
   if (sub && fil) {
-
+    const select =
+      'select * from listing where listing.filterType = $1 and listing.categoryID in (select id from category where category.parent in (select id from category where category.names = $2)) intersect select * from listing where listing.categoryid in (select id from category where category.names = $3 and category.parent in (select id from category where category.names = $2))'
+    const query = {
+      text: select,
+      values: [fil, category, sub],
+    };
+    const {rows} = await pool.query(query);
+    if (rows[0] === undefined) {
+      return undefined;
+    } else {
+      return rows;
+    }
   }
   if (sub && !fil) {
     const select =
@@ -46,28 +57,39 @@ exports.catListings = async (category, sub, fil) => {
     const {rows} = await pool.query(query);
     if (rows[0] === undefined) {
       return undefined;
-    } else {
-      return rows;
-    }
+      } else {
+        return rows;
+      }
   } else {
     if (fil && !sub) {
-
-    } else {
-      const select = 
-        'select * from listing where listing.categoryid in (select id from category where category.parent in (select id from category where category.parent is null and category.names = $1))'
-        ;
+      const select =
+        'select * from listing where listing.filterType = $1 and listing.categoryID in (select id from category where category.parent in (select id from category where category.names = $2))'
       const query = {
         text: select,
-        values: [category],
-      }; 
+        values: [fil, category],
+      };
       const {rows} = await pool.query(query);
       if (rows[0] === undefined) {
         return undefined;
       } else {
         return rows;
       }
-    }
-  }
+      } else {
+        const select = 
+          'select * from listing where listing.categoryid in (select id from category where category.parent in (select id from category where category.parent is null and category.names = $1))'
+          ;
+        const query = {
+          text: select,
+          values: [category],
+        }; 
+        const {rows} = await pool.query(query);
+        if (rows[0] === undefined) {
+          return undefined;
+        } else {
+          return rows;
+        }
+      }
+}
 };
 
 // gets all the categories from db

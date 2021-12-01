@@ -13,8 +13,6 @@ exports.getListings = async (req, res) => {
   };
 
 exports.getCatListings = async (req, res) => {
-  console.log('Were in getCatListings (inside listings)')
-  console.log(req.query);
   //  this function can take a filter query later 
   //  on in the program if we need it this req.query.filter
   const listings = await db.catListings(req.params.category, req.query.sub, req.query.fil);
@@ -28,8 +26,6 @@ exports.getCatListings = async (req, res) => {
 };
 
 exports.getCategories = async (req, res) => {
-  console.log('Were in getCategories (inside listings)')
-  console.log(req.query);
   // this function gets all categories
   const categories = await db.getCategories(req.query.sub, req.query.fil);
   res.status(200).json(categories);
