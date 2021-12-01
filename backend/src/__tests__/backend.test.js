@@ -204,6 +204,39 @@ test('GET Listings by Sub', async () => {
     });
 });
 
+test('GET Listings by Filter', async () => {
+  await request.get('/v0/listings/Vehicles?fil=Blue')
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then((res) => {
+      expect(res).toBeDefined();
+      expect(res.body).toBeDefined();
+      expect(res.body[0].id).toBeDefined();
+      expect(res.body[0].categoryid).toBeDefined();
+      expect(res.body[0].memberid).toBeDefined();
+      expect(res.body[0].listings.title).toBeDefined();
+      expect(res.body[0].listings.price).toBeDefined();
+      expect(res.body[0].listings.content).toBeDefined();
+      expect(res.body[0].listings.createDate).toBeDefined();
+    });
+});
+
+test('GET Listings by Filter and Sub', async () => {
+  await request.get('/v0/listings/Apparel?sub=Clothing&fil=Mens')
+    .expect(200)
+    .expect('Content-Type', /json/)
+    .then((res) => {
+      expect(res).toBeDefined();
+      expect(res.body).toBeDefined();
+      expect(res.body[0].id).toBeDefined();
+      expect(res.body[0].categoryid).toBeDefined();
+      expect(res.body[0].memberid).toBeDefined();
+      expect(res.body[0].listings.title).toBeDefined();
+      expect(res.body[0].listings.price).toBeDefined();
+      expect(res.body[0].listings.content).toBeDefined();
+      expect(res.body[0].listings.createDate).toBeDefined();
+    });
+});
 
 test('GET Members', async () => {
   await request.get('/v0/member')
