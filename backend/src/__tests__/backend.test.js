@@ -221,6 +221,11 @@ test('GET Listings by Filter', async () => {
     });
 });
 
+test('GET Listings by BAD Filter', async () => {
+  await request.get('/v0/listings/Apparel?fil=Blue')
+    .expect(404)
+});
+
 test('GET Listings by Filter and Sub', async () => {
   await request.get('/v0/listings/Apparel?sub=Clothing&fil=Mens')
     .expect(200)
@@ -236,6 +241,11 @@ test('GET Listings by Filter and Sub', async () => {
       expect(res.body[0].listings.content).toBeDefined();
       expect(res.body[0].listings.createDate).toBeDefined();
     });
+});
+
+test('GET Listings by BAD Filter and BAD sub', async () => {
+  await request.get('/v0/listings/Apparel?sub=Cars&fil=Sony')
+    .expect(404)
 });
 
 test('GET Members', async () => {
