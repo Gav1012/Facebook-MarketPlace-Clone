@@ -84,7 +84,7 @@ export default function Filter() {
         <Button variant="outlined" startIcon={<TuneIcon />}
           label='Filters' onClick={handleClickOpen}>
           Filter
-        </Button> : ''};
+        </Button> : ''}
       <Dialog fullScreen open={open} onClose={handleClose}>
         <AppBar sx={{position: 'relative'}}>
           <Toolbar>
