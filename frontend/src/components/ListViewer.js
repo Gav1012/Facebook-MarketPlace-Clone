@@ -1,7 +1,7 @@
 // import {TextField} from '@mui/material';
 // import CategoryContext from './CategoryContext';
 import Dialog from '@mui/material/Dialog';
-// import Button from '@mui/material/Button';
+import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import {alpha} from '@material-ui/core/styles/colorManipulator';
 import CloseIcon from '@mui/icons-material/Close';
@@ -79,6 +79,10 @@ function ListViewer() {
             <div style={{height: 'auto', fontSize: '13pt',
               marginLeft: '15px'}}
             >{popupData[0].listings.price}</div>
+            <Button style={{backgroundColor: 'lightblue', marginLeft: '20px',
+              marginRight: '20px', marginTop: '10px', marginBottom: '5px'}}>
+              Reply to poster
+            </Button>
             <Divider style={{marginTop: '10px', marginBottom: '10px'}}
               variant='middle'/>
             <div style={{height: 'auto', fontSize: '15pt',
