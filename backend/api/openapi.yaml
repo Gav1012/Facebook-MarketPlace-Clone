@@ -56,6 +56,37 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Listings'
+    post:
+      description: Post a listing
+      security: []
+      requestBody:
+        description: listing to add
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/NewListing'
+      parameters:
+      - name: memberID
+        in: query
+        description: ID of member posting
+        required: true
+        schema:
+          type: string
+          format: uuid
+      responses:
+        201:
+          description: Posted successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Listings'
+        400:
+          description: invalid parameter
+        404:
+          description: Member does not exist
+
+
   /listings/category:
     get:
       description: Gets all categories
@@ -172,6 +203,41 @@ components:
         - parent
         - name
         - id
+    NewListing:
+      properties:
+        category:
+          type: string
+        filter:
+          type: string
+        listing:
+          type: object
+          properties:
+            title:
+              type: string
+            content:
+              type: string
+            summary:
+              type: string
+            price:
+              type: string
+            images:
+              type: array
+              items:
+                type: object
+                properties:
+                  link:
+                    type: string
+                    format: url
+                required:
+                - link
+          required:
+            - title
+            - content
+            - images
+      required:
+        - filter
+        - listing              
+
     Listings:
       properties:
         id:

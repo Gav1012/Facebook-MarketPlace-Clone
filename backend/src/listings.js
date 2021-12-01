@@ -49,3 +49,13 @@ exports.post = async (req, res) => {
   const newInsert = await db.insertMember(req.body);
   res.status(201).send(newInsert);
 }
+
+exports.postListings = async (req, res) => {
+  console.log(req.qeu)
+  const listing = await db.postListings(req.body, req.query.memberID);
+  if (listing) {
+    res.status(200).send(listing);
+  } else {
+    res.status(404).send();
+  }
+}
