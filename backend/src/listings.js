@@ -1,4 +1,5 @@
 const db = require('./db');
+const bcrypt = require('bcrypt');
 
 exports.getListings = async (req, res) => {
     //  this function can take a search query later 
@@ -36,7 +37,6 @@ exports.getCategories = async (req, res) => {
 
 exports.getMembers = async (req, res) => {
   // checks email from input and search for user with email
-
   const members = await db.selectMembers(req.query.user, req.query.id);
   // if the member is found
   if (members) {
@@ -45,3 +45,11 @@ exports.getMembers = async (req, res) => {
     res.status(404).send();
   }
 };
+
+exports.post = async (req, res) => {
+  // hashes user's password
+  req.body.password = await bcrypt.hash(req.body.password, 1);
+  // sends data to database
+  const newInsert = await db.insertMember(req.body);
+  res.status(201).send(newInsert);
+}

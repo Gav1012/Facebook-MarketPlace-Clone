@@ -138,6 +138,24 @@ paths:
                 $ref: '#/components/schemas/Members'
         404:
           description: Users not found
+    post:
+      description: add user to database
+      requestBody:
+        description: inputted user data
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UserResponse'
+      responses:
+        201:
+          description: Successfully added user
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Members'
+        400:
+          description: Unexpected Values
 
 components:
   schemas:
@@ -179,6 +197,17 @@ components:
           format: uuid
         member:
           type: object
+          properties:
+            name:
+              type: string
+            email:
+              type: string
+            password:
+              type: string
+          required:
+            - name
+            - email
+            - password
       required:
         - id
         - member
@@ -197,6 +226,21 @@ components:
           type: string
         accessToken:
           type: string
+    UserResponse:
+      type: object
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - name
+        - email
+        - password
+      additionalProperties: false
+
   securitySchemes:
     bearerAuth:
       type: http

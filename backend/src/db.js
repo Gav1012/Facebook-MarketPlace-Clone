@@ -126,3 +126,15 @@ exports.selectMembers = async (email, id) => {
   }
   return rows;
 }
+
+exports.insertMember = async (member) => {
+  console.log('hello from insert');
+  console.log(member);
+  const insert = ` insert into member(member) values ($1) returning id`;
+  const query = {
+    text: insert,
+    values: [member],
+  };
+  const {rows} = await pool.query(query);
+  return {id: rows[0].id, member: member};
+};

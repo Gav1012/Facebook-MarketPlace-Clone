@@ -35,6 +35,7 @@ app.get('/v0/listings', listings.getListings);
 app.get('/v0/listings/category', listings.getCategories);
 app.get('/v0/listings/:category', listings.getCatListings);
 app.get('/v0/member', listings.getMembers);
+app.post('/v0/member', listings.post);
 
 app.use((err, req, res, next) => {
   res.status(err.status).json({
