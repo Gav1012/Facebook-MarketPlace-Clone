@@ -39,7 +39,6 @@ afterAll(() => server.close());
 
     test('listgrid render', async () => {
         render(
-        
           <CategoryContext.Provider value={{currCat, dimensions, currSub, dimensions, search}}>
         <ListGrid setListings={setListings} listings={listings} />
         
@@ -54,4 +53,44 @@ afterAll(() => server.close());
 
       
       });
+
+      test('Handles Server Error', async () => {
+        server.use(
+          rest.get(listing, (req, res, ctx) => {
+            return res(ctx.status(404))
+          }),
+        )
+        render(
+            <CategoryContext.Provider value={{currCat, dimensions, currSub, dimensions, search}}>
+          <ListGrid setListings={setListings} listings={listings} />
+          
+          </CategoryContext.Provider>
+          );
+          await waitFor(() => {
+            expect(screen.getByText('gold necklace'));
+            fireEvent.click(screen.getByText('gold necklace'));
+          })
+        await new Promise((r) => setTimeout(r, 2000));
+      });
+
+      test('Handles Server Error2', async () => {
+        server.use(
+          rest.get(listingv, (req, res, ctx) => {
+            return res(ctx.status(404))
+          }),
+        )
+        render(
+            <CategoryContext.Provider value={{currCat, dimensions, currSub, dimensions, search}}>
+          <ListGrid setListings={setListings} listings={listings} />
+          
+          </CategoryContext.Provider>
+          );
+          await waitFor(() => {
+            expect(screen.getByText('gold necklace'));
+            fireEvent.click(screen.getByText('gold necklace'));
+          })
+        await new Promise((r) => setTimeout(r, 2000));
+      });
+      
+      
       
