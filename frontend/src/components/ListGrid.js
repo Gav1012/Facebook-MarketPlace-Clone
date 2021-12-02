@@ -6,15 +6,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import {CardActionArea} from '@mui/material';
 import CategoryContext from './CategoryContext';
-// import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
-// import Box from '@mui/material/Box';
-// import {alpha} from '@material-ui/core/styles/colorManipulator';
-// import CloseIcon from '@mui/icons-material/Close';
-// import IconButton from '@mui/material/IconButton';
-// import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-// import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-// import List from '@mui/material/List';
 import ListViewer from './ListViewer';
 import ListingContext from './ListingContext';
 
@@ -23,16 +15,14 @@ const fetchListings = (setListings, currCat, currSub, search) => {
   // original string to grab all listings
   let toBeFetched = '/v0/listings';
   // if a category has been clicked, only that category is viewed
-
-  if (currCat && currSub === undefined) {
+  if (currCat && !currSub) {
     toBeFetched = '/v0/listings/' + currCat;
   }
-
   if (currCat && currSub) {
     toBeFetched = '/v0/listings/' + currCat + '?sub=' + currSub;
   }
   // if search bar is used, includes it in search process
-  if (search.length > 0) {
+  if (search) {
     toBeFetched += '?search=' + search;
   }
   // fetches the listings based on above modifications
@@ -42,15 +32,15 @@ const fetchListings = (setListings, currCat, currSub, search) => {
       'Content-Type': 'application/json',
     },
   })
-    .then((response) => {
-      if (!response.ok) {
-        throw response;
-      }
-      return response.json();
-    })
-    .then((json) => {
-      setListings(json);
-    });
+  .then((response) => {
+    if (!response.ok) {
+      throw response;
+    }
+    return response.json();
+  })
+  .then((json) => {
+    setListings(json);
+  });
 };
 
 /**
@@ -120,8 +110,8 @@ function ListGrid() {
       </ListingContext.Provider> : null}
       <Grid container item spacing={2}>
         {listings.map((listing) => (
-          <Grid item sx={{ml: 1}} key={listing.id}>
-            <CardActionArea key={listing.id} onClick={
+          <Grid item sx={{ml: 1}} key={listing.id} aria-label={listing.title}>
+            <CardActionArea id={listing.title} key={listing.id} onClick={
               () => {
                 fetchItem(listing.id);
                 imageBar(listing.listings.images.length);
