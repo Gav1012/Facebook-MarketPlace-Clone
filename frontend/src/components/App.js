@@ -10,6 +10,7 @@ import BreadCrumbs from './BreadCrumbs';
 import Filter from './Filter';
 import Login from './Login';
 import NewAccount from './NewAccount';
+import CreateListing from './CreateListing';
 
 /**
  * Simple component with no state.
@@ -67,6 +68,15 @@ function App() {
         <Route path='/login'>
           <Login />
         </Route>
+        <CategoryContext.Provider value={
+            {currCat, setCategory, currSub, setSub,
+              search, setSearch, dimensions, catList, setCatList,
+              subList, setSubList, currFilter, setFilter,
+              filList, setFilList}}>
+        <Route path='/CreateListing'>
+          <CreateListing/>
+        </Route>
+        </CategoryContext.Provider>
         <Route path='/newaccount'>
           <NewAccount />
         </Route>
