@@ -34,13 +34,14 @@ afterAll(() => server.close());
     const currCat = undefined;
     const currSub = undefined;
     const search = ' ';
+    const imageNo = 0;
     const dimensions = {width: 500};
 
 
     test('listgrid render', async () => {
         render(
         
-          <CategoryContext.Provider value={{currCat, dimensions, currSub, dimensions, search}}>
+          <CategoryContext.Provider value={{currCat, dimensions, currSub, dimensions, search, imageNo}}>
         <ListGrid setListings={setListings} listings={listings} />
         
         </CategoryContext.Provider>
@@ -52,6 +53,30 @@ afterAll(() => server.close());
         await waitFor(() => {
             expect(screen.getByText('1'));
             fireEvent.click(screen.getByText('1'));
+          })
+        await waitFor(() => {
+            expect(screen.getByTitle('leftButton'));
+            fireEvent.click(screen.getByTitle('leftButton'));
+          })
+          await waitFor(() => {
+            expect(screen.getByTitle('leftButton'));
+            fireEvent.click(screen.getByTitle('leftButton'));
+          })
+        await waitFor(() => {
+            expect(screen.getByTitle('rightButton'));
+            fireEvent.click(screen.getByTitle('rightButton'));
+          })
+          await waitFor(() => {
+            expect(screen.getByTitle('rightButton'));
+            fireEvent.click(screen.getByTitle('rightButton'));
+          })
+          await waitFor(() => {
+            expect(screen.getByTitle('rightButton'));
+            fireEvent.click(screen.getByTitle('rightButton'));
+          })
+          await waitFor(() => {
+            expect(screen.getByTitle('closeButton'));
+            fireEvent.click(screen.getByTitle('closeButton'));
           })
           
         await new Promise((r) => setTimeout(r, 2000));

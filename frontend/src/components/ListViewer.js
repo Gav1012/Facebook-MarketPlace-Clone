@@ -55,6 +55,8 @@ function ListViewer() {
             <div style={{textAlign: 'center', marginTop: '10px'}} sx={{m: 0.5}}>
               <IconButton onClick={() => shiftImageLeft(
                 popupData[0].listings.images.length)}
+                key='leftButton'
+                title='leftButton'
               style={{minWidth: '7px', width: '35px',
                 backgroundColor: 'black', marginRight: '5px',
                 borderRadius: '50%', opacity: '0.5', color: 'white'}}>
@@ -63,6 +65,8 @@ function ListViewer() {
               {rowState}
               <IconButton onClick={() => shiftImageRight(
                 popupData[0].listings.images.length)}
+                key='rightButton'
+                title='rightButton'
               style={{minWidth: '7px', width: '35px',
                 backgroundColor: 'black',
                 borderRadius: '50%', opacity: '0.5', color: 'white'}}>
@@ -95,6 +99,7 @@ function ListViewer() {
           }}
         style={{right: '10px', top: '10px', position: 'fixed',
           color: 'white', backgroundColor: alpha('#000', 0.5)}}
+        title="closeButton"
         >
           <CloseIcon />
         </IconButton>
