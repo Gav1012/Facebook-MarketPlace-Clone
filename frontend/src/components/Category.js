@@ -18,6 +18,9 @@ import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
 import SportsCricketIcon from '@mui/icons-material/SportsCricket';
 import DevicesOtherIcon from '@mui/icons-material/DevicesOther';
 import ListItemIcon from '@mui/material/ListItemIcon';
+import Button from '@mui/material/Button';
+// import CreateListing from './CreateListing';
+// import createListingContext from './CreateListingContext';
 
 // grabs all the listings and specific ones depending on other inputs
 
@@ -38,6 +41,8 @@ const fetchCategory = (setCatList) => {
     })
     .then((json) => {
       setCatList(json);
+      console.log('cat');
+      console.log(json);
     });
 };
 const fetchSub = (setSubList, currCat) => {
@@ -59,6 +64,10 @@ const fetchSub = (setSubList, currCat) => {
         setSubList(json);
       });
   }
+};
+
+const createListing = () => {
+  console.log('press');
 };
 
 /**
@@ -112,8 +121,12 @@ function Category({setSearch}) {
             </Box>:
             <Box sx={{my: 1}}
               style={dimensions.width > 599? {display: 'none'} : {}}>
-              <Chip sx={{mb: .25, mr: 1}} label='Sell'
-                onClick={()=>setCategory(undefined)} />
+              <Button sx={{mb: .25, mr: 1}} label='Sell' href='/CreateListing'
+                style={{backgroundColor: '#00000014', borderRadius: '35%',
+                height: '33px', textTransform: 'none', color: 'Black'}}
+                onClick={()=>createListing()}>
+              Sell
+              </Button>
               <Chip sx={{mb: .25}} label='Categories'
                 onClick={handleClickOpen} />
               {dimensions.width < 600?
