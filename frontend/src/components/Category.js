@@ -94,6 +94,9 @@ function Category() {
   React.useEffect(() => {
     fetchSub(setSubList, currCat);
   }, [setSubList, currCat]);
+  const createListing = () => {
+    console.log('press');
+  };
   return (
     <Container>
       <Box>
