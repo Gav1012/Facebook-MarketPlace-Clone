@@ -13,16 +13,10 @@ import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
-import CheckroomIcon from '@mui/icons-material/Checkroom';
-import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
-import SportsCricketIcon from '@mui/icons-material/SportsCricket';
-import DevicesOtherIcon from '@mui/icons-material/DevicesOther';
-import ListItemIcon from '@mui/material/ListItemIcon';
-
 // grabs all the listings and specific ones depending on other inputs
-
-
-const fetchCategory = (setCatList) => {
+const fetchCategory = (setCatList, currCat) => {
+  if (currCat === undefined) {
+  console.log('Were inside FetchCategory');
   // fetches the listings based on above modifications
   fetch('/v0/listings/category', {
     method: 'get',
@@ -31,6 +25,8 @@ const fetchCategory = (setCatList) => {
     },
   })
     .then((response) => {
+      console.log('Response for fetchCategory Given');
+      console.log(response);
       if (!response.ok) {
         throw response;
       }
@@ -40,8 +36,10 @@ const fetchCategory = (setCatList) => {
       setCatList(json);
     });
 };
+};
 const fetchSub = (setSubList, currCat) => {
   if (currCat) {
+  console.log('Were inside fetchSub');
     // fetches the listings based on above modifications
     fetch('/v0/listings/category?sub=' + currCat, {
       method: 'get',
@@ -50,6 +48,8 @@ const fetchSub = (setSubList, currCat) => {
       },
     })
       .then((response) => {
+        console.log('Response for fetchSub Given');
+        console.log(response);
         if (!response.ok) {
           throw response;
         }
@@ -58,13 +58,14 @@ const fetchSub = (setSubList, currCat) => {
       .then((json) => {
         setSubList(json);
       });
-  }
 };
-
+};
 /**
  * @return {object}
  */
-function Category({setSearch}) {
+function Category() {
+  const {setSearch} = useContext(CategoryContext);
+  const {setFilter} = useContext(CategoryContext);
   // uses context to set the category to be viewed when clicked
   const {currCat, setCategory} = useContext(CategoryContext);
   // grabs context for setting the subcategories
@@ -79,15 +80,13 @@ function Category({setSearch}) {
   const [open, setOpen] = React.useState(false);
   // handles when listing changes
   const handleClickOpen = () => {
-    if (dimensions.width < 600) {
       setOpen(true);
-    }
   };
   const handleClose = () => {
     setOpen(false);
   };
   React.useEffect(() => {
-    fetchCategory(setCatList);
+    fetchCategory(setCatList, currCat);
   }, [setCatList]);
   React.useEffect(() => {
     fetchSub(setSubList, currCat);
@@ -101,6 +100,7 @@ function Category({setSearch}) {
               {subList.map((sub) => (
                 <Chip
                   sx={{mb: .25, mr: 1}}
+                  aria-label={sub.names}
                   label={sub.names}
                   key={sub.names}
                   onClick={()=>{
@@ -136,15 +136,10 @@ function Category({setSearch}) {
                           setCategory(cat.names);
                           setSub(undefined);
                           setSearch('');
+                          setFilter(undefined);
                           handleClose();
                         }}
                       >
-                        <ListItemIcon>
-                          {index === 0 ? <DirectionsCarIcon/> : ''}
-                          {index === 1 ? <CheckroomIcon/>: ''}
-                          {index === 2 ? <DevicesOtherIcon/>: ''}
-                          {index === 3 ? <SportsCricketIcon/>: ''}
-                        </ListItemIcon>
                         <ListItemText primary={cat.names} />
                       </ListItem>))}
                   </List>
