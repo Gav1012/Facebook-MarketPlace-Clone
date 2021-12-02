@@ -94,9 +94,6 @@ function Category() {
   React.useEffect(() => {
     fetchSub(setSubList, currCat);
   }, [setSubList, currCat]);
-  const createListing = () => {
-    console.log('press');
-  };
   return (
     <Container>
       <Box>
@@ -121,7 +118,7 @@ function Category() {
               <Button sx={{mb: .25, mr: 1}} label='Sell' href='/CreateListing'
                 style={{backgroundColor: '#00000014', borderRadius: '35%',
                 height: '33px', textTransform: 'none', color: 'Black'}}
-                onClick={()=>createListing()}>
+              >
               Sell
               </Button>
               <Chip sx={{mb: .25}} label='Categories'

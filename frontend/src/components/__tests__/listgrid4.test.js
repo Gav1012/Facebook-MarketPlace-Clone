@@ -17,7 +17,7 @@ const server = setupServer(
   rest.get(listingv, (req, res, ctx) => {
     const subs = req.url.searchParams.getAll('sub')
     const fils = req.url.searchParams.getAll('fil')
-        return res(ctx.json([{id: '91bc30cf-186e-4de8-a4c1-37a1449059c7',categoryid: '006915ba-51c1-4bb5-bcfe-5f45e59a5c3a',memberid: 'ff761662-3505-4fcf-b44d-e7307bb586c6',filtertype: 'Womens',listings: {price: '$582',title: 'gold necklace',images: [{link: 'https://slimages.macysassets.com/is/image/MCY/products/4/optimized/884154_fpx.tif?op_sharpen=1&wid=700&hei=855&fit=fit,1'}],content: 'it is made out of gold',comments: [],createDate: 'November 23, 2021'}}]))
+        return res(ctx.json([{id: '91bc30cf-186e-4de8-a4c1-37a1449059c7',categoryid: '006915ba-51c1-4bb5-bcfe-5f45e59a5c3a',memberid: 'ff761662-3505-4fcf-b44d-e7307bb586c6',filtertype: 'Womens',listings: {price: '$582',title: 'jelly fish',images: [{link: 'https://slimages.macysassets.com/is/image/MCY/products/4/optimized/884154_fpx.tif?op_sharpen=1&wid=700&hei=855&fit=fit,1'}],content: 'it is made out of gold',comments: [],createDate: 'November 23, 2021'}}]))
   }),
   rest.get(listing, (req, res, ctx) => {
     const subs = req.url.searchParams.getAll('sub')
@@ -37,7 +37,7 @@ afterAll(() => server.close());
     const dimensions = {width: 500};
 
 
-    test('listgrid render', async () => {
+    test('listgrid render4', async () => {
         render(
           <CategoryContext.Provider value={{currCat, dimensions, currSub, dimensions, search}}>
         <ListGrid setListings={setListings} listings={listings} />
@@ -45,8 +45,8 @@ afterAll(() => server.close());
         </CategoryContext.Provider>
         );
         await waitFor(() => {
-            expect(screen.getByText('gold necklace'));
-            fireEvent.click(screen.getByText('gold necklace'));
+            expect(screen.getByText('jelly fish'));
+            fireEvent.click(screen.getByText('jelly fish'));
           })
           
         await new Promise((r) => setTimeout(r, 2000));
@@ -54,7 +54,7 @@ afterAll(() => server.close());
       
       });
 
-      test('Handles Server Error', async () => {
+      test('List Grid Handles Server Error', async () => {
         server.use(
           rest.get(listing, (req, res, ctx) => {
             return res(ctx.status(404))
@@ -67,13 +67,14 @@ afterAll(() => server.close());
           </CategoryContext.Provider>
           );
           await waitFor(() => {
-            expect(screen.getByText('gold necklace'));
-            fireEvent.click(screen.getByText('gold necklace'));
+            expect(screen.getAllByText('jelly fish'));
+            fireEvent.click(screen.getByText('jelly fish'));
+
           })
         await new Promise((r) => setTimeout(r, 2000));
       });
 
-      test('Handles Server Error2', async () => {
+      test('Handles Server Error2 Listgrid4', async () => {
         server.use(
           rest.get(listingv, (req, res, ctx) => {
             return res(ctx.status(404))
@@ -91,6 +92,5 @@ afterAll(() => server.close());
           })
         await new Promise((r) => setTimeout(r, 2000));
       });
-      
-      
+
       
