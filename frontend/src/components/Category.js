@@ -13,6 +13,7 @@ import Typography from '@mui/material/Typography';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
+import Button from '@mui/material/Button';
 // grabs all the listings and specific ones depending on other inputs
 const fetchCategory = (setCatList, currCat) => {
   if (currCat === undefined) {
