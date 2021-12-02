@@ -58,7 +58,8 @@ paths:
                 $ref: '#/components/schemas/Listings'
     post:
       description: Post a listing
-      security: []
+      security:
+        - bearerAuth: []
       requestBody:
         description: listing to add
         required: true
@@ -66,14 +67,6 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/NewListing'
-      parameters:
-      - name: memberID
-        in: query
-        description: ID of member posting
-        required: true
-        schema:
-          type: string
-          format: uuid
       responses:
         201:
           description: Posted successfully
@@ -221,7 +214,6 @@ components:
                 properties:
                   link:
                     type: string
-                    format: url
                 required:
                 - link
           required:
