@@ -191,18 +191,12 @@ paths:
 components:
   schemas:
     Categories:
+      type: array
       properties:
-        parent:
+        names:
           type: string
-        name:
-          type: string
-        id:
-          type: string
-          format: uuid
       required:
-        - parent
-        - name
-        - id
+        - names
     NewListing:
       properties:
         category:
