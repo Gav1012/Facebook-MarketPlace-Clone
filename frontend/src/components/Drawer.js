@@ -6,17 +6,12 @@ import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
 import Divider from '@mui/material/Divider';
 import ListItem from '@mui/material/ListItem';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import Typography from '@mui/material/Typography';
 import ListItemText from '@mui/material/ListItemText';
 import CategoryContext from './CategoryContext';
 import Filter from './Filter';
 import BreadCrumbs from './BreadCrumbs';
 import Search from './Search';
-import CheckroomIcon from '@mui/icons-material/Checkroom';
-import DirectionsCarIcon from '@mui/icons-material/DirectionsCar';
-import SportsCricketIcon from '@mui/icons-material/SportsCricket';
-import DevicesOtherIcon from '@mui/icons-material/DevicesOther';
 import {useContext} from 'react';
 const drawerWidth = 500;
 /**
@@ -24,8 +19,7 @@ const drawerWidth = 500;
  */
 export default function PermanentDrawerLeft() {
   const {currCat, setCategory} = useContext(CategoryContext);
-  const {dimensions} = useContext(CategoryContext);
-  const {currSub, setSub} = useContext(CategoryContext);
+  const {setSub} = useContext(CategoryContext);
   const {catList} = useContext(CategoryContext);
   const {subList} = useContext(CategoryContext);
   const {setFilter} = useContext(CategoryContext);
@@ -48,21 +42,17 @@ export default function PermanentDrawerLeft() {
       >
         <Toolbar />
         <div style={{margin: 15}} >
-          {dimensions.width > 599? <BreadCrumbs /> : ''}
-          {currSub ? <Typography variant="h4" gutterBottom component="div">
-            {currSub}
-          </Typography> : ''}
-          {currCat && !currSub ?
+        <BreadCrumbs />
+          {currCat ?
             <Typography variant="h4" gutterBottom component="div">
               {currCat}
-            </Typography> : ''}
+            </Typography> :
+              <Typography variant="h4" gutterBottom component="div">
+              Marketplace
+            </Typography> }
           {search.length > 0 ?
             <Typography variant="h4" gutterBottom component="div">
               Search results
-            </Typography> : ''}
-          {search.length === 0 && !currSub && !currCat ?
-            <Typography variant="h4" gutterBottom component="div">
-              Marketplace
             </Typography> : ''}
         </div>
         <Divider />
@@ -93,12 +83,6 @@ export default function PermanentDrawerLeft() {
                 setSearch('');
               }}
             >
-              <ListItemIcon>
-                {index === 0 ? <DirectionsCarIcon/> : ''}
-                {index === 1 ? <CheckroomIcon/>: ''}
-                {index === 2 ? <DevicesOtherIcon/>: ''}
-                {index === 3 ? <SportsCricketIcon/>: ''}
-              </ListItemIcon>
               <ListItemText primary={cat.names} />
             </ListItem>))}
         </List>

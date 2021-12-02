@@ -45,17 +45,10 @@ export default function Filter() {
   const {dimensions} = useContext(CategoryContext);
   const {setSearch} = useContext(CategoryContext);
  //  const {setSub} = useContext(CategoryContext);
-  const {currFilter, setFilter} = useContext(CategoryContext);
+  const {setFilter} = useContext(CategoryContext);
  //  const {subList} = useContext(CategoryContext);
   const {filList, setFilList} = useContext(CategoryContext);
   const [open, setOpen] = useState(false);
-  const handleChange = (event) => {
-    setFilter(event.target.value);
-  };
-  console.log('were inside filter');
-  console.log(currFilter);
-  console.log(handleChange);
-
   const temp = [];
   let filterName = '';
   if (currCat && filList[0]) {
@@ -68,9 +61,7 @@ export default function Filter() {
   }
   console.log(temp);
   const handleClickOpen = () => {
-    if (dimensions.width < 600) {
       setOpen(true);
-    }
   };
   const handleClose = () => {
     setOpen(false);

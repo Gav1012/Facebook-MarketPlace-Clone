@@ -12,6 +12,7 @@ export default function CustomSeparator() {
   const {dimensions} = useContext(CategoryContext);
   const {currSub, setSub} = useContext(CategoryContext);
   const {setSearch} = useContext(CategoryContext);
+  const {setFilter} = useContext(CategoryContext);
   return (
     <div>
       <Stack spacing={1}>
@@ -21,6 +22,7 @@ export default function CustomSeparator() {
               onClick={()=>{
                 setCategory(undefined);
                 setSub(undefined);
+                setFilter(undefined);
                 setSearch('');
               }}
             >
