@@ -38,17 +38,3 @@ const search = '';
     expect(screen.getByText('gold necklace'));
   })
 });
-
-// test('Handle Server Error', async () => {
-//   server.use(
-//     rest.get(URL, (req, res, ctx) => {
-//       return res(ctx.status(404));
-//     }),
-//   )
-//   render(
-//     <CategoryContext.Provider value={{
-//       currCat, currSub, search}}>
-//       <ListGrid />
-//     </CategoryContext.Provider>
-//   );
-// })
