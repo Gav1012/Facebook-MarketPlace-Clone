@@ -26,17 +26,17 @@ const fetchFilter = (setFilList, currCat) => {
         'Content-Type': 'application/json',
       },
     })
-    .then((response) => {
-      if (!response.ok) {
-        throw response;
-      }
-      return response.json();
-    })
-    .then((json) => {
-      setFilList(json);
-    })
-    .catch(() => {
-    });
+      .then((response) => {
+        if (!response.ok) {
+          throw response;
+        }
+        return response.json();
+      })
+      .then((json) => {
+        setFilList(json);
+      })
+      .catch(() => {
+      });
   }
 };
 /**
@@ -46,9 +46,9 @@ export default function Filter() {
   const {currCat} = useContext(CategoryContext);
   const {dimensions} = useContext(CategoryContext);
   const {setSearch} = useContext(CategoryContext);
- //  const {setSub} = useContext(CategoryContext);
+  // const {setSub} = useContext(CategoryContext);
   const {setFilter} = useContext(CategoryContext);
- //  const {subList} = useContext(CategoryContext);
+  // const {subList} = useContext(CategoryContext);
   const {filList, setFilList} = useContext(CategoryContext);
   const [open, setOpen] = useState(false);
   const temp = [];
@@ -63,7 +63,7 @@ export default function Filter() {
   }
   // console.log(temp);
   const handleClickOpen = () => {
-      setOpen(true);
+    setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);

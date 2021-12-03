@@ -19,28 +19,28 @@ const fetchCategory = (setCatList, currCat) => {
   if (currCat === undefined) {
   // console.log('Were inside FetchCategory');
   // fetches the listings based on above modifications
-  fetch('/v0/listings/category', {
-    method: 'get',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
-    .then((response) => {
-      // console.log('Response for fetchCategory Given');
-      // console.log(response);
-      if (!response.ok) {
-        throw response;
-      }
-      return response.json();
+    fetch('/v0/listings/category', {
+      method: 'get',
+      headers: {
+        'Content-Type': 'application/json',
+      },
     })
-    .then((json) => {
-      setCatList(json);
-      // console.log('cat');
-      // console.log(json);
-    })
-    .catch(() => {
-    });
-};
+      .then((response) => {
+        // console.log('Response for fetchCategory Given');
+        // console.log(response);
+        if (!response.ok) {
+          throw response;
+        }
+        return response.json();
+      })
+      .then((json) => {
+        setCatList(json);
+        // console.log('cat');
+        // console.log(json);
+      })
+      .catch(() => {
+      });
+  };
 };
 const fetchSub = (setSubList, currCat) => {
   if (currCat) {
@@ -87,14 +87,14 @@ function Category() {
   const [open, setOpen] = React.useState(false);
   // handles when listing changes
   const handleClickOpen = () => {
-      setOpen(true);
+    setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
   React.useEffect(() => {
     fetchCategory(setCatList, currCat);
-  }, [setCatList]);
+  }, [setCatList, currCat]);
   React.useEffect(() => {
     fetchSub(setSubList, currCat);
   }, [setSubList, currCat]);
@@ -121,7 +121,7 @@ function Category() {
               style={dimensions.width > 599? {display: 'none'} : {}}>
               <Button sx={{mb: .25, mr: 1}} label='Sell' href='/CreateListing'
                 style={{backgroundColor: '#00000014', borderRadius: '35%',
-                height: '33px', textTransform: 'none', color: 'Black'}}
+                  height: '33px', textTransform: 'none', color: 'Black'}}
               >
               Sell
               </Button>

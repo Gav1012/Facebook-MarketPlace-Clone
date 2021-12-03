@@ -32,17 +32,17 @@ const fetchListings = (setListings, currCat, currSub, search) => {
       'Content-Type': 'application/json',
     },
   })
-  .then((response) => {
-    if (!response.ok) {
-      throw response;
-    }
-    return response.json();
-  })
-  .then((json) => {
-    setListings(json);
-  })
-  .catch(() => {
-  });
+    .then((response) => {
+      if (!response.ok) {
+        throw response;
+      }
+      return response.json();
+    })
+    .then((json) => {
+      setListings(json);
+    })
+    .catch(() => {
+    });
 };
 
 /**
@@ -67,19 +67,19 @@ function ListGrid() {
         'Content-Type': 'application/json',
       },
     })
-    .then((response) => {
-      if (!response.ok) {
-        throw response;
-      }
-      return response.json();
-    })
-    .then((json) => {
-      setPopupData(json);
-      // console.log('popupdata');
-      // console.log(popupData);
-    })
-    .catch(() => {
-    });
+      .then((response) => {
+        if (!response.ok) {
+          throw response;
+        }
+        return response.json();
+      })
+      .then((json) => {
+        setPopupData(json);
+        // console.log('popupdata');
+        // console.log(popupData);
+      })
+      .catch(() => {
+      });
   };
 
   let rows = [];
@@ -106,10 +106,10 @@ function ListGrid() {
   return (
     <Grid container spacing={3}>
       {popupData ?
-      <ListingContext.Provider value = {{setPopupData, popupData, setImage,
-        imageNo, setRowState, rowState}}>
-        <ListViewer/>
-      </ListingContext.Provider> : null}
+        <ListingContext.Provider value = {{setPopupData, popupData, setImage,
+          imageNo, setRowState, rowState}}>
+          <ListViewer/>
+        </ListingContext.Provider> : null}
       <Grid container item spacing={2}>
         {listings.map((listing) => (
           <Grid item sx={{ml: 1}} key={listing.id} aria-label={listing.title}>

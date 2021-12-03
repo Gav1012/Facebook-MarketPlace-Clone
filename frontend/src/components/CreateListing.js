@@ -236,11 +236,11 @@ function CreateListing() {
 
   return (
     <div>
-    <AppBar sx={{position: 'fixed'}}>
+      <AppBar sx={{position: 'fixed'}}>
         <Toolbar>
           <Typography variant='h6'>Login Screen</Typography>
           <IconButton sx={{marginLeft: 'auto'}}
-          onClick={()=>history.push('/')}>
+            onClick={()=>history.push('/')}>
             <CloseIcon />
           </IconButton>
         </Toolbar>
@@ -267,8 +267,8 @@ function CreateListing() {
         />
         <InputLabel htmlFor="grouped-native-select"
           style={{}}>Category</InputLabel>
-          {/* <div>x</div> */}
-          {/* {// console.log('x')}
+        {/* <div>x</div> */}
+        {/* {// console.log('x')}
           {// console.log(cList)} */}
         {/* {loading && cList.map((test) => {
           return (<div>{'x'}{// console.log(test)}
@@ -313,8 +313,8 @@ function CreateListing() {
               {console.log(cat['names'])}
               {subSelect(cat['names'])}
               {/* {// console.log(cat)} */}
-              {/* <option value={'test'}>test</option> */}
-            {/* </optgroup>
+          {/* <option value={'test'}>test</option> */}
+          {/* </optgroup>
             );
           })} */}
           {/* <optgroup label="Vehicles">
@@ -334,7 +334,7 @@ function CreateListing() {
           name='summary'
           onChange={handleInputChange}
           style={{width: '295px', borderColor: 'lightgrey',
-          borderRadius: '1%', marginTop: '20px'}}
+            borderRadius: '1%', marginTop: '20px'}}
         />
         <TextField
           id='outlined-search'
@@ -350,7 +350,7 @@ function CreateListing() {
           name='images'
           onChange={handleInputChange}
           style={{width: '295px', borderColor: 'lightgrey',
-          borderRadius: '1%', marginTop: '20px'}}
+            borderRadius: '1%', marginTop: '20px'}}
         />
         <TextField
           id='outlined-search'
@@ -392,7 +392,7 @@ function CreateListing() {
           New User
         </Button> */}
       </Box>
-      </div>
+    </div>
   );
 }
 

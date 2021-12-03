@@ -69,13 +69,13 @@ function App() {
           <Login />
         </Route>
         <CategoryContext.Provider value={
-            {currCat, setCategory, currSub, setSub,
-              search, setSearch, dimensions, catList, setCatList,
-              subList, setSubList, currFilter, setFilter,
-              filList, setFilList}}>
-        <Route path='/CreateListing'>
-          <CreateListing/>
-        </Route>
+          {currCat, setCategory, currSub, setSub,
+            search, setSearch, dimensions, catList, setCatList,
+            subList, setSubList, currFilter, setFilter,
+            filList, setFilList}}>
+          <Route path='/CreateListing'>
+            <CreateListing/>
+          </Route>
         </CategoryContext.Provider>
         <Route path='/newaccount'>
           <NewAccount />

@@ -21,10 +21,10 @@ export default function PermanentDrawerLeft() {
   const {currCat, setCategory} = useContext(CategoryContext);
   const {setSub} = useContext(CategoryContext);
   const {catList} = useContext(CategoryContext);
-  const {subList} = useContext(CategoryContext);
+  // const {subList} = useContext(CategoryContext);
   const {setFilter} = useContext(CategoryContext);
   const {search, setSearch} = useContext(CategoryContext);
-  console.log(subList);
+  // console.log(subList);
   return (
     <Box sx={{display: 'flex'}}>
       <CssBaseline />
@@ -42,12 +42,12 @@ export default function PermanentDrawerLeft() {
       >
         <Toolbar />
         <div style={{margin: 15}} >
-        <BreadCrumbs />
+          <BreadCrumbs />
           {currCat ?
             <Typography variant="h4" gutterBottom component="div">
               {currCat}
             </Typography> :
-              <Typography variant="h4" gutterBottom component="div">
+            <Typography variant="h4" gutterBottom component="div">
               Marketplace
             </Typography> }
           {search.length > 0 ?
