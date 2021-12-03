@@ -17,14 +17,12 @@ import Divider from '@mui/material/Divider';
  * @return {x}
  */
 function ListViewer() {
-  // {setPopupData, popupData,
-  //   setImage, imageNo, setRowState, rowState}>
   const {popupData, setPopupData} = useContext(ListingContext);
   const {imageNo, setImage} = useContext(ListingContext);
   const {rowState, setRowState} = useContext(ListingContext);
-  console.log(setRowState);
-  console.log('popup');
-  console.log(popupData);
+  // console.log(setRowState);
+  // console.log('popup');
+  // console.log(popupData);
   const shiftImageLeft = (length) => {
     if (imageNo === 0) {
       setImage(length - 1);

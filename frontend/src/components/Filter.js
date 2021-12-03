@@ -26,15 +26,17 @@ const fetchFilter = (setFilList, currCat) => {
         'Content-Type': 'application/json',
       },
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw response;
-        }
-        return response.json();
-      })
-      .then((json) => {
-        setFilList(json);
-      });
+    .then((response) => {
+      if (!response.ok) {
+        throw response;
+      }
+      return response.json();
+    })
+    .then((json) => {
+      setFilList(json);
+    })
+    .catch(() => {
+    });
   }
 };
 /**
@@ -59,7 +61,7 @@ export default function Filter() {
     }
     filterName = filList[0].names;
   }
-  console.log(temp);
+  // console.log(temp);
   const handleClickOpen = () => {
       setOpen(true);
   };

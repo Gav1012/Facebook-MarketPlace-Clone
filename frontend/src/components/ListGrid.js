@@ -40,6 +40,8 @@ const fetchListings = (setListings, currCat, currSub, search) => {
   })
   .then((json) => {
     setListings(json);
+  })
+  .catch(() => {
   });
 };
 
@@ -65,17 +67,19 @@ function ListGrid() {
         'Content-Type': 'application/json',
       },
     })
-      .then((response) => {
-        if (!response.ok) {
-          throw response;
-        }
-        return response.json();
-      })
-      .then((json) => {
-        setPopupData(json);
-        console.log('popupdata');
-        console.log(popupData);
-      });
+    .then((response) => {
+      if (!response.ok) {
+        throw response;
+      }
+      return response.json();
+    })
+    .then((json) => {
+      setPopupData(json);
+      // console.log('popupdata');
+      // console.log(popupData);
+    })
+    .catch(() => {
+    });
   };
 
   let rows = [];
@@ -104,8 +108,6 @@ function ListGrid() {
       {popupData ?
       <ListingContext.Provider value = {{setPopupData, popupData, setImage,
         imageNo, setRowState, rowState}}>
-        {/* {console.log('lisgridpoupp')}
-        {console.log(popupData)} */}
         <ListViewer/>
       </ListingContext.Provider> : null}
       <Grid container item spacing={2}>

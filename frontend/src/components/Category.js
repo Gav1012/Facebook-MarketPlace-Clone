@@ -17,7 +17,7 @@ import Button from '@mui/material/Button';
 // grabs all the listings and specific ones depending on other inputs
 const fetchCategory = (setCatList, currCat) => {
   if (currCat === undefined) {
-  console.log('Were inside FetchCategory');
+  // console.log('Were inside FetchCategory');
   // fetches the listings based on above modifications
   fetch('/v0/listings/category', {
     method: 'get',
@@ -26,8 +26,8 @@ const fetchCategory = (setCatList, currCat) => {
     },
   })
     .then((response) => {
-      console.log('Response for fetchCategory Given');
-      console.log(response);
+      // console.log('Response for fetchCategory Given');
+      // console.log(response);
       if (!response.ok) {
         throw response;
       }
@@ -35,14 +35,16 @@ const fetchCategory = (setCatList, currCat) => {
     })
     .then((json) => {
       setCatList(json);
-      console.log('cat');
-      console.log(json);
+      // console.log('cat');
+      // console.log(json);
+    })
+    .catch(() => {
     });
 };
 };
 const fetchSub = (setSubList, currCat) => {
   if (currCat) {
-  console.log('Were inside fetchSub');
+  // console.log('Were inside fetchSub');
     // fetches the listings based on above modifications
     fetch('/v0/listings/category?sub=' + currCat, {
       method: 'get',
@@ -51,8 +53,8 @@ const fetchSub = (setSubList, currCat) => {
       },
     })
       .then((response) => {
-        console.log('Response for fetchSub Given');
-        console.log(response);
+        // console.log('Response for fetchSub Given');
+        // console.log(response);
         if (!response.ok) {
           throw response;
         }
@@ -60,8 +62,10 @@ const fetchSub = (setSubList, currCat) => {
       })
       .then((json) => {
         setSubList(json);
+      })
+      .catch(() => {
       });
-};
+  };
 };
 /**
  * @return {object}

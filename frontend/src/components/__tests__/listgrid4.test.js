@@ -37,7 +37,7 @@ const search = '';
 const dimensions = {width: 500};
 
 
-test('ListGrid4 get listing that does not exist', async () => {
+test('ListGrid4', async () => {
   render(
     <CategoryContext.Provider value={{currCat, dimensions, currSub, dimensions, search}}>
       <ListGrid setListings={setListings} listings={listings} />
@@ -47,7 +47,6 @@ test('ListGrid4 get listing that does not exist', async () => {
       expect(screen.getByText('jelly fish'));
       fireEvent.click(screen.getByText('jelly fish'));
     })
-  await new Promise((r) => setTimeout(r, 2000));
 });
 
 test('List Grid Handles Server Error', async () => {
@@ -57,9 +56,8 @@ test('List Grid Handles Server Error', async () => {
     }),
   )
   render(
-      <CategoryContext.Provider value={{currCat, dimensions, currSub, dimensions, search}}>
-    <ListGrid setListings={setListings} listings={listings} />
-    
+    <CategoryContext.Provider value={{currCat, dimensions, currSub, dimensions, search}}>
+      <ListGrid setListings={setListings} listings={listings} />
     </CategoryContext.Provider>
     );
   await waitFor(() => {
