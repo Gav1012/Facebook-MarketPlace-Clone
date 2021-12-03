@@ -32,9 +32,11 @@ export default function Search() {
         <InputLabel htmlFor="outlined-adornment-amount">Search</InputLabel>
         <OutlinedInput
           id="outlined-adornment-amount"
+          title='search bar'
           value={value}
           onChange={handleChange}
           startAdornment={<InputAdornment position="start"><SearchIcon
+            title='search icon'
             onClick={()=>onSearchClick(value)} /></InputAdornment>}
           label="Search"
         />
