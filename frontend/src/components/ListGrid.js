@@ -11,18 +11,25 @@ import ListViewer from './ListViewer';
 import ListingContext from './ListingContext';
 
 // grabs all the listings and specific ones depending on other inputs
-const fetchListings = (setListings, currCat, currSub, search) => {
+const fetchListings = (setListings, currCat, currSub, search, currFilter) => {
   // original string to grab all listings
   let toBeFetched = '/v0/listings';
   // if a category has been clicked, only that category is viewed
-  if (currCat && !currSub) {
+  if (currCat && !currSub && !currFilter && !search) {
     toBeFetched = '/v0/listings/' + currCat;
   }
-  if (currCat && currSub) {
+  if (currCat && currSub && !currFilter && !search) {
     toBeFetched = '/v0/listings/' + currCat + '?sub=' + currSub;
   }
+  if (currCat && !currSub && currFilter && !search) {
+    toBeFetched = '/v0/listings/' + currCat + '?fil=' + currFilter;
+  }
+  if (currCat && currSub && currFilter && !search) {
+    toBeFetched =
+      '/v0/listings/' + currCat + '?sub=' + currSub + '&fil=' + currFilter;
+  }
   // if search bar is used, includes it in search process
-  if (search) {
+  if (search && !currCat && !currSub && !currFilter) {
     toBeFetched += '?search=' + search;
   }
   // fetches the listings based on above modifications
@@ -53,6 +60,7 @@ function ListGrid() {
   const {currCat} = useContext(CategoryContext);
   const {search} = useContext(CategoryContext);
   const {currSub} = useContext(CategoryContext);
+  const {currFilter} = useContext(CategoryContext);
   const [popupData, setPopupData] = React.useState(false);
   const [imageNo, setImage] = React.useState(0);
   const [rowState, setRowState] = React.useState([]);
@@ -100,8 +108,8 @@ function ListGrid() {
   // grabs all the listings from the database
   // and changes depending on categories and search bar
   React.useEffect(() => {
-    fetchListings(setListings, currCat, currSub, search);
-  }, [currCat, currSub, search]);
+    fetchListings(setListings, currCat, currSub, search, currFilter);
+  }, [currCat, currSub, search, currFilter]);
 
   return (
     <Grid container spacing={3}>
