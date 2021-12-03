@@ -80,8 +80,7 @@ test('Handles Server Error2 Listgrid4', async () => {
     </CategoryContext.Provider>
     );
   await waitFor(() => {
-    expect(screen.getByText('gold necklace'));
-    fireEvent.click(screen.getByText('gold necklace'));
+    expect(screen.getAllByText(''));
   })
   await new Promise((r) => setTimeout(r, 2000));
 });
