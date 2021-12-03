@@ -61,7 +61,6 @@ export default function Filter() {
     }
     filterName = filList[0].names;
   }
-  // console.log(temp);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -100,13 +99,14 @@ export default function Filter() {
           <AccordionDetails>
             <FormControl component="fieldset">
               <RadioGroup
-                aria-label="gender"
-                defaultValue="female"
-                name="radio-buttons-group"
+                key="filters"
+                aria-label="filters"
+                defaultValue="filter"
+                name="filters"
               >
                 {temp.map((fil) => (
                   <FormControlLabel value={fil}
-                    control={<Radio />} label={fil} onClick={()=>{
+                    control={<Radio />} key={fil} label={fil} onClick={()=>{
                       setFilter(fil);
                       handleClose();
                       setSearch('');
@@ -130,13 +130,14 @@ export default function Filter() {
         <AccordionDetails>
           <FormControl component="fieldset">
             <RadioGroup
-              aria-label="gender"
-              defaultValue="female"
-              name="radio-buttons-group"
+              key = "filter2"
+              aria-label="filter2"
+              defaultValue="filter2"
+              name="filter2"
             >
               {temp.map((fil) => (
                 <FormControlLabel value={fil}
-                  control={<Radio />} label={fil} onClick={()=>{
+                  control={<Radio />} key={fil} label={fil} onClick={()=>{
                     setFilter(fil);
                     setSearch('');
                   }}
