@@ -15,37 +15,16 @@ import Box from '@mui/material/Box';
  */
 function NewAccount() {
   const history = useHistory();
-  // const onSubmit = (event) => {
-  //   event.preventDefault();
-  //   // checks with db that user exists
-  //   fetch('/v0/member', {
-  //     method: 'POST',
-  //     body: JSON.stringify(user),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   })
-  //     .then((res) => {
-  //       if (!res.ok) {
-  //         throw res;
-  //       }
-  //       return res.json();
-  //     })
-  //     .then((json) => {
-  //       localStorage.setItem('member', JSON.stringify(json));
-  //       history.push('/');
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //       alert('Error logging in, please try again');
-  //     });
-  // };
   return (
-    <form>
+    <div>
       <AppBar sx={{position: 'fixed'}}>
         <Toolbar>
-          <Typography variant='h6'>Create Account</Typography>
-          <IconButton sx={{marginLeft: 'auto'}} onClick={()=>history.push('/')}>
+          <Typography variant='h6'>New Account</Typography>
+          <IconButton
+            sx={{marginLeft: 'auto'}}
+            onClick={()=>history.push('/')}
+            aria-label='close'
+          >
             <CloseIcon />
           </IconButton>
         </Toolbar>
@@ -56,18 +35,20 @@ function NewAccount() {
         </Box>
         <TextField
           id='outlined-search'
+          label='name'
+          name='name'
+          sx={{my: '2%', width: '300px'}}
+        />
+        <TextField
+          id='outlined-search'
           label='email'
           name='email'
-          // onChange={handleInputChange}
-          required
           sx={{my: '2%', width: '300px'}}
         />
         <TextField
           id='outlined-search'
           label='password'
           name='password'
-          // onChange={handleInputChange}
-          required
           sx={{my: '3%', width: '300px'}}
         />
         <Button
@@ -79,11 +60,12 @@ function NewAccount() {
         <Button
           variant='contained'
           href='/Login'
+          sx={{my: '3%', width: '300px'}}
         >
           Already have an account?
         </Button>
       </Box>
-    </form>
+    </div>
   );
 }
 
