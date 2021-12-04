@@ -16,6 +16,7 @@ import Box from '@mui/material/Box';
  */
 function Login() {
   const [user, setUser] = React.useState({email: '', password: ''});
+  const [error, setError] = React.useState('');
   const {setVisible} = useContext(CategoryContext);
   const history = useHistory();
   // from example code provided by Professor Harrison
@@ -46,14 +47,12 @@ function Login() {
         return res.json();
       })
       .then((json) => {
-        console.log('in here');
         localStorage.setItem('member', JSON.stringify(json));
         setVisible(true);
         history.push('/');
       })
-      .catch(() => {
-        // dont do this, create label to be error
-        // alert('Error logging in, please try again');
+      .catch((error) => {
+        setError(`${error.statusText} - wrong email or password`);
       });
   };
   return (
@@ -61,7 +60,11 @@ function Login() {
       <AppBar sx={{position: 'fixed'}}>
         <Toolbar>
           <Typography variant='h6'>Login Screen</Typography>
-          <IconButton sx={{marginLeft: 'auto'}} onClick={()=>history.push('/')}>
+          <IconButton
+            sx={{marginLeft: 'auto'}}
+            onClick={()=>history.push('/')}
+            aria-label='close'
+            >
             <CloseIcon />
           </IconButton>
         </Toolbar>
@@ -100,6 +103,9 @@ function Login() {
           sx={{width: '300px'}}>
           New User
         </Button>
+        <Typography variant='subtitle1'>
+          {error}
+        </Typography>
       </Box>
     </form>
   );
