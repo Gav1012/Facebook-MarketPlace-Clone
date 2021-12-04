@@ -11,11 +11,9 @@ const category = '/v0/listings/category';
 
 const server = setupServer(
   rest.get(category, (req, res, ctx) => {
-    const query = req.url.searchParams
-    const Sub = query.get("Sub")
     return res(ctx.json([{names: 'Vehicles'}]));
-    }
-));
+  }),
+);
 
 beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
@@ -34,7 +32,10 @@ const createListing = jest.fn();
 
 test('category render', async () => {
   render(
-    <CategoryContext.Provider value={{currCat, dimensions, setSub, setSearch, setCatList, setSubList, catList, setCategory, setFilter, createListing}}>
+    <CategoryContext.Provider value={{
+      currCat, dimensions, setSub, setSearch, setCatList,
+      setSubList, catList, setCategory, setFilter, createListing,
+    }}>
       <Category/>
     </CategoryContext.Provider>,
   );
@@ -47,15 +48,18 @@ test('category render', async () => {
 });
 
 test('Handles Server Error', async () => {
-    server.use(
-      rest.get(category, (req, res, ctx) => {
-        return res(ctx.status(500))
-      }),
-    )
-    render(
-      <CategoryContext.Provider value={{currCat, dimensions,  catList, setCatList, setSub, setSearch, setSubList, setCategory, setFilter, createListing}}>
-        <Category/>
-      </CategoryContext.Provider>,
-    );
-    await new Promise((r) => setTimeout(r, 2000));
-  });
+  server.use(
+    rest.get(category, (req, res, ctx) => {
+      return res(ctx.status(500));
+    }),
+  );
+  render(
+    <CategoryContext.Provider value={{
+      currCat, dimensions, catList, setCatList, setSub,
+      setSearch, setSubList, setCategory, setFilter, createListing,
+    }}>
+      <Category/>
+    </CategoryContext.Provider>,
+  );
+  await new Promise((r) => setTimeout(r, 2000));
+});

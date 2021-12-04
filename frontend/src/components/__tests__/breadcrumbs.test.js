@@ -20,9 +20,8 @@ const filter = '/v0/listings/category';
 
 const server = setupServer(
   rest.get(filter, (req, res, ctx) => {
-    const sub = req.url.searchParams.getAll('sub');
-    const fil = req.url.searchParams.getAll('fil');
-    return res(ctx.json([{names: 'Vehicle Color', attributes: {color1: 'White'}}]))
+    return res(
+      ctx.json([{names: 'Vehicle Color', attributes: {color1: 'White'}}]));
   }),
 );
 
@@ -32,7 +31,9 @@ afterAll(() => server.close());
 
 test('breadcrumb render', async () => {
   render(
-    <CategoryContext.Provider value={{currCat, dimensions,  setSub, setSearch, setCatList,  setCategory, setFilter, currSub}}>
+    <CategoryContext.Provider value={{currCat, dimensions, setSub,
+      setSearch, setCatList, setCategory, setFilter, currSub,
+    }}>
       <BreadCrumbs />
     </CategoryContext.Provider>,
   );
