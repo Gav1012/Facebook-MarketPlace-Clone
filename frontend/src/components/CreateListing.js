@@ -27,7 +27,7 @@ function CreateListing() {
   const [newListing, setListing] = useState({'listing': {}});
   const [currCat, setCat] = useState('');
   const bearerToken = localStorage.getItem('member') ?
-    JSON.parse(localStorage.getItem('member')).accessToken : 'fail';
+    JSON.parse(localStorage.getItem('member')).accessToken : '';
   // console.log('token');
   // const testdum = JSON.parse(localStorage.getItem('member')).accessToken;
   // testdum = testdum.accessToken;
@@ -56,10 +56,15 @@ function CreateListing() {
       newListing[name] = value;
     }
     if (name === 'category') {
+      console.log('categoried!');
       setCat(value);
     }
     setListing(newListingCopy);
   };
+
+  const memberEmail = localStorage.getItem('member') ?
+  JSON.parse(localStorage.getItem('member')).accessToken.
+  replace('@', '%40') : '';
 
   const checkUpload = () => {
     console.log('cu');
@@ -82,6 +87,7 @@ function CreateListing() {
         <Toolbar>
           <Typography variant='h6'>Login Screen</Typography>
           <IconButton sx={{marginLeft: 'auto'}}
+            title='createCloseButton'
             onClick={()=>history.push('/')}>
             <CloseIcon />
           </IconButton>
@@ -92,6 +98,7 @@ function CreateListing() {
           id='outlined-search'
           label='Name of Listing'
           name='title'
+          title='title'
           onChange={handleInputChange}
           required
           sx={{my: '2%', width: '300px'}}
@@ -100,6 +107,7 @@ function CreateListing() {
           id='outlined-search'
           label='Short description'
           name='content'
+          title='content'
           onChange={handleInputChange}
           required
           sx={{my: '3%', width: '300px'}}
@@ -108,6 +116,7 @@ function CreateListing() {
           id='outlined-search'
           label='Price'
           name='price'
+          title='price'
           onChange={handleInputChange}
           required
           sx={{my: '3%', width: '300px'}}
@@ -116,6 +125,7 @@ function CreateListing() {
           minRows={10}
           placeholder='Type your description here...'
           name='summary'
+          title='summary'
           onChange={handleInputChange}
           style={{width: '295px', borderColor: 'lightgrey',
             borderRadius: '1%', marginTop: '15px'}}
@@ -124,39 +134,33 @@ function CreateListing() {
           minRows={10}
           placeholder='Images, URLS separated by newline'
           name='images'
+          title='images'
           onChange={handleInputChange}
           style={{width: '295px', borderColor: 'lightgrey',
             borderRadius: '1%', marginTop: '20px'}}
         />
         <InputLabel htmlFor="grouped-native-select"
           style={{}}>Category</InputLabel>
-        <Select native defaultValue="category"
-          id="grouped-native-select"
+        <Select
           name='category'
+          title='category'
+          data-testid='categoryX'
           onChange={handleInputChange}
           sx={{my: '3%', width: '300px'}}
         >
           <option aria-label="None" value="" />
-          <optgroup label={'Vehicles'}>
-            <option value={'Cars'}>Cars</option>
-            <option value={'Motorcycles'}>Motorcycles</option>
-            <option value={'RVs'}>RVs</option>
-            <option value={'Boats'}>Boats</option>
-          </optgroup>
-          <optgroup label={'Apparel'}>
-            <option value={'Clothing'}>Clothing</option>
-            <option value={'Accessories'}>Accessories</option>
-            <option value={'Shoes'}>Shoes</option>
-          </optgroup>
-          <optgroup label={'Electronics'}>
-            <option value={'Computers'}>Computers</option>
-            <option value={'Cellphones'}>Cellphones</option>
-            <option value={'TVs'}>TVs</option>
-          </optgroup>
-          <optgroup label={'Sporting Goods'}>
-            <option value={'Sports Equipment'}>Sports Eq.</option>
-            <option value={'Camping'}>Camping</option>
-          </optgroup>
+          <option value='Cars'>Cars</option>
+          <option value='Motorcycles'>Motorcycles</option>
+          <option value='RVs'>RVs</option>
+          <option value='Boats'>Boats</option>
+          <option value='Clothing'>Clothing</option>
+          <option value='Accessories'>Accessories</option>
+          <option value='Shoes'>Shoes</option>
+          <option value='Computers'>Computers</option>
+          <option value='Cellphones'>Cellphones</option>
+          <option value='TVs'>TVs</option>
+          <option value='Sports Equipment'>Sports Eq.</option>
+          <option value='Camping'>Camping</option>
         </Select>
         {(currCat === 'Cars' ||
               currCat === 'Motorcycles' ||
