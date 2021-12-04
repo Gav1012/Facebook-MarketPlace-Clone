@@ -3,6 +3,7 @@ const http = require('http');
 
 const db = require('./db');
 const app = require('../app');
+const auth = require('../auth');
 
 let server;
 
@@ -21,6 +22,30 @@ test('GET Invalid URL', async () => {
   await request.get('/v0/so-not-a-real-end-point-ba-bip-de-doo-da/')
     .expect(404);
 });
+
+const failAuthListing = {
+  "category": "Cars",
+  "filter": "string",
+  "listing": {
+    "title": "string",
+    "content": "string",
+    "summary": "string",
+    "price": "string",
+    "images": [
+      {
+        "link": "https://picsum.photos/200"
+      }
+    ]
+  }
+}
+
+test('POST Listing, No Auth', async () => {
+  console.log('what im waiting for');
+  await request.post('/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3969')
+
+    .send(failAuthListing)
+    .expect(401);
+})
 
 test('GET Category', async () => {
   await request.get('/v0/listings/category')
@@ -346,7 +371,7 @@ test('POST Authenticate Member', async () => {
     .then((res) => {
       expect(res).toBeDefined();
       expect(res.body).toBeDefined();
-      console.log(res.body);
+      // console.log(res.body);
     })
 })
 
@@ -355,3 +380,61 @@ test('POST Authenticate Bad Member', async () => {
     .send(fakeMemeber)
     .expect(401)
 })
+
+const newListing = {
+  "category": "Cars",
+  "filter": "Red",
+  "listing": {
+    "title": "red car",
+    "content": "on the road",
+    "summary": "where will it go",
+    "price": "$1",
+    "images": [
+      {
+        "link": "https://picsum.photos/200"
+      }
+    ]
+  }
+}
+
+const badListing = {
+  "category": "GOD",
+  "filter": "Red",
+  "listing": {
+    "title": "red car",
+    "content": "on the road",
+    "summary": "where will it go",
+    "price": "$1",
+    "images": [
+      {
+        "link": "https://picsum.photos/200"
+      }
+    ]
+  }
+}
+
+// test('POST Listing Auth, Failed Auth, No Auth', async () => {
+//   let token = '';
+//   await request.post('/v0/authenticate')
+//   .send(harrisonMember)
+//   .expect(200)
+//   .then((res) => {
+//     expect(res).toBeDefined();
+//     expect(res.body).toBeDefined();
+//     token = res.body.accessToken;
+//     // console.log(res.body.accessToken);
+//   });
+//   // const response = set('Authorization', token);
+//   await request.post('/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912')
+//     .set('Authorization', 'Bearer ' + token)
+//     .send(newListing)
+//     .expect(201);
+//   await request.post('/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912')
+//     .set('Authorization', 'Bearer ' + 69)
+//     .send(newListing)
+//     .expect(403);
+//   await request.post('/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912')
+//     .set('Authorization', 'Bearer ' + token)
+//     .send(badListing)
+//     .expect(404);
+// })

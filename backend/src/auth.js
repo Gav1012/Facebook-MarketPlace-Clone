@@ -18,7 +18,7 @@ exports.authenticate = async (req, res) => {
   // checks that the user email and password match
   if (user && user[0].member.email === email &&
       bcrypt.compareSync(password, user[0].member.password)) {
-        console.log('found! email and pw match');
+        // console.log('found! email and pw match');
         // grants access token to user logging in
         const accessToken = jwt.sign(
           {email: user[0].member.email},
@@ -34,8 +34,9 @@ exports.authenticate = async (req, res) => {
 };
 
 exports.check = (req, res, next) => {
-  console.log('x');
+  console.log('check start');
     const authHeader = req.headers.authorization;
+    console.log(authHeader);
     if (authHeader) {
       const token = authHeader.split(' ')[1];
       jwt.verify(token, secrets.accessToken, (err, user) => {
