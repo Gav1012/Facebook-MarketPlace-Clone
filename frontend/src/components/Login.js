@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import {useHistory} from 'react-router-dom';
 import AppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
+import CategoryContext from './CategoryContext';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import Box from '@mui/material/Box';
 
@@ -15,6 +16,7 @@ import Box from '@mui/material/Box';
  */
 function Login() {
   const [user, setUser] = React.useState({email: '', password: ''});
+  const {setVisible} = useContext(CategoryContext);
   const history = useHistory();
   // from example code provided by Professor Harrison
   const handleInputChange = (event) => {
@@ -44,12 +46,14 @@ function Login() {
         return res.json();
       })
       .then((json) => {
+        console.log('in here');
         localStorage.setItem('member', JSON.stringify(json));
+        setVisible(true);
         history.push('/');
       })
-      .catch((err) => {
-        console.log(err);
-        alert('Error logging in, please try again');
+      .catch(() => {
+        // dont do this, create label to be error
+        // alert('Error logging in, please try again');
       });
   };
   return (
@@ -68,6 +72,7 @@ function Login() {
         </Box>
         <TextField
           id='outlined-search'
+          title='email'
           label='email'
           name='email'
           onChange={handleInputChange}
@@ -76,7 +81,8 @@ function Login() {
         />
         <TextField
           id='outlined-search'
-          label='password'
+          title='password'
+          label='label'
           name='password'
           onChange={handleInputChange}
           required
@@ -90,7 +96,7 @@ function Login() {
         </Button>
         <Button
           variant='contained'
-          href='/NewAccount'
+          href='/newaccount'
           sx={{width: '300px'}}>
           New User
         </Button>

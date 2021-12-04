@@ -134,7 +134,9 @@ function Category() {
                   {console.log(localStorage.getItem('member'))}
                   <AppBar sx={{position: 'relative'}}>
                     <Toolbar>
-                      <Typography>Categories</Typography>
+                      <Typography variant='h6'>
+                        Categories
+                      </Typography>
                       <IconButton
                         sx={{marginLeft: 'auto'}} onClick={handleClose}>
                         <CloseIcon />

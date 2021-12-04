@@ -27,6 +27,7 @@ function App() {
   const [filList, setFilList] = useState([]);
   // sets state for when search bar is used
   const [search, setSearch] = useState('');
+  const [visible, setVisible] = useState(false);
 
   const winDims = () => ({
     width: window.innerWidth,
@@ -51,7 +52,7 @@ function App() {
             {currCat, setCategory, currSub, setSub,
               search, setSearch, dimensions, catList, setCatList,
               subList, setSubList, currFilter, setFilter,
-              filList, setFilList}}>
+              filList, setFilList, visible, setVisible}}>
             <TopBar />
             <div style={dimensions.width > 599 ? {margin: 500} : {margin: 0}}>
               {dimensions.width < 600? <BreadCrumbs/> : ''}
@@ -66,7 +67,9 @@ function App() {
           </CategoryContext.Provider>
         </Route>
         <Route path='/login'>
-          <Login />
+          <CategoryContext.Provider value={{visible, setVisible}}>
+            <Login />
+          </CategoryContext.Provider>
         </Route>
         <Route path='/CreateListing'>
           <CreateListing/>

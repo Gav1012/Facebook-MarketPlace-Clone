@@ -49,6 +49,7 @@ const fetchListings = (setListings, currCat, currSub, search, currFilter) => {
       setListings(json);
     })
     .catch(() => {
+      setListings([]);
     });
 };
 
