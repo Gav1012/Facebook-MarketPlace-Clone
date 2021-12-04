@@ -11,21 +11,17 @@ import CategoryContext from '../CategoryContext'
 import ListingContext from '../ListingContext'
 import TopBar from '../TopBar';
 
-
-
 const dimensions = {width: 500};
-
 
 test('topbar render', async () => {
   render(
-    <CategoryContext.Provider value={{ dimensions}}>
+    <CategoryContext.Provider value={{dimensions}}>
       <TopBar  />
     </CategoryContext.Provider>
   );
   await waitFor(() => {
       expect(screen.getByText('Login'));
-      fireEvent.click(screen.getByText('Login'));
     })
-  await new Promise((r) => setTimeout(r, 2000));
+  fireEvent.click(screen.getByText('Login'));
 });
       

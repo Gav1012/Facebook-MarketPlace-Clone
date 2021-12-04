@@ -39,15 +39,14 @@ afterAll(() => server.close());
 
 test('breadcrumb render', async () => {
   render(
-  
     <CategoryContext.Provider value={{currCat, dimensions,  setSub, setSearch, setCatList,  setCategory, setFilter, currSub}}>
-  <BreadCrumbs />
-  
-  </CategoryContext.Provider>
+      <BreadCrumbs />
+    </CategoryContext.Provider>
   );
-
   await waitFor(() => screen.getByText('MARKETPLACE'));
   fireEvent.click(screen.getByText('MARKETPLACE'));
   await waitFor(() => screen.getByText('Vehicles'));
   fireEvent.click(screen.getByText('Vehicles'));
+  await new Promise((r) => setTimeout(r, 2000));
+  expect(currCat).toBe('Vehicles');
 });

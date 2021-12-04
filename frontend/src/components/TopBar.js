@@ -5,40 +5,27 @@ import Typography from '@mui/material/Typography';
 import CssBaseline from '@mui/material/CssBaseline';
 import CategoryContext from './CategoryContext';
 import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import {useHistory} from 'react-router';
+// import {useHistory} from 'react-router';
 
 /**
- *
  * @return {object}
  */
 function TopBar() {
   // grabs current user from local storage
   const curr = localStorage.getItem('member');
   // used to swap between login and logout button
-  const [visible, setVisible] = React.useState(curr ? true: false);
+  const {visible, setVisible} = useContext(CategoryContext);
   // used for logging in on the desktop version
-  const inputBoxes = (
-    <form noValidate autoComplete="off">
-      <TextField
-        id='outlined-search'
-        label='username'
-      >search</TextField>
-      <TextField
-        id='outlined-search'
-        label='password'
-      >search</TextField>
-    </form>
-  );
-  const history = useHistory();
+  // const history = useHistory();
   // removes from local storage and displays Login
-  const logout = async () => {
+  console.log('visible val: ', visible);
+  const logout = () => {
+    console.log('removing from local storage');
     localStorage.removeItem('member');
-    await history.go(0);
+    console.log('updating state visible');
     setVisible(false);
   };
   // deals with conditional render
-  const {dimensions} = useContext(CategoryContext);
   return (
     <React.Fragment>
       <CssBaseline />
@@ -47,10 +34,7 @@ function TopBar() {
           <Typography variant='h6' component='div'>
             facebook
           </Typography>
-          <div>
-            {dimensions.width > 600 ? inputBoxes: null}
-          </div>
-          {visible ?
+          {visible || curr ?
             <Button
               onClick={logout}
               style={{color: 'white', marginLeft: 'auto'}}
