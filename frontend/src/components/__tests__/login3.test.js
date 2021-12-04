@@ -15,8 +15,7 @@ const setVisible = jest.fn();
 const server = setupServer(
   rest.post(authenticate, (req, res, ctx) => {
     return res(
-      ctx.status(201),
-      ctx.json({email: 'dcharris@ucsc.edu', accessToken: '12345'}))
+      ctx.status(401))
   }),
 )
 
@@ -24,7 +23,7 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-test('login screen appears and login', async () => {
+test('login screen click on close button', async () => {
   const history = createMemoryHistory();
   render(
     <Router history={history}>
@@ -34,21 +33,6 @@ test('login screen appears and login', async () => {
     </Router>
   );
   await waitFor(() => screen.getByText("Login Screen"));
-  const email = screen.getByTitle('email').querySelector('input');
-  const password = screen.getByTitle('password').querySelector('input');
-  fireEvent.click(screen.getByTitle('email'));
-  fireEvent.change(email, {
-    target: {
-      value: 'dcharris@ucsc.edu'
-    },
-  });
-  fireEvent.click(screen.getByTitle('password'));
-  fireEvent.change(password, {
-    target: {
-      value: 'cse183'
-    },
-  });
-  fireEvent.click(screen.getByText('Login'));
+  fireEvent.click(screen.getByLabelText('close'));
   await new Promise((r) => setTimeout(r, 1000));
-  expect(history.length).toBe(2);
 })
