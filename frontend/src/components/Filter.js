@@ -104,6 +104,12 @@ export default function Filter() {
                 defaultValue="filter"
                 name="filters"
               >
+                <FormControlLabel value='None'
+                  control={<Radio />} key='None' label='None' onClick={()=>{
+                    setFilter(undefined);
+                    setSearch('');
+                  }}
+                />
                 {temp.map((fil) => (
                   <FormControlLabel value={fil}
                     control={<Radio />} key={fil} label={fil} onClick={()=>{
@@ -135,6 +141,12 @@ export default function Filter() {
               defaultValue="filter2"
               name="filter2"
             >
+              <FormControlLabel value='None'
+                control={<Radio />} key='None' label='None' onClick={()=>{
+                  setFilter(undefined);
+                  setSearch('');
+                }}
+              />
               {temp.map((fil) => (
                 <FormControlLabel value={fil}
                   control={<Radio />} key={fil} label={fil} onClick={()=>{
