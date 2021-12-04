@@ -128,7 +128,7 @@ function ListGrid() {
                 imageBar(listing.listings.images.length);
               }
             }>
-              <Card sx={{width: 180}}>
+              <Card variant='outlined' sx={{width: 175, height: 275}}>
                 <CardMedia
                   component='img'
                   height='140'
@@ -136,13 +136,13 @@ function ListGrid() {
                   alt={listing.listings.title}
                 />
                 <CardContent>
-                  <Typography variant='h5'>
+                  <Typography variant='h6'>
                     {listing.listings.price}
                   </Typography>
-                  <Typography gutterBottom variant='h6'>
+                  <Typography gutterBottom variant='subtitle1'>
                     {listing.listings.title}
                   </Typography>
-                  <Typography variant='body2'>
+                  <Typography variant='caption'>
                     {listing.listings.content}
                   </Typography>
                 </CardContent>
