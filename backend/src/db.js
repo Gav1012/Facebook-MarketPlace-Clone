@@ -157,12 +157,9 @@ exports.insertMember = async (member) => {
 };
 
 exports.postListings = async (newListing, memberID) => {
-  console.log('memeberid');
-  console.log(memberID);
   const insert = `INSERT INTO listing(categoryid, memberid, filterType, listings) values ($1, $2, $3, $4)`;
   const select = `SELECT id FROM category WHERE names LIKE $1`;
   const like = newListing['category'];
-  console.log(typeof(newListing['category']));
   const querySelect = {
     text: select,
     values: [like],
@@ -171,9 +168,7 @@ exports.postListings = async (newListing, memberID) => {
   if (catID['rows'].length === 0) {
     return undefined;
   }
-  console.log(catID);
   catID = catID['rows'][0]['id'];
-  console.log(catID);
   const date = new Date();
   const monthName = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'];
@@ -181,16 +176,11 @@ exports.postListings = async (newListing, memberID) => {
   const year = date.getFullYear();
   const dateNum = date.getDate();
   const dateString = month + ' ' + dateNum + ', ' + year;
-  console.log(dateString);
-  console.log(newListing);
   newListing['listing']['createDate'] = dateString;
-  console.log(newListing);
   const query = {
     text: insert,
     values: [catID, memberID, newListing['filter'], newListing['listing']],
   };
   const {rows} = await pool.query(query);
-  console.log(rows);
-  console.log('I WAS HERE');
   return rows;
 }
