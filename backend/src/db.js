@@ -191,5 +191,6 @@ exports.postListings = async (newListing, memberID) => {
   };
   const {rows} = await pool.query(query);
   console.log(rows);
+  console.log('I WAS HERE');
   return rows;
 }

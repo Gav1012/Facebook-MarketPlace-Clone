@@ -51,7 +51,7 @@ exports.post = async (req, res) => {
 }
 
 exports.postListings = async (req, res) => {
-  console.log(req.qeu)
+  console.log(req.query.memberID);
   const listing = await db.postListings(req.body, req.query.memberID);
   if (listing) {
     res.status(200).send(listing);

@@ -26,6 +26,8 @@ function CreateListing() {
   const history = useHistory();
   const [newListing, setListing] = useState({'listing': {}});
   const [currCat, setCat] = useState('');
+  const bearerToken = localStorage.getItem('member') ?
+    localStorage.getItem('member').accessToken : '';
 
   const handleInputChange = (event) => {
     const {value, name} = event.target;
@@ -59,6 +61,7 @@ function CreateListing() {
     fetch('/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912', {
       method: 'post',
       headers: {
+        'Authorization': `Bearer ${bearerToken}`,
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(newListing),
@@ -226,7 +229,7 @@ function CreateListing() {
         <Button
           style={{backgroundColor: 'lightblue'}}
           onClick={() => {
-            checkUpload(); console.log(currCat);
+            checkUpload(); console.log(bearerToken);
           }}>
           Upload!
         </Button>
