@@ -119,7 +119,9 @@ function Category() {
             </Box>:
             <Box sx={{my: 1}}
               style={dimensions.width > 599? {display: 'none'} : {}}>
-              <Button sx={{mb: .25, mr: 1}} label='Sell' href='/CreateListing'
+              <Button sx={{mb: .25, mr: 1}} label='Sell'
+                {... localStorage.getItem('member') !== null ?
+                  {href: '/CreateListing'} : {href: '/Login'}}
                 style={{backgroundColor: '#00000014', borderRadius: '35%',
                   height: '33px', textTransform: 'none', color: 'Black'}}
               >
@@ -129,6 +131,7 @@ function Category() {
                 onClick={handleClickOpen} />
               {dimensions.width < 600?
                 <Dialog fullScreen open={open} onClose={handleClose}>
+                  {console.log(localStorage.getItem('member'))}
                   <AppBar sx={{position: 'relative'}}>
                     <Toolbar>
                       <Typography>Categories</Typography>

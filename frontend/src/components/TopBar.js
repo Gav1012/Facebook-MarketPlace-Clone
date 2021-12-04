@@ -6,6 +6,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import CategoryContext from './CategoryContext';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
+import {useHistory} from 'react-router';
 
 /**
  *
@@ -29,9 +30,11 @@ function TopBar() {
       >search</TextField>
     </form>
   );
+  const history = useHistory();
   // removes from local storage and displays Login
-  const logout = () => {
+  const logout = async () => {
     localStorage.removeItem('member');
+    await history.go(0);
     setVisible(false);
   };
   // deals with conditional render
@@ -50,7 +53,8 @@ function TopBar() {
           {visible ?
             <Button
               onClick={logout}
-              style={{color: 'white', marginLeft: 'auto'}}>
+              style={{color: 'white', marginLeft: 'auto'}}
+            >
             Log out
             </Button>:
             <Button
