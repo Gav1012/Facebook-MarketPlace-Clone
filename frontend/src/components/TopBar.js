@@ -20,10 +20,10 @@ function TopBar() {
   // removes from local storage and displays Login
   console.log('visible val: ', visible);
   const logout = () => {
+    setVisible(false);
     console.log('removing from local storage');
     localStorage.removeItem('member');
     console.log('updating state visible');
-    setVisible(false);
   };
   // deals with conditional render
   return (

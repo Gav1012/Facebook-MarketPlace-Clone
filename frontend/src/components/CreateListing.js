@@ -27,7 +27,12 @@ function CreateListing() {
   const [newListing, setListing] = useState({'listing': {}});
   const [currCat, setCat] = useState('');
   const bearerToken = localStorage.getItem('member') ?
-    localStorage.getItem('member').accessToken : '';
+    JSON.parse(localStorage.getItem('member')).accessToken : 'fail';
+  // console.log('token');
+  // const testdum = JSON.parse(localStorage.getItem('member')).accessToken;
+  // testdum = testdum.accessToken;
+  // console.log(testdum);
+  // console.log((JSON.parse(localStorage.getItem('member')));
 
   const handleInputChange = (event) => {
     const {value, name} = event.target;
@@ -57,7 +62,10 @@ function CreateListing() {
   };
 
   const checkUpload = () => {
+    console.log('cu');
     console.log(newListing);
+    console.log('token');
+    console.log(bearerToken);
     fetch('/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912', {
       method: 'post',
       headers: {
