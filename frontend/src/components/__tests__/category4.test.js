@@ -1,9 +1,6 @@
-import React, {useState} from 'react';
-import {render, fireEvent} from '@testing-library/react';
+import React from 'react';
+import {render} from '@testing-library/react';
 import '@testing-library/jest-dom';
-import {screen, waitFor} from '@testing-library/react';
-import {act} from 'react-dom/test-utils';
-import App from '../App';
 import Category from '../Category';
 import {setupServer} from 'msw/node'
 import {rest} from 'msw'
@@ -30,14 +27,11 @@ const setSearch = jest.fn();
 const setCatList = jest.fn();
 const setSubList = jest.fn();
 
-
 test('category render', async () => {
   render(
-  
     <CategoryContext.Provider value={{currCat, dimensions, subList, setSub, setSearch, setCatList, setSubList, catList}}>
-  <Category/>
-  
-  </CategoryContext.Provider>
+      <Category/>
+    </CategoryContext.Provider>,
   );
   await new Promise((r) => setTimeout(r, 2000));
 });

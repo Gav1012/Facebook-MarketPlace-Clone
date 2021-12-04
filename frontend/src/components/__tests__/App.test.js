@@ -33,4 +33,4 @@ test('App renders in Mobile form', async () => {
     fireEvent.click(searchIcon);
     // fireEvent.click(screen.getByRole("button", { name: "close" }));
   })
-})
+});

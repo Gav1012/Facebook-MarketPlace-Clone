@@ -1,13 +1,8 @@
-import React, {useState} from 'react';
-import {render, fireEvent} from '@testing-library/react';
+import React from 'react';
+import {render} from '@testing-library/react';
 import '@testing-library/jest-dom';
-import {screen, waitFor} from '@testing-library/react';
-import {act} from 'react-dom/test-utils';
-import App from '../App';
 import Filter from '../Filter';
-import {setupServer} from 'msw/node'
-import {rest} from 'msw'
-import CategoryContext from '../CategoryContext'
+import CategoryContext from '../CategoryContext';
 
 const currCat = undefined;
 const dimensions = {width: 500};
@@ -21,14 +16,14 @@ const setFilter = jest.fn();
 const setFilList = jest.fn();
 const filList = [{names: 'Vehicle Color', attributes: {color1: 'White'}}];
 
-
 test('filter render', async () => {
   render(
-  
-    <CategoryContext.Provider value={{currCat, dimensions, subList, setSub, setSearch, setCatList, setSubList, catList, filList, setFilList, setFilter}}>
-  <Filter />
-  </CategoryContext.Provider>
+    <CategoryContext.Provider value={{currCat, dimensions, subList,
+      setSub, setSearch, setCatList, setSubList, catList, filList,
+      setFilList, setFilter,
+    }}>
+      <Filter />
+    </CategoryContext.Provider>,
   );
-
   await new Promise((r) => setTimeout(r, 2000));
 });
