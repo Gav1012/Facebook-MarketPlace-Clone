@@ -36,9 +36,7 @@ test('Listgrid filter and sub', async () => {
     </CategoryContext.Provider>,
   );
   await waitFor(() => {
-    expect(screen.getByText('gold necklace'));
     fireEvent.click(screen.getByText('gold necklace'));
-    expect(screen.getByText('gold necklace'));
     fireEvent.click(screen.getByText('gold necklace'));
   });
   await new Promise((r) => setTimeout(r, 2000));

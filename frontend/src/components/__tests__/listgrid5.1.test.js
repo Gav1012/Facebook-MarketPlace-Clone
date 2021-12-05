@@ -36,35 +36,27 @@ test('ListGrid, clicking on listing with multiple pics', async () => {
     </CategoryContext.Provider>,
   );
   await waitFor(() => {
-    expect(screen.getByText('really cool car'));
     fireEvent.click(screen.getByText('really cool car'));
   });
   await waitFor(() => {
-    expect(screen.getByText('1'));
     fireEvent.click(screen.getByText('1'));
   });
   await waitFor(() => {
-    expect(screen.getByTitle('leftButton'));
     fireEvent.click(screen.getByTitle('leftButton'));
   });
   await waitFor(() => {
-    expect(screen.getByTitle('leftButton'));
     fireEvent.click(screen.getByTitle('leftButton'));
   });
   await waitFor(() => {
-    expect(screen.getByTitle('rightButton'));
     fireEvent.click(screen.getByTitle('rightButton'));
   });
   await waitFor(() => {
-    expect(screen.getByTitle('rightButton'));
     fireEvent.click(screen.getByTitle('rightButton'));
   });
   await waitFor(() => {
-    expect(screen.getByTitle('rightButton'));
     fireEvent.click(screen.getByTitle('rightButton'));
   });
   await waitFor(() => {
-    expect(screen.getByTitle('closeButton'));
     fireEvent.click(screen.getByTitle('closeButton'));
   });
   await new Promise((r) => setTimeout(r, 2000));
