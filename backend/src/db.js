@@ -31,8 +31,9 @@ exports.searchListings = async (search, id) => {
   return rows;
 };
 
-// gets listings based on category selected
+// gets listings based on category, sub category, and/or filter inputted
 exports.catListings = async (category, sub, fil) => {
+  // if a subcat and filter are inputted
   if (sub && fil) {
     const select =
       `select * from listing where listing.filterType = $1 and
@@ -52,6 +53,7 @@ exports.catListings = async (category, sub, fil) => {
       return rows;
     }
   }
+  // if only a subcat is inputted
   if (sub && !fil) {
     const select =
       `select * from listing where listing.categoryid in
@@ -68,6 +70,7 @@ exports.catListings = async (category, sub, fil) => {
       return rows;
     }
   } else {
+    // if only filter is inputted
     if (fil && !sub) {
       const select =
         `select * from listing where listing.filterType = $1 and
@@ -83,6 +86,7 @@ exports.catListings = async (category, sub, fil) => {
       } else {
         return rows;
       }
+    // if only category is inputted
     } else {
       const select =
           `select * from listing where listing.categoryid in
@@ -105,6 +109,7 @@ exports.catListings = async (category, sub, fil) => {
 
 // gets all the categories from db
 exports.getCategories = async (sub, fil) => {
+  // gets all the subcat names
   if (sub) {
     const select =
       `select names from category where category.parent in
@@ -116,6 +121,7 @@ exports.getCategories = async (sub, fil) => {
     const {rows} = await pool.query(query);
     return rows;
   } else {
+    // gets all the filter names
     if (fil) {
       const select =
           `select names, attributes from filter where filter.parent in
@@ -143,9 +149,11 @@ exports.getCategories = async (sub, fil) => {
 exports.selectMembers = async (email, id) => {
   let select = ` select id, member from member`;
   val = [];
+  // gets user with the inputted email
   if (email) {
     select += ` where member->>'email' = $1`;
     val.push(email);
+  // gets user with the inputted id
   } else if (id) {
     select += ` WHERE id = $1`;
     val.push(id);
@@ -155,12 +163,14 @@ exports.selectMembers = async (email, id) => {
     values: val,
   };
   const {rows} = await pool.query(query);
+  // if the user cannot be found
   if (rows.length === 0) {
     return undefined;
   }
   return rows;
 };
 
+// creates member to be added to the database
 exports.insertMember = async (member) => {
   const insert = ` insert into member(member) values ($1) returning id`;
   const query = {
@@ -171,6 +181,7 @@ exports.insertMember = async (member) => {
   return {id: rows[0].id, member: member};
 };
 
+// creates listing to be added to the database
 exports.postListings = async (newListing, memberID) => {
   const insert =
     `INSERT INTO listing(categoryid, memberid, filterType, listings)

@@ -7,8 +7,7 @@ const bcrypt = require('bcrypt');
 // used in the process of giving user the token
 const secrets = require('../data/secrets');
 
-// basis of this function comes direct from example code
-// provided by Professor Harrison
+// function comes direct from example code provided by Professor Harrison
 exports.authenticate = async (req, res) => {
   // grabs the input and destructures
   const {email, password} = req.body;
@@ -29,13 +28,17 @@ exports.authenticate = async (req, res) => {
     // sends succesfully code
     res.status(200).json({email: email, accessToken: accessToken});
   } else {
+    // if the provided info cannot be found in db
     res.status(401).send('Username or password incorrect');
   }
 };
 
+// function comes direct from example code provided by Professor Harrison
 exports.check = (req, res, next) => {
+  // grabs the authorization
   const authHeader = req.headers.authorization;
   const token = authHeader.split(' ')[1];
+  // verifies that the token is acceptable
   jwt.verify(token, secrets.accessToken, (err, user) => {
     if (err) {
       console.log('403');
