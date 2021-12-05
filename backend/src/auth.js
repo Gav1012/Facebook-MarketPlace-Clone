@@ -48,7 +48,6 @@ exports.check = (req, res, next) => {
         next();
       });
     } else {
-      console.log('401');
       res.sendStatus(401);
     }
   };

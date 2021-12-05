@@ -413,28 +413,28 @@ const badListing = {
   }
 }
 
-// test('POST Listing Auth, Failed Auth, No Auth', async () => {
-//   let token = '';
-//   await request.post('/v0/authenticate')
-//   .send(harrisonMember)
-//   .expect(200)
-//   .then((res) => {
-//     expect(res).toBeDefined();
-//     expect(res.body).toBeDefined();
-//     token = res.body.accessToken;
-//     // console.log(res.body.accessToken);
-//   });
-//   // const response = set('Authorization', token);
-//   await request.post('/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912')
-//     .set('Authorization', 'Bearer ' + token)
-//     .send(newListing)
-//     .expect(201);
-//   await request.post('/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912')
-//     .set('Authorization', 'Bearer ' + 69)
-//     .send(newListing)
-//     .expect(403);
-//   await request.post('/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912')
-//     .set('Authorization', 'Bearer ' + token)
-//     .send(badListing)
-//     .expect(404);
-// })
+ test('POST Listing Auth, Failed Auth, No Auth', async () => {
+   let token = '';
+   await request.post('/v0/authenticate')
+  .send(harrisonMember)
+   .expect(200)
+   .then((res) => {
+     expect(res).toBeDefined();
+     expect(res.body).toBeDefined();
+     token = res.body.accessToken;
+     // console.log(res.body.accessToken);
+   });
+   // const response = set('Authorization', token);
+   await request.post('/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912')
+     .set('Authorization', 'Bearer ' + token)
+     .send(newListing)
+  .expect(201);
+ await request.post('/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912')
+    .set('Authorization', 'Bearer ' + 69)
+   .send(newListing)
+    .expect(403);
+  await request.post('/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912')
+    .set('Authorization', 'Bearer ' + token)
+    .send(badListing)
+    .expect(404);
+ })
