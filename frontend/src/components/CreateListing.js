@@ -171,12 +171,12 @@ function CreateListing() {
             onChange={handleInputChange}
             sx={{my: '3%', width: '300px'}}
           >
-              <option aria-label="None" value="" />
-              <option value={'White'}>White</option>
-              <option value={'Grey'}>Grey</option>
-              <option value={'Black'}>Black</option>
-              <option value={'Red'}>Red</option>
-              <option value={'Blue'}>Blue</option>
+            <option aria-label="None" value="" />
+            <option value={'White'}>White</option>
+            <option value={'Grey'}>Grey</option>
+            <option value={'Black'}>Black</option>
+            <option value={'Red'}>Red</option>
+            <option value={'Blue'}>Blue</option>
           </Select>
         </div>
         }
@@ -192,9 +192,9 @@ function CreateListing() {
             onChange={handleInputChange}
             sx={{my: '3%', width: '300px'}}
           >
-              <option aria-label="None" value="" />
-              <option value={'Mens'}>Men's</option>
-              <option value={'Womens'}>Women's</option>
+            <option aria-label="None" value="" />
+            <option value={'Mens'}>Men's</option>
+            <option value={'Womens'}>Women's</option>
           </Select>
         </div>
         }
@@ -210,10 +210,10 @@ function CreateListing() {
             onChange={handleInputChange}
             sx={{my: '3%', width: '300px'}}
           >
-              <option aria-label="None" value="" />
-              <option value={'Sony'}>Sony</option>
-              <option value={'Samsung'}>Samsung</option>
-              <option value={'Apple'}>Apple</option>
+            <option aria-label="None" value="" />
+            <option value={'Sony'}>Sony</option>
+            <option value={'Samsung'}>Samsung</option>
+            <option value={'Apple'}>Apple</option>
           </Select>
         </div>
         }
@@ -228,9 +228,9 @@ function CreateListing() {
             onChange={handleInputChange}
             sx={{my: '3%', width: '300px'}}
           >
-              <option aria-label="None" value="" />
-              <option value={'New'}>New</option>
-              <option value={'Used'}>Used</option>
+            <option aria-label="None" value="" />
+            <option value={'New'}>New</option>
+            <option value={'Used'}>Used</option>
           </Select>
         </div>
         }
