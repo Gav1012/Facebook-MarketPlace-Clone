@@ -17,34 +17,31 @@ exports.authenticate = async (req, res) => {
   // if the user is found give token
   // checks that the user email and password match
   if (user && user[0].member.email === email &&
-      bcrypt.compareSync(password, user[0].member.password)) {
-        // console.log('found! email and pw match');
-        // grants access token to user logging in
-        const accessToken = jwt.sign(
-          {email: user[0].member.email},
-          secrets.accessToken, {
-            expiresIn: '30m',
-            algorithm: 'HS256'
-          });
-        // sends succesfully code
-        res.status(200).json({email: email, accessToken: accessToken});
+    bcrypt.compareSync(password, user[0].member.password)) {
+    // console.log('found! email and pw match');
+    // grants access token to user logging in
+    const accessToken = jwt.sign(
+      {email: user[0].member.email},
+      secrets.accessToken, {
+        expiresIn: '30m',
+        algorithm: 'HS256',
+      });
+    // sends succesfully code
+    res.status(200).json({email: email, accessToken: accessToken});
   } else {
     res.status(401).send('Username or password incorrect');
   }
 };
 
 exports.check = (req, res, next) => {
-  console.log('check start');
-    const authHeader = req.headers.authorization;
-    console.log(authHeader);
-      const token = authHeader.split(' ')[1];
-      jwt.verify(token, secrets.accessToken, (err, user) => {
-        if (err) {
-          console.log('403');
-          return res.sendStatus(403);
-        }
-        req.user = user;
-        next();
-      });
-  };
-  
+  const authHeader = req.headers.authorization;
+  const token = authHeader.split(' ')[1];
+  jwt.verify(token, secrets.accessToken, (err, user) => {
+    if (err) {
+      console.log('403');
+      return res.sendStatus(403);
+    }
+    req.user = user;
+    next();
+  });
+};

@@ -3,7 +3,7 @@ const http = require('http');
 
 const db = require('./db');
 const app = require('../app');
-const auth = require('../auth');
+// const auth = require('../auth');
 
 let server;
 
@@ -22,40 +22,6 @@ test('GET Invalid URL', async () => {
   await request.get('/v0/so-not-a-real-end-point-ba-bip-de-doo-da/')
     .expect(404);
 });
-
-// const failAuthListing = {
-//   "category": "Cars",
-//   "filter": "string",
-//   "listing": {
-//     "title": "string",
-//     "content": "string",
-//     "summary": "string",
-//     "price": "string",
-//     "images": [
-//       {
-//         "link": "https://picsum.photos/200"
-//       }
-//     ]
-//   }
-// }
-
-// test('POST Listing, No Auth', async () => {
-//   console.log('what im waiting for');
-//   let token = '';
-//   await request.post('/v0/authenticate')
-//   .send(harrisonMember)
-//   .expect(200)
-//   .then((res) => {
-//     expect(res).toBeDefined();
-//     expect(res.body).toBeDefined();
-//     token = res.body.accessToken;
-//     // console.log(res.body.accessToken);
-//   });
-//   await request.post('/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912')
-//     .set('Authorization', 'Bearer ' + null)
-//     .send(failAuthListing)
-//     .expect(401);
-// })
 
 test('GET Category', async () => {
   await request.get('/v0/listings/category')
@@ -159,7 +125,8 @@ test('GET Listings by ID', async () => {
       expect(res.body[0].id).toBeDefined();
       expect(res.body[0].id).toBe('61d21627-0c63-4b85-9ae1-c7b668009348');
       expect(res.body[0].categoryid).toBeDefined();
-      expect(res.body[0].categoryid).toBe('e2af758a-0c87-4710-a611-14a9ecbccc9a');
+      expect(res.body[0].categoryid).toBe(
+        'e2af758a-0c87-4710-a611-14a9ecbccc9a');
       expect(res.body[0].memberid).toBeDefined();
       expect(res.body[0].memberid).toBe('59599566-32d7-4cff-a293-48178ff58876');
       expect(res.body[0].listings.title).toBeDefined();
@@ -173,8 +140,7 @@ test('GET Listings by ID', async () => {
 
 test('GET Bad Listings Search', async () => {
   await request.get('/v0/listings?search=unicorncrazymenwithweapons')
-    .expect(404)
-
+    .expect(404);
 });
 
 test('GET Listings by Cat', async () => {
@@ -213,14 +179,13 @@ test('GET Listings by Sub', async () => {
 
 test('GET Bad Listings by Cat', async () => {
   await request.get('/v0/listings/Oldsoggywaffles')
-    .expect(404)
+    .expect(404);
 });
 
 test('GET Bad Listings by Sub', async () => {
   await request.get('/v0/listings/Apparel?sub=Unicornmoonjumpers')
-    .expect(404)
+    .expect(404);
 });
-
 
 test('GET Listings by Sub', async () => {
   await request.get('/v0/listings/Apparel?sub=Clothing')
@@ -258,7 +223,7 @@ test('GET Listings by Filter', async () => {
 
 test('GET Listings by BAD Filter', async () => {
   await request.get('/v0/listings/Apparel?fil=Blue')
-    .expect(404)
+    .expect(404);
 });
 
 test('GET Listings by Filter and Sub', async () => {
@@ -280,7 +245,7 @@ test('GET Listings by Filter and Sub', async () => {
 
 test('GET Listings by BAD Filter and BAD sub', async () => {
   await request.get('/v0/listings/Apparel?sub=Cars&fil=Sony')
-    .expect(404)
+    .expect(404);
 });
 
 test('GET Members', async () => {
@@ -339,7 +304,7 @@ test('GET Members by Email', async () => {
 
 test('GET BAD Members by ID', async () => {
   await request.get('/v0/member?id=ff761662-3505-ffff-4444-e7307bb58666')
-    .expect(404)
+    .expect(404);
 });
 
 const testMember = {
@@ -350,18 +315,18 @@ const testMember = {
 
 test('POST New Member', async () => {
   await request.post('/v0/member')
-      .send(testMember)
-      .expect(201)
-      .then((res) => {
-        expect(res).toBeDefined();
-        expect(res.body).toBeDefined();
-        expect(res.body.id).toBeDefined();
-        expect(res.body.member).toBeDefined();
-        expect(res.body.member.name).toBeDefined();
-        expect(res.body.member.name).toBe('Maurice Foreman');
-        expect(res.body.member.email).toBeDefined();
-        expect(res.body.member.email).toBe('hooktrader@hotmail.com');
-      });
+    .send(testMember)
+    .expect(201)
+    .then((res) => {
+      expect(res).toBeDefined();
+      expect(res.body).toBeDefined();
+      expect(res.body.id).toBeDefined();
+      expect(res.body.member).toBeDefined();
+      expect(res.body.member.name).toBeDefined();
+      expect(res.body.member.name).toBe('Maurice Foreman');
+      expect(res.body.member.email).toBeDefined();
+      expect(res.body.member.email).toBe('hooktrader@hotmail.com');
+    });
 });
 
 const harrisonMember = {
@@ -372,7 +337,7 @@ const harrisonMember = {
 const fakeMemeber = {
   email: 'dummy@gmail.com',
   password: 'strong password',
-}
+};
 
 test('POST Authenticate Member', async () => {
   await request.post('/v0/authenticate')
@@ -382,69 +347,70 @@ test('POST Authenticate Member', async () => {
       expect(res).toBeDefined();
       expect(res.body).toBeDefined();
       // console.log(res.body);
-    })
-})
+    });
+});
 
 test('POST Authenticate Bad Member', async () => {
   await request.post('/v0/authenticate')
     .send(fakeMemeber)
-    .expect(401)
-})
+    .expect(401);
+});
 
 const newListing = {
-  "category": "Cars",
-  "filter": "Red",
-  "listing": {
-    "title": "red car",
-    "content": "on the road",
-    "summary": "where will it go",
-    "price": "$1",
-    "images": [
+  'category': 'Cars',
+  'filter': 'Red',
+  'listing': {
+    'title': 'red car',
+    'content': 'on the road',
+    'summary': 'where will it go',
+    'price': '$1',
+    'images': [
       {
-        "link": "https://picsum.photos/200"
-      }
-    ]
-  }
-}
+        'link': 'https://picsum.photos/200',
+      },
+    ],
+  },
+};
 
 const badListing = {
-  "category": "GOD",
-  "filter": "Red",
-  "listing": {
-    "title": "red car",
-    "content": "on the road",
-    "summary": "where will it go",
-    "price": "$1",
-    "images": [
+  'category': 'GOD',
+  'filter': 'Red',
+  'listing': {
+    'title': 'red car',
+    'content': 'on the road',
+    'summary': 'where will it go',
+    'price': '$1',
+    'images': [
       {
-        "link": "https://picsum.photos/200"
-      }
-    ]
-  }
-}
+        'link': 'https://picsum.photos/200',
+      },
+    ],
+  },
+};
 
 test('POST Listing Auth, Failed Auth, No Auth', async () => {
   let token = '';
   await request.post('/v0/authenticate')
-  .send(harrisonMember)
-  .expect(200)
-  .then((res) => {
-    expect(res).toBeDefined();
-    expect(res.body).toBeDefined();
-    token = res.body.accessToken;
-    // console.log(res.body.accessToken);
-  });
-  // const response = set('Authorization', token);
-  await request.post('/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912')
+    .send(harrisonMember)
+    .expect(200)
+    .then((res) => {
+      expect(res).toBeDefined();
+      expect(res.body).toBeDefined();
+      token = res.body.accessToken;
+    });
+  await request.post(
+    '/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912')
     .set('Authorization', 'Bearer ' + token)
     .send(newListing)
     .expect(201);
-  await request.post('/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912')
+  await request.post(
+    '/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912')
     .set('Authorization', 'Bearer ' + 69)
     .send(newListing)
     .expect(403);
-  await request.post('/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912')
+  await request.post(
+    '/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912')
     .set('Authorization', 'Bearer ' + token)
     .send(badListing)
     .expect(404);
-})
+});
