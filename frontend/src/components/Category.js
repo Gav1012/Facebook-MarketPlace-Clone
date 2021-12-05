@@ -137,7 +137,6 @@ function Category() {
                 onClick={handleClickOpen} />
               {dimensions.width < 600?
                 <Dialog fullScreen open={open} onClose={handleClose}>
-                  {console.log(localStorage.getItem('member'))}
                   <AppBar sx={{position: 'relative'}}>
                     <Toolbar>
                       <Typography variant='h6'>

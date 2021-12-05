@@ -9,7 +9,6 @@ import {rest} from 'msw';
 import CategoryContext from '../CategoryContext';
 import {createMemoryHistory} from 'history';
 import CreateListing from '../CreateListing';
-// import userEvent from '@testing-library/user-event';
 
 const authenticate = '/v0/authenticate';
 const setVisible = jest.fn();
@@ -32,7 +31,6 @@ test('login screen appears and login', async () => {
     <Router history={history}>
       <CategoryContext.Provider value={{setVisible}}>
         <Login />
-        {/* <CreateListing /> */}
       </CategoryContext.Provider>
     </Router>,
   );
@@ -53,8 +51,6 @@ test('login screen appears and login', async () => {
   });
   fireEvent.click(screen.getByText('Login'));
   await new Promise((r) => setTimeout(r, 1000));
-  console.log('history: ', history);
-  console.log('storage: ', localStorage);
   expect(history.length).toBe(2);
 });
 
@@ -63,7 +59,6 @@ test('input texts for listing', async () => {
   render(
     <Router history={history}>
       <CategoryContext.Provider value={{setVisible}}>
-        {/* <Login /> */}
         <CreateListing />
       </CategoryContext.Provider>
     </Router>,

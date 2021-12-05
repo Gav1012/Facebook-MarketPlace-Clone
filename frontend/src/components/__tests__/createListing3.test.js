@@ -1,7 +1,6 @@
 import React from 'react';
 import {render, fireEvent} from '@testing-library/react';
 import {Router} from 'react-router-dom';
-// import Login from '../Login';
 import '@testing-library/jest-dom';
 import {screen} from '@testing-library/react';
 import {setupServer} from 'msw/node';
@@ -9,7 +8,6 @@ import {rest} from 'msw';
 import CategoryContext from '../CategoryContext';
 import {createMemoryHistory} from 'history';
 import CreateListing from '../CreateListing';
-// import userEvent from '@testing-library/user-event';
 
 const authenticate = '/v0/authenticate';
 const setVisible = jest.fn();
@@ -31,7 +29,6 @@ test('login screen appears and login', async () => {
   render(
     <Router history={history}>
       <CategoryContext.Provider value={{setVisible}}>
-        {/* <Login /> */}
         <CreateListing />
       </CategoryContext.Provider>
     </Router>,

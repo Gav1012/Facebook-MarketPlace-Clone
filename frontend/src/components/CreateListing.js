@@ -28,16 +28,9 @@ function CreateListing() {
   const [currCat, setCat] = useState('');
   const bearerToken = localStorage.getItem('member') ?
     JSON.parse(localStorage.getItem('member')).accessToken : '';
-  // console.log('token');
-  // const testdum = JSON.parse(localStorage.getItem('member')).accessToken;
-  // testdum = testdum.accessToken;
-  // console.log(testdum);
-  // console.log((JSON.parse(localStorage.getItem('member')));
 
   const handleInputChange = (event) => {
     const {value, name} = event.target;
-    console.log(value);
-    console.log(name);
     const newListingCopy = newListing;
     if (name === 'title' ||
       name === 'content' ||
@@ -46,7 +39,6 @@ function CreateListing() {
       newListing['listing'][name] = value;
     } else if (name === 'images') {
       const newVal = value.split('\n');
-      console.log(newVal);
       const imgArr = [];
       for (let i = 0; i < newVal.length; i++) {
         imgArr.push({'link': newVal[i]});
@@ -56,17 +48,12 @@ function CreateListing() {
       newListing[name] = value;
     }
     if (name === 'category') {
-      console.log('categoried!');
       setCat(value);
     }
     setListing(newListingCopy);
   };
 
   const checkUpload = () => {
-    console.log('cu');
-    console.log(newListing);
-    console.log('token');
-    console.log(bearerToken);
     fetch('/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912', {
       method: 'post',
       headers: {
@@ -81,7 +68,7 @@ function CreateListing() {
     <div>
       <AppBar sx={{position: 'fixed'}}>
         <Toolbar>
-          <Typography variant='h6'>Login Screen</Typography>
+          <Typography variant='h6'>Create Listing</Typography>
           <IconButton sx={{marginLeft: 'auto'}}
             title='createCloseButton'
             onClick={()=>history.push('/')}>
@@ -237,7 +224,7 @@ function CreateListing() {
         <Button
           style={{backgroundColor: 'lightblue'}}
           onClick={() => {
-            checkUpload(); console.log(bearerToken);
+            checkUpload();
           }}>
           Upload!
         </Button>
