@@ -1,27 +1,21 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {render, fireEvent} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import {screen, waitFor} from '@testing-library/react';
-import {act} from 'react-dom/test-utils';
-import App from '../App';
-import ListGrid from '../ListGrid';
-import {setupServer} from 'msw/node'
-import {rest} from 'msw'
-import CategoryContext from '../CategoryContext'
-import ListingContext from '../ListingContext'
+import CategoryContext from '../CategoryContext';
 import TopBar from '../TopBar';
 
-const dimensions = {width: 500};
+const visible = false;
+const setVisible = jest.fn();
 
 test('topbar render', async () => {
   render(
-    <CategoryContext.Provider value={{dimensions}}>
-      <TopBar  />
-    </CategoryContext.Provider>
+    <CategoryContext.Provider value={{visible, setVisible}}>
+      <TopBar />
+    </CategoryContext.Provider>,
   );
   await waitFor(() => {
-      expect(screen.getByText('Login'));
-    })
+    screen.getByText('Login');
+  });
   fireEvent.click(screen.getByText('Login'));
 });
-      
