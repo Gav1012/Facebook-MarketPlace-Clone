@@ -100,7 +100,7 @@ function Login() {
         <TextField
           id='outlined-search'
           title='password'
-          label='name'
+          label='password'
           name='password'
           onChange={handleInputChange}
           required
