@@ -11,6 +11,7 @@ import ListViewer from './ListViewer';
 import ListingContext from './ListingContext';
 
 // grabs all the listings and specific ones depending on other inputs
+// fetch based on books example provided by Professor Harrison
 const fetchListings = (setListings, currCat, currSub, search, currFilter) => {
   // original string to grab all listings
   let toBeFetched = '/v0/listings';
@@ -18,12 +19,15 @@ const fetchListings = (setListings, currCat, currSub, search, currFilter) => {
   if (currCat && !currSub && !currFilter && !search) {
     toBeFetched = '/v0/listings/' + currCat;
   }
+  // if only category and sub category is active
   if (currCat && currSub && !currFilter && !search) {
     toBeFetched = '/v0/listings/' + currCat + '?sub=' + currSub;
   }
+  // if only category and filter is active
   if (currCat && !currSub && currFilter && !search) {
     toBeFetched = '/v0/listings/' + currCat + '?fil=' + currFilter;
   }
+  // if all are active
   if (currCat && currSub && currFilter && !search) {
     toBeFetched =
       '/v0/listings/' + currCat + '?sub=' + currSub + '&fil=' + currFilter;
@@ -49,6 +53,7 @@ const fetchListings = (setListings, currCat, currSub, search, currFilter) => {
       setListings(json);
     })
     .catch(() => {
+      // makes no listings appear
       setListings([]);
     });
 };
@@ -57,18 +62,26 @@ const fetchListings = (setListings, currCat, currSub, search, currFilter) => {
  * @return {object}
  */
 function ListGrid() {
+  // grabs state for listings
   const [listings, setListings] = React.useState([]);
+  // grabs state for category
   const {currCat} = useContext(CategoryContext);
+  // grabs state for search
   const {search} = useContext(CategoryContext);
+  // grabs state for sub category
   const {currSub} = useContext(CategoryContext);
+  // grabs state for filter
   const {currFilter} = useContext(CategoryContext);
+  // grabs state for clicking on a listing
   const [popupData, setPopupData] = React.useState(false);
+  // sets state for displaying a listings images
   const [imageNo, setImage] = React.useState(0);
+  // grabs state for listings with multiple pictures
   const [rowState, setRowState] = React.useState([]);
 
   // fetches specific listing when clicking on a listing
+  // fetch based on books example provided by Professor Harrison
   const fetchItem = (popupId) => {
-    // const toBeFetched = '/v0/listings';
     const toBeFetched = '/v0/listings?id=' + popupId;
     fetch(toBeFetched, {
       method: 'get',
@@ -84,13 +97,11 @@ function ListGrid() {
       })
       .then((json) => {
         setPopupData(json);
-        // console.log('popupdata');
-        // console.log(popupData);
       })
       .catch(() => {
       });
   };
-
+  // sets up for images to be clicked for list viewer
   let rows = [];
   const imageBar = (length) => {
     rows = [];
@@ -106,12 +117,18 @@ function ListGrid() {
     setRowState(rows);
     return rows;
   };
+
   // grabs all the listings from the database
   // and changes depending on categories and search bar
   React.useEffect(() => {
     fetchListings(setListings, currCat, currSub, search, currFilter);
   }, [currCat, currSub, search, currFilter]);
 
+  // renders all the listings from the database
+  // the rendering of the listings is a combination of examples from MUI
+  // using Grid and Card components to create listings
+  // https://codesandbox.io/s/ilg2z?file=/demo.js
+  // https://codesandbox.io/s/rf7vt?file=/demo.js
   return (
     <Grid container spacing={3}>
       {popupData ?

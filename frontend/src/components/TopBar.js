@@ -5,10 +5,6 @@ import Typography from '@mui/material/Typography';
 import CssBaseline from '@mui/material/CssBaseline';
 import CategoryContext from './CategoryContext';
 import Button from '@mui/material/Button';
-// import {useHistory} from 'react-router';
-
-// formatting of the Appbar based on example from MUI
-// https://codesandbox.io/s/hnj12?file=/demo.js
 
 /**
  * @return {object}
@@ -18,15 +14,15 @@ function TopBar() {
   const curr = localStorage.getItem('member');
   // used to swap between login and logout button
   const {visible, setVisible} = useContext(CategoryContext);
-  // const history = useHistory();
   // logout directly inspired by code provided by Professor Harrison
   // removes from local storage and displays Login
   const logout = () => {
     setVisible(false);
     localStorage.removeItem('member');
-    // history.go();
   };
   // renders the topbar of the homepage and buttons used for login
+  // formatting of the Appbar based on example from MUI
+  // https://codesandbox.io/s/hnj12?file=/demo.js
   return (
     <React.Fragment>
       <CssBaseline />

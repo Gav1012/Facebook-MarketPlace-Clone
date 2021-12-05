@@ -37,7 +37,7 @@ function Login() {
     setUser(u);
   };
   // handles when user presses login button
-  // from example code provided by Professor Harrison
+  // fetch login based on books example provided by Professor Harrison
   const onSubmit = (event) => {
     event.preventDefault();
     // checks with db that user exists
@@ -69,7 +69,7 @@ function Login() {
   };
   // render of login page inspired by books example
   // provided by Professor Harrison
-  // login page render
+  // renders the login page when selected
   return (
     <form onSubmit={onSubmit}>
       <AppBar sx={{position: 'fixed'}}>

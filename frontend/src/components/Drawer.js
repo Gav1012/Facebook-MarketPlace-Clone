@@ -13,18 +13,26 @@ import Filter from './Filter';
 import BreadCrumbs from './BreadCrumbs';
 import Search from './Search';
 import {useContext} from 'react';
+
+// sets the drawer to always be this size
 const drawerWidth = 500;
+
 /**
  * @return {object}
  */
-export default function PermanentDrawerLeft() {
+export default function DesktopDrawer() {
+  // grabs state for category
   const {currCat, setCategory} = useContext(CategoryContext);
+  // grabs state for sub category
   const {setSub} = useContext(CategoryContext);
+  // grabs state for category list
   const {catList} = useContext(CategoryContext);
-  // const {subList} = useContext(CategoryContext);
+  // grabs state for filter
   const {setFilter} = useContext(CategoryContext);
+  // grabs state for search
   const {search, setSearch} = useContext(CategoryContext);
-  // console.log(subList);
+  // used permanent drawer MUI component like example
+  // https://codesandbox.io/s/i87zt?file=/demo.js
   return (
     <Box sx={{display: 'flex'}}>
       <CssBaseline />

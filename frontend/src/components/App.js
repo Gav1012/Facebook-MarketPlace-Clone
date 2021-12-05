@@ -18,17 +18,25 @@ import CreateListing from './CreateListing';
  * @return {object} JSX
  */
 function App() {
-  // sets state for category being viewed
+  // sets state for current category being viewed
   const [currCat, setCategory] = useState(undefined);
+  // sets state for current sub category
   const [currSub, setSub] = useState(undefined);
+  // sets state for current filter
   const [currFilter, setFilter] = useState(undefined);
+  // holds all the categories from database
   const [catList, setCatList] = useState([]);
+  // holds all sub categories from database
   const [subList, setSubList] = useState([]);
+  // holds all filters from database
   const [filList, setFilList] = useState([]);
   // sets state for when search bar is used
   const [search, setSearch] = useState('');
+  // determines whether login or logout is displayed
   const [visible, setVisible] = useState(false);
 
+  // from the Dimensions Provider function provided by Professor Harrison
+  // handles when the window size changes
   const winDims = () => ({
     width: window.innerWidth,
   });
@@ -43,7 +51,8 @@ function App() {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
-
+  // renders the entire application
+  // BrowserRouter setup inspired by code provided by Professor Harrison
   return (
     <BrowserRouter>
       <Switch>
