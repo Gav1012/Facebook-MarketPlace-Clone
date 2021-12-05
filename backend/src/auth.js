@@ -37,7 +37,6 @@ exports.check = (req, res, next) => {
   console.log('check start');
     const authHeader = req.headers.authorization;
     console.log(authHeader);
-    if (authHeader) {
       const token = authHeader.split(' ')[1];
       jwt.verify(token, secrets.accessToken, (err, user) => {
         if (err) {
@@ -47,9 +46,5 @@ exports.check = (req, res, next) => {
         req.user = user;
         next();
       });
-    } else {
-      console.log('401');
-      res.sendStatus(401);
-    }
   };
   
