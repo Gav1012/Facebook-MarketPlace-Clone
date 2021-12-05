@@ -41,7 +41,6 @@ exports.check = (req, res, next) => {
   // verifies that the token is acceptable
   jwt.verify(token, secrets.accessToken, (err, user) => {
     if (err) {
-      console.log('403');
       return res.sendStatus(403);
     }
     req.user = user;
