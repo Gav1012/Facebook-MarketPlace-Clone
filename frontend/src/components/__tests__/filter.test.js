@@ -49,7 +49,7 @@ test('filter render', async () => {
   await new Promise((r) => setTimeout(r, 2000));
 });
 
-test('Handles Server Error', async () => {
+test('Handles Server Error Filter', async () => {
   server.use(
     rest.get(filter, (req, res, ctx) => {
       return res(ctx.status(404))

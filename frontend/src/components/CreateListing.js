@@ -62,9 +62,9 @@ function CreateListing() {
     setListing(newListingCopy);
   };
 
-  const memberEmail = localStorage.getItem('member') ?
-  JSON.parse(localStorage.getItem('member')).accessToken.
-  replace('@', '%40') : '';
+  //  const memberEmail = localStorage.getItem('member') ?
+  //  JSON.parse(localStorage.getItem('member')).accessToken.
+  //  replace('@', '%40') : '';
 
   const checkUpload = () => {
     console.log('cu');

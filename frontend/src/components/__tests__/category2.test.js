@@ -31,19 +31,16 @@ const setCatList = jest.fn();
 const setSubList = jest.fn();
 const setCategory = jest.fn();
 const setFilter = jest.fn();
-const createListing = jest.fn();
 
 
 test('category render', async () => {
   render(
   
-    <CategoryContext.Provider value={{currCat, dimensions, setSub, setSearch, setCatList, setSubList, catList, setCategory, setFilter, createListing}}>
+    <CategoryContext.Provider value={{currCat, dimensions, setSub, setSearch, setCatList, setSubList, catList, setCategory, setFilter}}>
   <Category/>
   
   </CategoryContext.Provider>
   );
-  await waitFor(() => screen.getByText('Sell'));
-  fireEvent.click(screen.getByText('Sell'));
   await waitFor(() => screen.getByText('Categories'));
   fireEvent.click(screen.getByText('Categories'));
   await waitFor(() => screen.getByText('Vehicles'));
@@ -51,14 +48,14 @@ test('category render', async () => {
   
 });
 
-test('Handles Server Error', async () => {
+test('Handles Server Error Category 2', async () => {
     server.use(
       rest.get(category, (req, res, ctx) => {
         return res(ctx.status(500))
       }),
     )
     render(
-      <CategoryContext.Provider value={{currCat, dimensions,  catList, setCatList, setSub, setSearch, setSubList, setCategory, setFilter, createListing}}>
+      <CategoryContext.Provider value={{currCat, dimensions,  catList, setCatList, setSub, setSearch, setSubList, setCategory, setFilter}}>
     <Category/>
     </CategoryContext.Provider>
     

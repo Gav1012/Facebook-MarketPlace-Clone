@@ -128,6 +128,7 @@ function Category() {
               Sell
               </Button>
               <Chip sx={{mb: .25}} label='Categories'
+                aria-label = 'Categories'
                 onClick={handleClickOpen} />
               {dimensions.width < 600?
                 <Dialog fullScreen open={open} onClose={handleClose}>
@@ -147,6 +148,7 @@ function Category() {
                     {catList.map((cat, index) => (
                       <ListItem
                         label={cat.names}
+                        aria-label={cat.names}
                         key={cat.names}
                         onClick={()=>{
                           setCategory(cat.names);

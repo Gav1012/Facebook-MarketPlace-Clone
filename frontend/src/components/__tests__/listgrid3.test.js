@@ -33,7 +33,7 @@ const listings = [{id: '91bc30cf-186e-4de8-a4c1-37a1449059c7',categoryid: '00691
 const setListings = jest.fn();
 const currCat = undefined;
 const currSub = undefined;
-const search = ' ';
+const search = 'test';
 const dimensions = {width: 500};
 
 
@@ -44,6 +44,8 @@ test('listgrid render', async () => {
     </CategoryContext.Provider>
   );
   await waitFor(() => {
+      expect(screen.getByText('gold necklace'));
+      fireEvent.click(screen.getByText('gold necklace'));
       expect(screen.getByText('gold necklace'));
       fireEvent.click(screen.getByText('gold necklace'));
     })

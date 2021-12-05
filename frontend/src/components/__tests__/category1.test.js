@@ -46,7 +46,7 @@ test('category render', async () => {
 });
 
 
-test('Handles Server Error', async () => {
+test('Handles Server Error Category 1', async () => {
   server.use(
     rest.get(category, (req, res, ctx) => {
       return res(ctx.status(404))
