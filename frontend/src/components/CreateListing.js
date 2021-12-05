@@ -14,7 +14,7 @@ import {Button, Select} from '@mui/material';
 import {useState} from 'react';
 import {TextareaAutosize} from '@mui/base';
 import {InputLabel} from '@mui/material';
-// import {MenuItem} from '@mui/material';
+import {MenuItem} from '@mui/material';
 // import {useContext} from 'react';
 // import CategoryContext from './CategoryContext';
 
@@ -61,10 +61,6 @@ function CreateListing() {
     }
     setListing(newListingCopy);
   };
-
-  const memberEmail = localStorage.getItem('member') ?
-  JSON.parse(localStorage.getItem('member')).accessToken.
-  replace('@', '%40') : '';
 
   const checkUpload = () => {
     console.log('cu');
@@ -148,19 +144,19 @@ function CreateListing() {
           onChange={handleInputChange}
           sx={{my: '3%', width: '300px'}}
         >
-          <option aria-label="None" value="" />
-          <option value='Cars'>Cars</option>
-          <option value='Motorcycles'>Motorcycles</option>
-          <option value='RVs'>RVs</option>
-          <option value='Boats'>Boats</option>
-          <option value='Clothing'>Clothing</option>
-          <option value='Accessories'>Accessories</option>
-          <option value='Shoes'>Shoes</option>
-          <option value='Computers'>Computers</option>
-          <option value='Cellphones'>Cellphones</option>
-          <option value='TVs'>TVs</option>
-          <option value='Sports Equipment'>Sports Eq.</option>
-          <option value='Camping'>Camping</option>
+          <MenuItem aria-label="None" value="" />
+          <MenuItem value='Cars'>Cars</MenuItem>
+          <MenuItem value='Motorcycles'>Motorcycles</MenuItem>
+          <MenuItem value='RVs'>RVs</MenuItem>
+          <MenuItem value='Boats'>Boats</MenuItem>
+          <MenuItem value='Clothing'>Clothing</MenuItem>
+          <MenuItem value='Accessories'>Accessories</MenuItem>
+          <MenuItem value='Shoes'>Shoes</MenuItem>
+          <MenuItem value='Computers'>Computers</MenuItem>
+          <MenuItem value='Cellphones'>Cellphones</MenuItem>
+          <MenuItem value='TVs'>TVs</MenuItem>
+          <MenuItem value='Sports Equipment'>Sports Eq.</MenuItem>
+          <MenuItem value='Camping'>Camping</MenuItem>
         </Select>
         {(currCat === 'Cars' ||
               currCat === 'Motorcycles' ||
