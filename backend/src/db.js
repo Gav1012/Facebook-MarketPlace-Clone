@@ -212,3 +212,6 @@ exports.postListings = async (newListing, memberID) => {
   const {rows} = await pool.query(query);
   return rows;
 };
+
+// Sources
+// https://stackoverflow.com/questions/1643320/get-month-name-from-date
