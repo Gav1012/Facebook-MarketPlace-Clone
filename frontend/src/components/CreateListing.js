@@ -14,7 +14,7 @@ import {Button, Select} from '@mui/material';
 import {useState} from 'react';
 import {TextareaAutosize} from '@mui/base';
 import {InputLabel} from '@mui/material';
-// import {MenuItem} from '@mui/material';
+import {MenuItem} from '@mui/material';
 // import {useContext} from 'react';
 // import CategoryContext from './CategoryContext';
 
@@ -28,16 +28,9 @@ function CreateListing() {
   const [currCat, setCat] = useState('');
   const bearerToken = localStorage.getItem('member') ?
     JSON.parse(localStorage.getItem('member')).accessToken : '';
-  // console.log('token');
-  // const testdum = JSON.parse(localStorage.getItem('member')).accessToken;
-  // testdum = testdum.accessToken;
-  // console.log(testdum);
-  // console.log((JSON.parse(localStorage.getItem('member')));
 
   const handleInputChange = (event) => {
     const {value, name} = event.target;
-    console.log(value);
-    console.log(name);
     const newListingCopy = newListing;
     if (name === 'title' ||
       name === 'content' ||
@@ -46,7 +39,6 @@ function CreateListing() {
       newListing['listing'][name] = value;
     } else if (name === 'images') {
       const newVal = value.split('\n');
-      console.log(newVal);
       const imgArr = [];
       for (let i = 0; i < newVal.length; i++) {
         imgArr.push({'link': newVal[i]});
@@ -56,21 +48,12 @@ function CreateListing() {
       newListing[name] = value;
     }
     if (name === 'category') {
-      console.log('categoried!');
       setCat(value);
     }
     setListing(newListingCopy);
   };
 
-  //  const memberEmail = localStorage.getItem('member') ?
-  //  JSON.parse(localStorage.getItem('member')).accessToken.
-  //  replace('@', '%40') : '';
-
   const checkUpload = () => {
-    console.log('cu');
-    console.log(newListing);
-    console.log('token');
-    console.log(bearerToken);
     fetch('/v0/listings?memberID=fd4e8e32-bef3-41c0-b111-61f695ea3912', {
       method: 'post',
       headers: {
@@ -85,7 +68,7 @@ function CreateListing() {
     <div>
       <AppBar sx={{position: 'fixed'}}>
         <Toolbar>
-          <Typography variant='h6'>Login Screen</Typography>
+          <Typography variant='h6'>Create Listing</Typography>
           <IconButton sx={{marginLeft: 'auto'}}
             title='createCloseButton'
             onClick={()=>history.push('/')}>
@@ -148,19 +131,19 @@ function CreateListing() {
           onChange={handleInputChange}
           sx={{my: '3%', width: '300px'}}
         >
-          <option aria-label="None" value="" />
-          <option value='Cars'>Cars</option>
-          <option value='Motorcycles'>Motorcycles</option>
-          <option value='RVs'>RVs</option>
-          <option value='Boats'>Boats</option>
-          <option value='Clothing'>Clothing</option>
-          <option value='Accessories'>Accessories</option>
-          <option value='Shoes'>Shoes</option>
-          <option value='Computers'>Computers</option>
-          <option value='Cellphones'>Cellphones</option>
-          <option value='TVs'>TVs</option>
-          <option value='Sports Equipment'>Sports Eq.</option>
-          <option value='Camping'>Camping</option>
+          <MenuItem aria-label="None" value="" />
+          <MenuItem value='Cars'>Cars</MenuItem>
+          <MenuItem value='Motorcycles'>Motorcycles</MenuItem>
+          <MenuItem value='RVs'>RVs</MenuItem>
+          <MenuItem value='Boats'>Boats</MenuItem>
+          <MenuItem value='Clothing'>Clothing</MenuItem>
+          <MenuItem value='Accessories'>Accessories</MenuItem>
+          <MenuItem value='Shoes'>Shoes</MenuItem>
+          <MenuItem value='Computers'>Computers</MenuItem>
+          <MenuItem value='Cellphones'>Cellphones</MenuItem>
+          <MenuItem value='TVs'>TVs</MenuItem>
+          <MenuItem value='Sports Equipment'>Sports Eq.</MenuItem>
+          <MenuItem value='Camping'>Camping</MenuItem>
         </Select>
         {(currCat === 'Cars' ||
               currCat === 'Motorcycles' ||
@@ -175,12 +158,12 @@ function CreateListing() {
             onChange={handleInputChange}
             sx={{my: '3%', width: '300px'}}
           >
-              <option aria-label="None" value="" />
-              <option value={'White'}>White</option>
-              <option value={'Grey'}>Grey</option>
-              <option value={'Black'}>Black</option>
-              <option value={'Red'}>Red</option>
-              <option value={'Blue'}>Blue</option>
+            <option aria-label="None" value="" />
+            <option value={'White'}>White</option>
+            <option value={'Grey'}>Grey</option>
+            <option value={'Black'}>Black</option>
+            <option value={'Red'}>Red</option>
+            <option value={'Blue'}>Blue</option>
           </Select>
         </div>
         }
@@ -196,9 +179,9 @@ function CreateListing() {
             onChange={handleInputChange}
             sx={{my: '3%', width: '300px'}}
           >
-              <option aria-label="None" value="" />
-              <option value={'Mens'}>Men's</option>
-              <option value={'Womens'}>Women's</option>
+            <option aria-label="None" value="" />
+            <option value={'Mens'}>Men's</option>
+            <option value={'Womens'}>Women's</option>
           </Select>
         </div>
         }
@@ -214,10 +197,10 @@ function CreateListing() {
             onChange={handleInputChange}
             sx={{my: '3%', width: '300px'}}
           >
-              <option aria-label="None" value="" />
-              <option value={'Sony'}>Sony</option>
-              <option value={'Samsung'}>Samsung</option>
-              <option value={'Apple'}>Apple</option>
+            <option aria-label="None" value="" />
+            <option value={'Sony'}>Sony</option>
+            <option value={'Samsung'}>Samsung</option>
+            <option value={'Apple'}>Apple</option>
           </Select>
         </div>
         }
@@ -232,16 +215,16 @@ function CreateListing() {
             onChange={handleInputChange}
             sx={{my: '3%', width: '300px'}}
           >
-              <option aria-label="None" value="" />
-              <option value={'New'}>New</option>
-              <option value={'Used'}>Used</option>
+            <option aria-label="None" value="" />
+            <option value={'New'}>New</option>
+            <option value={'Used'}>Used</option>
           </Select>
         </div>
         }
         <Button
           style={{backgroundColor: 'lightblue'}}
           onClick={() => {
-            checkUpload(); console.log(bearerToken);
+            checkUpload();
           }}>
           Upload!
         </Button>
@@ -251,3 +234,7 @@ function CreateListing() {
 }
 
 export default CreateListing;
+
+// Sources
+// https://mui.com/components/selects/
+// https://mui.com/components/textarea-autosize/

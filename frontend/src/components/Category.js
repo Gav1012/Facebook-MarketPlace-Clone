@@ -14,10 +14,11 @@ import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import Button from '@mui/material/Button';
+
 // grabs all the listings and specific ones depending on other inputs
+// fetch based on books example provided by Professor Harrison
 const fetchCategory = (setCatList, currCat) => {
   if (currCat === undefined) {
-  // console.log('Were inside FetchCategory');
   // fetches the listings based on above modifications
     fetch('/v0/listings/category', {
       method: 'get',
@@ -26,8 +27,6 @@ const fetchCategory = (setCatList, currCat) => {
       },
     })
       .then((response) => {
-        // console.log('Response for fetchCategory Given');
-        // console.log(response);
         if (!response.ok) {
           throw response;
         }
@@ -35,16 +34,15 @@ const fetchCategory = (setCatList, currCat) => {
       })
       .then((json) => {
         setCatList(json);
-        // console.log('cat');
-        // console.log(json);
       })
       .catch(() => {
       });
   };
 };
+// grabs the sub category based on input
+// fetch based on books example provided by Professor Harrison
 const fetchSub = (setSubList, currCat) => {
   if (currCat) {
-  // console.log('Were inside fetchSub');
     // fetches the listings based on above modifications
     fetch('/v0/listings/category?sub=' + currCat, {
       method: 'get',
@@ -53,8 +51,6 @@ const fetchSub = (setSubList, currCat) => {
       },
     })
       .then((response) => {
-        // console.log('Response for fetchSub Given');
-        // console.log(response);
         if (!response.ok) {
           throw response;
         }
@@ -71,7 +67,9 @@ const fetchSub = (setSubList, currCat) => {
  * @return {object}
  */
 function Category() {
+  // gets state for search
   const {setSearch} = useContext(CategoryContext);
+  // gets state for filter
   const {setFilter} = useContext(CategoryContext);
   // uses context to set the category to be viewed when clicked
   const {currCat, setCategory} = useContext(CategoryContext);
@@ -86,18 +84,28 @@ function Category() {
   // sets state for when search box is used
   const [open, setOpen] = React.useState(false);
   // handles when listing changes
+  // comes from dialog MUI example
+  // https://codesandbox.io/s/2r9eq?file=/demo.js
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
+  // uses the fetchCategory function
   React.useEffect(() => {
     fetchCategory(setCatList, currCat);
   }, [setCatList, currCat]);
+  // uses the fetchSub function
   React.useEffect(() => {
     fetchSub(setSubList, currCat);
   }, [setSubList, currCat]);
+  // renders the category button
+  // pop up of category list based on Dialog example from MUI
+  // https://codesandbox.io/s/2r9eq?file=/demo.js
+  // stack for hold the buttons for categories based on example
+  // from MUI Stack
+  // https://codesandbox.io/s/hd6b7?file=/demo.js
   return (
     <Container>
       <Box>
@@ -120,8 +128,6 @@ function Category() {
             <Box sx={{my: 1}}
               style={dimensions.width > 599? {display: 'none'} : {}}>
               <Button sx={{mb: .25, mr: 1}} label='Sell' href='/CreateListing'
-                // {... localStorage.getItem('member') !== null ?
-                //   {href: '/CreateListing'} : {href: '/Login'}}
                 style={{backgroundColor: '#00000014', borderRadius: '35%',
                   height: '33px', textTransform: 'none', color: 'Black'}}
               >
@@ -132,7 +138,6 @@ function Category() {
                 onClick={handleClickOpen} />
               {dimensions.width < 600?
                 <Dialog fullScreen open={open} onClose={handleClose}>
-                  {console.log(localStorage.getItem('member'))}
                   <AppBar sx={{position: 'relative'}}>
                     <Toolbar>
                       <Typography variant='h6'>

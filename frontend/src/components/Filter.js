@@ -17,6 +17,8 @@ import Toolbar from '@mui/material/Toolbar';
 import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 
+// grabs the data based on filter input
+// fetch based on books example provided by Professor Harrison
 const fetchFilter = (setFilList, currCat) => {
   if (currCat) {
     // fetches the listings based on above modifications
@@ -43,13 +45,17 @@ const fetchFilter = (setFilList, currCat) => {
  * @return {object}
  */
 export default function Filter() {
+  // grab state for category
   const {currCat} = useContext(CategoryContext);
+  // grabs state for window dimensions
   const {dimensions} = useContext(CategoryContext);
+  // grabs state for search
   const {setSearch} = useContext(CategoryContext);
-  // const {setSub} = useContext(CategoryContext);
+  // grabs state for filter
   const {setFilter} = useContext(CategoryContext);
-  // const {subList} = useContext(CategoryContext);
+  // grabs state for filter list
   const {filList, setFilList} = useContext(CategoryContext);
+  // grabs state for opening dialog
   const [open, setOpen] = useState(false);
   const temp = [];
   let filterName = '';
@@ -61,15 +67,22 @@ export default function Filter() {
     }
     filterName = filList[0].names;
   }
+  // from Dialog component example
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
+  // uses the fetchFilter function
   useEffect(() => {
     fetchFilter(setFilList, currCat);
   }, [setFilList, currCat]);
+  // renders the filter part of the applicaton
+  // uses Dialog component from MUI
+  // https://codesandbox.io/s/2r9eq?file=/demo.js
+  // also uses Accordian component
+  // https://codesandbox.io/s/g8j7r?file=/demo.js
   return (
     <div>
       {currCat && temp && dimensions.width < 600?

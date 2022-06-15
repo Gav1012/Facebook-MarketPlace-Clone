@@ -12,10 +12,15 @@ import OutlinedInput from '@mui/material/OutlinedInput';
  * @return {object}
  */
 export default function Search() {
+  // grabs state for category
   const {setCategory} = useContext(CategoryContext);
+  // grabs state for search
   const {setSearch} = useContext(CategoryContext);
+  // grabs state for sub category
   const {setSub} = useContext(CategoryContext);
+  // grabs state for filter
   const {setFilter} = useContext(CategoryContext);
+  // creates state for the user input
   const [value, setValue] = useState('');
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -26,6 +31,7 @@ export default function Search() {
     setFilter(undefined);
     setSearch(e);
   };
+  // renders the search bar
   return (
     <Box sx={{my: .5}}>
       <FormControl style ={{width: '98%'}}>

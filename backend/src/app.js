@@ -30,7 +30,6 @@ app.use(
 
 // Your routes go here
 app.post('/v0/authenticate', auth.authenticate);
-
 app.get('/v0/listings', listings.getListings);
 app.get('/v0/listings/category', listings.getCategories);
 app.get('/v0/listings/:category', listings.getCatListings);

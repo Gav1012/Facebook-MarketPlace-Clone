@@ -51,6 +51,6 @@
   "scripts": {
     "start": "nodemon src/server.js",
     "test": "jest --runInBand --coverage --verbose --forceExit",
-    "lint": "./node_modules/.bin/eslint . --ext .js"
+    "lint": "eslint . --ext .js"
   }
 }

@@ -14,6 +14,9 @@ import Box from '@mui/material/Box';
  * @return {object}
  */
 function NewAccount() {
+  // this function just displays stuff does not create account
+  // ran out of time to implement to frontend
+  // does work in the backend
   const history = useHistory();
   return (
     <div>
